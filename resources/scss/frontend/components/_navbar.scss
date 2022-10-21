@@ -1,0 +1,47 @@
+#nav {
+    //   height: 60px;
+    //   width: 100vw;
+    //   position: fixed;
+
+    transform: translate3d(0, 0, 0);
+    transition: 0.3s all ease-out;
+}
+#nav.navbar--hidden {
+    box-shadow: none;
+    transform: translate3d(0, -100%, 0);
+}
+nav.navbar {
+    .navbar-brand {
+        padding: 0.2rem 0px;
+    }
+
+    .navbar-brand img {
+        max-width: 85%;
+        height: auto;
+    }
+    background: $gray-7;
+    box-shadow: 0 2px 15px rgba(30, 30, 30, 0.5);
+    // background-image: url("/assets/images/fx/bg_header.jpg");
+    background-size: 100% 100%;
+
+    // background: -moz-linear-gradient(top, $gray-8, $gray-8, $base-color-5);
+    // background: -webkit-linear-gradient(top, $gray-8, $gray-8, $base-color-5);
+    // background: -o-linear-gradient(top, $gray-8, $gray-8, $base-color-5);
+    // background: -ms-linear-gradient(top, $gray-8, $gray-8, $base-color-5);
+    // background: linear-gradient(to bottom, $gray-8, $gray-8, $base-color-5);
+
+    a {
+        font-size: 0.75rem;
+        font-weight: $font-weight-nav;
+        text-transform: uppercase;
+        color: inherit;
+    }
+}
+.navbar-toggler {
+    color: $gray-3;
+    border-color: $gray-3;
+}
+
+.navbar-toggler-icon {
+    background-image: escape-svg($navbar-dark-toggler-icon-bg);
+}

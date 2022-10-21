@@ -1,0 +1,150 @@
+.footer-area-section {
+    padding: 5rem;
+    // border-top: 1px solid $base-color-5;
+
+    .container {
+        // box-sizing: content-box;
+        padding: 2.5rem;
+        border: 1px solid $base-color-5;
+        border-radius: 3rem;
+        background-image: linear-gradient(330deg, $gray-8, $gray-6);
+    }
+}
+.footer-about {
+    .footer-logo {
+        width: 8rem;
+
+        img {
+        }
+    }
+    .footer-about-text {
+        p {
+            margin-bottom: 25px;
+            color: $gray-2;
+            font-size: 0.75rem;
+        }
+    }
+}
+
+.footer-content {
+    .footer-menu {
+        float: left;
+        margin-left: 70px;
+
+        li {
+            margin-bottom: 10px;
+            color: $white;
+
+            i {
+                margin-right: 10px;
+                color: $base-color-1;
+            }
+        }
+        .widget-title {
+            font-size: 1.3rem;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+.menu-policy {
+    li {
+        margin-right: 1.2rem;
+        font-size: 0.8rem;
+    }
+}
+
+.menu-sociality,
+.contact-menu-sociality {
+    float: left;
+    margin-left: 70px;
+
+    li {
+        // margin-bottom: 10px;
+        color: $gray-2;
+
+        i {
+            // margin-right: 10px;
+            color: $base-color-2;
+        }
+    }
+}
+
+.footer-widget {
+    .photo-list {
+        li {
+            position: relative;
+            margin-bottom: 3px;
+
+            .pop-up-icon {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                right: 0;
+                text-align: center;
+                transition: 0.3s all ease-in-out;
+                opacity: 0;
+
+                i {
+                    color: $white;
+                }
+            }
+
+            &:hover .pop-up-icon {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.footer-social,
+.footer-section {
+    li {
+        line-height: 1.4;
+        // margin-bottom: ;
+        color: $gray-2;
+        font-size: 0.75rem;
+    }
+    .widget-title {
+        margin-bottom: 40px;
+
+        &:after {
+            bottom: -15px;
+        }
+    }
+}
+.footer-social {
+    li {
+        height: rem(40);
+        width: rem(40);
+
+        i {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.copy-right-menu {
+    padding: 0;
+    padding-top: rem(15);
+    border-top: 1px solid $gray-5;
+
+    .copy-right-text {
+        color: 2;
+
+        p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+    }
+
+    .copy-right-menu-item {
+        li {
+            color: $gray-2;
+            margin-left: 20px;
+        }
+    }
+}

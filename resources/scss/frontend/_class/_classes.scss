@@ -1,0 +1,78 @@
+@use "sass:math";
+
+@each $num, $type, $value, $text, $hover_value, $hover_text in $colors {
+    .bg-#{$type}-#{$num} {
+        background-color: $value !important;
+        color: $text !important;
+    }
+
+    .color-#{$type}-#{$num} {
+        svg {
+            fill: $value !important;
+        }
+        color: $value !important;
+    }
+    .border-#{$type}-#{$num} {
+        border-color: $value !important;
+    }
+}
+
+@each $num, $type, $value, $text in $grays {
+    .bg-#{$type}-#{$num} {
+        background-color: $value !important;
+        color: $text !important;
+    }
+
+    .color-#{$type}-#{$num} {
+        svg {
+            fill: $value !important;
+        }
+        color: $value !important;
+    }
+    .border-#{$type}-#{$num} {
+        border-color: $value !important;
+    }
+}
+
+@for $i from 1 through 19 {
+    $sizeW: ($i * 5) + "%";
+    $sizeH: rem($i * 20);
+    $sizeQuery: (($i * 10) * $i)+ "%";
+    .w-#{$i * 5} {
+        width: #{$sizeW} !important;
+        &.w-mq {
+            @if ($i * 5) < 55 {
+                @media #{$large-down} {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    .h-#{($i * 20) + "-px"} {
+        height: #{$sizeH} !important;
+    }
+}
+@for $i from 1 through 10 {
+    $val: math.div($i, 10) + "rem";
+    $sizeQuery: (($i * 10) * $i)+ "%";
+    ._border-rad-#{$i} {
+        border-radius: #{$val} !important;
+    }
+}
+
+@for $i from 1 through 20 {
+    $val: rem($i * 5);
+    .mb#{$i*5} {
+        margin-bottom: #{$val} !important;
+    }
+    .mt#{$i*5} {
+        margin-top: #{$val} !important;
+    }
+    $val: rem($i * 5);
+    .pb#{$i*5} {
+        padding-bottom: #{$val} !important;
+    }
+    .pt#{$i*5} {
+        padding-top: #{$val} !important;
+    }
+}

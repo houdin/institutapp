@@ -1,0 +1,35 @@
+{
+    "name": "gerardojbaez/messenger",
+    "description": "Messenger functionality for Laravel 5.2.",
+    "keywords": ["laravel", "messenger", "messages"],
+    "license": "MIT",
+    "authors": [{
+        "name": "Gerardo Báez",
+        "email": "g@gerardobaez.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2",
+        "illuminate/support": "5.* || 6.* || 7.* || 8.*"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeders",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gerardojbaez\\Messenger\\MessengerServiceProvider"
+            ],
+            "aliases": {
+                "Messenger": "Gerardojbaez\\Messenger\\Facades\\Messenger"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+#container-master.container {
+    min-height: rem(300);
+    padding-top: rem(65);
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+}
+// Pages
+@import "pages_statics";
+
+// Pages
+@import "pages_dynamics";
+
+._section_page_._page_ {
+    min-height: 60vh;
+    padding-top: rem(90);
+}

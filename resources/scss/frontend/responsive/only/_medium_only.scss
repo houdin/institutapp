@@ -1,0 +1,6 @@
+@media #{$medium-only} {
+    .latest-area-section .col-md-4 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+}

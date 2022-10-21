@@ -1,0 +1,120 @@
+.router-link-active.router-link-exact-active.nav-link {
+    color: $gray-2;
+    border: 1px solid #f99d1b;
+}
+
+.nav-menu {
+    // padding-top: 12px;
+
+    li {
+        a {
+            position: relative;
+            border-radius: 6px;
+        }
+    }
+}
+
+.header_auth {
+    .log-in a,
+    .log-out a {
+        text-transform: uppercase;
+
+        // padding: 15px;
+    }
+}
+#mobile-menu {
+    justify-content: center;
+}
+
+.nav-menu {
+    .menu-item-has-children {
+        position: relative;
+        .sub-menu {
+            width: rem(220);
+            display: table;
+            box-shadow: 0 5px 10px 0 rgba(83, 82, 82, 0.1);
+            background-image: linear-gradient(180deg, $gray-8, $gray-6);
+            position: absolute;
+            @include transform(scaleY(0) translateX(-25%));
+            transform-origin: center top 0;
+            transition: 0.3s all ease-in-out;
+            top: rem(35);
+            text-align: left;
+            border-radius: rem(15);
+            padding: rem(15) !important;
+            border: 1px solid $gray-5;
+        }
+        .sub-menu li {
+            position: relative;
+            padding: 0.4rem 0px;
+
+            a {
+                text-transform: uppercase !important;
+                color: $gray-1;
+                padding: 0;
+
+                &:hover {
+                    color: $base-color-1 !important;
+                }
+            }
+        }
+        .sub-menu li ul {
+            @for $i from 1 through 5 {
+                &.depth-#{$i} {
+                    margin-left: (10 * $i) + "px";
+                }
+            }
+        }
+
+        &:hover .sub-menu {
+            @include transform(scaleY(1) translateX(-25%));
+        }
+    }
+    &.mobile {
+        width: 100%;
+        .menu-item-has-children {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            .sub-menu {
+                width: 80%;
+                position: absolute;
+                @include transform(scaleY(0));
+                transform-origin: center top 0;
+                transition: 0.3s all ease-in-out;
+                top: rem(0);
+                text-align: center;
+                border-radius: rem(15);
+                padding: rem(15) !important;
+                border: 1px solid $gray-5;
+            }
+            .sub-menu li {
+                position: relative;
+                padding: 0.4rem 0px;
+
+                a {
+                    text-transform: uppercase !important;
+                    color: $gray-1;
+                    padding: 0;
+
+                    &:hover {
+                        color: $base-color-1 !important;
+                    }
+                }
+            }
+            .sub-menu li ul {
+                @for $i from 1 through 5 {
+                    &.depth-#{$i} {
+                        margin-left: (10 * $i) + "px";
+                    }
+                }
+            }
+        }
+        .menu-item-has-children.active {
+            .sub-menu {
+                position: relative;
+                @include transform(scaleY(1));
+            }
+        }
+    }
+}

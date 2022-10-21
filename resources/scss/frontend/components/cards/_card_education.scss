@@ -1,0 +1,171 @@
+/* Cards */
+.card.educcard {
+    margin: 0 0 2rem 0;
+    background-color: $gray-8;
+    border: none;
+    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+    position: relative;
+    overflow: hidden;
+
+    .card-title {
+        font-size: 1.2rem;
+        z-index: 10;
+    }
+
+    .card-img-top {
+        object-fit: cover;
+        position: relative;
+        overflow: hidden;
+        img {
+            @include transform(scale(1));
+            max-width: none;
+        }
+    }
+
+    .card-img-top_link {
+        width: 100%;
+        height: 100%;
+        display: contents;
+    }
+
+    .card__bar {
+        width: 50px;
+        height: 6px;
+        margin: 10px 0;
+        border-radius: 3px;
+        background-color: $gray-5;
+        transition: width 0.2s ease;
+    }
+
+    .card-body {
+        // padding: 1.5rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        .card-text {
+            font-size: 0.84rem;
+        }
+    }
+
+    .card__preview-txt {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        // text-align: justify;
+        // height: 100%;
+    }
+
+    .card__tagbox {
+        display: flex;
+        flex-flow: row wrap;
+        font-size: 14px;
+        margin: 20px 0 0 0;
+        padding: 0;
+        justify-content: center;
+
+        .tag__item {
+            display: inline-block;
+            background: $gray-6;
+            border-radius: 3px;
+            padding: 0;
+            margin: 0 5px 5px 0;
+            cursor: default;
+            user-select: none;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background: $gray-5;
+            }
+        }
+        .tag__item.play {
+            .tag__item_btn {
+                background: rgb(83, 83, 83);
+                padding: 2.5px 10px;
+                transition: background-color 0.3s;
+                cursor: default;
+
+                &:hover {
+                    background: inherit;
+                }
+            }
+        }
+    }
+
+    &:hover .card__bar {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 768.98px) {
+    .card.educcard {
+        .card-img-top {
+            // max-width: rem(400);
+            img {
+                max-width: 100%;
+                // width: 100%;
+                min-height: none;
+                @include translate(0);
+            }
+        }
+        max-height: none;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .card.educcard {
+        flex-wrap: inherit;
+        .card__tagbox {
+            justify-content: start;
+        }
+
+        .card-img-top img {
+            transition: transform 0.3s ease;
+        }
+
+        .card-body {
+            // padding: 2rem 3rem;
+            // width: 100%;
+        }
+
+        &:hover .card-img-top img {
+            @include transform(scale(1.1));
+        }
+
+        // &:nth-child(2n + 1) .card__row {
+        //     flex-direction: row;
+        // }
+
+        // &:nth-child(2n + 0) .card__row {
+        //     flex-direction: row-reverse;
+        // }
+
+        // &:nth-child(2n + 1) .card-body::before {
+        //     left: 40% !important;
+        //     transform: rotate(87deg);
+        // }
+
+        // &:nth-child(2n + 0) .card-body::before {
+        //     right: rem(-20) !important;
+        //     transform: rotate(-4deg);
+        // }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .card.educcard {
+        .card-body {
+            // padding: 2rem 3.5rem;
+
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                left: 42% !important;
+                transform: rotate(87deg);
+                top: -67%;
+                height: 140%;
+                width: rem(40);
+                background: $gray-8;
+            }
+        }
+    }
+}

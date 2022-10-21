@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <h1>OFFERS</h1>
+  </div>
+</template>
+
+<script setup>
+</script>
+

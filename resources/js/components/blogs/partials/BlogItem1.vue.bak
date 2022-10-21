@@ -1,0 +1,38 @@
+<template>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="blog-post-img-content border-0">
+        <div class="blog-img-date position-relative">
+          <div class="blog-thumnile" :style="item.image ? 'background-image: url(' + item.image.url + ')' : ''">
+
+          </div>
+          <div class="formation-price text-center gradient-bg">
+            <span>{{ format(new Date(item.created_at), 'd/M/Y') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="blog-title-content headline">
+        <h3>
+          <router-link class="color-base-2" :to="{ name: 'blogs.show', params: {slug : item.slug} }">{{item.title}}</router-link>
+          <!-- <a class="color-base-2" href="{{route('blogs.index',['slug'=> $item->slug.'-'.$item->id])}}">{{$item->title}}</a> -->
+        </h3>
+        <div class="blog-content">
+          {!! strip_tags(mb_substr($item->content,0,100).'...') !!}
+        </div>
+
+        <div class="view-all-btn ">
+          <router-link class="color-base-2" :to="{ name: 'blogs.show', params: {slug : item.slug} }">{{ trans.get('labels.general.read_more') }} <i class="fas fa-chevron-circle-right"></i></router-link>
+          <!-- <a class="color-base-2" href="{{route('blogs.index',['slug'=> $item->slug.'-'.$item->id])}}">{{ trans.get('labels.general.read_more') }}  <i
+                                class="fas fa-chevron-circle-right"></i></a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup>
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+
+const props = defineProps(["item"]);
+</script>

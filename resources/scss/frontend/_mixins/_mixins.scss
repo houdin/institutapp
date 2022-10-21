@@ -1,0 +1,174 @@
+// $extra-small-between: "(min-width : 0px) and (max-width : 575.98px)";
+// $small-between: "(min-width : 576px) and (max-width : 575.98px)";
+// $medium-between: "(min-width : 768px) and (max-width : 991.98px)";
+// $large-between: "(min-width : 992px) and (max-width : 1199.98px)";
+// $extra-large-between: "(min-width : 1200px) and (max-width : 1399.98px)";
+// $extra-extra-between: "only screen and (min-width : 1400px)";
+
+@mixin media-breakpoint-between(
+    $lower,
+    $upper,
+    $breakpoints: $grid-breakpoints
+) {
+    $min: breakpoint-min($lower, $breakpoints);
+    $max: breakpoint-max($upper, $breakpoints);
+
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($lower, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($upper, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// @include media-breakpoint-between(md, xl) { ... }
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+
+// Maximum breakpoint width.
+// The maximum value is reduced by 0.02px to work around the limitations of
+// `min-` and `max-` prefixes and viewports with fractional widths.
+// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+// See https://bugs.webkit.org/show_bug.cgi?id=178261
+//
+//    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    767.98px
+
+@mixin alert-variant($background, $border, $color) {
+    color: $color;
+    @include gradient-bg($background);
+    border-color: $border;
+
+    .alert-link {
+        color: shade-color($color, 20%);
+    }
+}
+
+@mixin prefix($property, $value, $prefixes: moz webkit o ms) {
+    @each $prefix in $prefixes {
+        -#{$prefix}-#{$property}: $value;
+    }
+    #{$property}: $value;
+}
+
+// .gray {
+//     @include prefix(filter, grayscale(50%), moz webkit);
+// }
+
+@mixin rotate($rotate) {
+    @include transform(rotate($rotate));
+}
+@mixin translate($translate) {
+    @include transform(translate($translate));
+}
+@mixin scale($scale) {
+    @include transform(scale($scale));
+}
+@mixin transform($transform) {
+    @include prefix(transform, $transform);
+}
+
+@mixin bg-radial($start-colour, $end-colour) {
+    background-image: -webkit-linear-gradient(
+        to right,
+        $start-colour 0%,
+        $end-colour 100%
+    );
+    background-image: linear-gradient(
+        to right,
+        $start-colour 0%,
+        $end-colour 100%
+    );
+    opacity: 0.95;
+    background-size: 200% auto;
+}
+
+@mixin gradient-border($color1, $color2, $border-width, $direction) {
+    border: none;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#{$direction}, $color1 0%, $color2 100%),
+        linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+
+    @if $direction== "to right" or $direction== "to left" {
+        @if $direction== "to right" {
+            border-left: $border-width solid $color1;
+            border-right: $border-width solid $color2;
+        } @else {
+            border-left: $border-width solid $color2;
+            border-right: $border-width solid $color1;
+        }
+
+        background-position: 0 0, 0 100%;
+        background-size: 100% $border-width;
+    }
+
+    @if $direction== "to top" or $direction== "to bottom" {
+        @if $direction== "to top" {
+            border-top: $border-width solid $color2;
+            border-bottom: $border-width solid $color1;
+        } @else {
+            border-top: $border-width solid $color1;
+            border-bottom: $border-width solid $color2;
+        }
+
+        background-position: 0 0, 100% 0;
+        background-size: $border-width 100%;
+    }
+}
+
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+// Mixins
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+    -webkit-transition: $what $time $how;
+    -moz-transition: $what $time $how;
+    -ms-transition: $what $time $how;
+    -o-transition: $what $time $how;
+    transition: $what $time $how;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow: inset $top $left $blur $color;
+        -moz-box-shadow: inset $top $left $blur $color;
+        box-shadow: inset $top $left $blur $color;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}

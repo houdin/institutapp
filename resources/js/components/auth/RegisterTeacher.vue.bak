@@ -1,0 +1,549 @@
+<template>
+    <section id="about-page" class="about-page-section pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card  border-0 bg-gray-6">
+                        <div class="card-body">
+                                <div v-if="errors" class="alert alert-danger">
+                                    <ul class="list-inline list-style-none">
+                                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                                    </ul>
+                                </div>
+                        <ValidationObserver ref="registerform" v-slot="{ invalid, validated, handleSubmit }">
+                            <form id="registerForm"
+                            @submit.prevent="handleSubmit(onSubmit)"
+                            enctype="multipart/form-data"
+                            class="form-horizontal"
+                            >
+                                <!-- <form id="registerForm" class="contact_form"
+                                        {{-- action="{{ route('frontend.auth.register.post')}}" --}}
+                                        action="#"
+                                        method="post">
+                                        @csrf -->
+
+
+                            <!-- {{ html()->form('POST', route('frontend.auth.teacher.register.post'))->acceptsFiles()->class('form-horizontal')->open() }} -->
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        <!-- {{ html()->label($trans.get('validation.attributes.frontend.first_name'))->for('first_name') }}
+
+                                        {{ html()->text('first_name')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('validation.attributes.frontend.first_name'))
+                                            ->attribute('maxlength', 191)
+                                            ->required() }} -->
+                                        <input type="text" id="first_name" v-model="register.first_name" placeholder="Prénom" maxlength="191" class="form-control mb-0">
+                                        <span
+                                            class="text-danger special-danger"
+                                            id="first-name-error"
+                                            v-show="errors[0]"
+                                        >
+                                            {{ errors[0] }}
+                                        </span>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="last_name"
+                                    name="Last Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        <!-- {{ html()->label($trans.get('validation.attributes.frontend.last_name'))->for('last_name') }}
+
+                                        {{ html()->text('last_name')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('validation.attributes.frontend.last_name'))
+                                            ->attribute('maxlength', 191)
+                                            ->required() }} -->
+                                        <input type="text" v-model="register.last_name" id="last_name" placeholder="Nom de famille"
+                                            maxlength="191" class="form-control mb-0">
+                                        <span
+                                            class="text-danger special-danger"
+                                            id="last-name-error"
+                                            v-show="errors[0]"
+                                        >
+                                            {{ errors[0] }}
+                                        </span>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        <!-- {{ html()->label($trans.get('validation.attributes.frontend.email'))->for('email') }}
+
+                                        {{ html()->email('email')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('validation.attributes.frontend.email'))
+                                            ->attribute('maxlength', 191)
+                                            ->required() }} -->
+                                        <input type="email" v-model="register.email" id="email" placeholder="Adresse électronique"
+                                            maxlength="191" class="form-control mb-0">
+                                        <span
+                                            class="text-danger special-danger"
+                                            id="email-error"
+                                            v-show="errors[0]"
+                                        >
+                                            {{ errors[0] }}
+                                        </span>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        <!-- {{ html()->label($trans.get('validation.attributes.frontend.password'))->for('password') }}
+
+                                        {{ html()->password('password')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('validation.attributes.frontend.password'))
+                                            ->required() }} -->
+                                        <input type="password" v-model="register.password" id="password" placeholder="Mot de passe"
+                                            class="form-control mb-0">
+                                        <span
+                                            class="text-danger special-danger"
+                                            id="password-error"
+                                            v-show="errors[0]"
+                                        >
+                                            {{ errors[0] }}
+                                        </span>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        <!-- {{ html()->label($trans.get('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
+
+                                        {{ html()->password('password_confirmation')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('validation.attributes.frontend.password_confirmation'))
+                                            ->required() }} -->
+                                        <input type="password" v-model="register.password_confirmation" id="password_confirmation"
+                                            placeholder="Confirmation mot de passe" class="form-control mb-0">
+                                            <span
+                                            class="text-danger special-danger"
+                                            id="confirm-password-error"
+                                            v-show="errors[0]"
+                                        >
+                                            {{ errors[0] }}
+                                        </span>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.backend.teachers.fields.image'))->class('form-control-label')->for('image') }}
+
+                                        {!! Form::file('image', ['class' => 'form-control d-inline-block', 'placeholder' => '']) !!}
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.backend.general_settings.user_registration_settings.fields.gender'))->for('password_confirmation') }} :
+                                        <div class="form-control">
+                                            <label class="radio-inline me-3 mb-0">
+                                                <input type="radio" name="gender" value="male"> {{$trans.get('validation.attributes.frontend.male')}}
+                                            </label>
+                                            <label class="radio-inline me-3 mb-0">
+                                                <input type="radio" name="gender" value="female"> {{$trans.get('validation.attributes.frontend.female')}}
+                                            </label>
+                                            <label class="radio-inline me-3 mb-0">
+                                                <input type="radio" name="gender" value="other"> {{$trans.get('validation.attributes.frontend.other')}}
+                                            </label>
+                                        </div>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.teacher.facebook_link')) }}
+
+                                        {{ html()->text('facebook_link')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('labels.teacher.facebook_link')) }}
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.teacher.twitter_link')) }}
+
+                                        {{ html()->text('twitter_link')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('labels.teacher.twitter_link')) }}
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                                <div class="col-md-6">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.teacher.linkedin_link')) }}
+
+                                        {{ html()->text('linkedin_link')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('labels.teacher.linkedin_link')) }}
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+
+                            </div><!--row-->
+
+
+                            <div class="row">
+                                <div class="col">
+                                    <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.teacher.payment_details')) }}
+
+                                        <select class="form-control" name="payment_method" id="payment_method" required>
+                                            <option value="bank" {{ old('payment_method') == 'bank'?'selected':'' }}>{{ $trans.get('labels.teacher.bank') }}</option>
+                                            <option value="paypal" {{ old('payment_method') == 'paypal'?'selected':'' }}>{{ $trans.get('labels.teacher.paypal') }}</option>
+                                        </select>
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+                            </div><!--row-->
+
+                            <div class="bank_details">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ValidationProvider
+                                    vid="first_name"
+                                    name="First Name"
+                                    rules="required|alpha_spaces"
+                                    v-slot="{ errors, changed, invalid }"
+                                >
+                                        <div class="form-group">
+                                            {{ html()->label($trans.get('labels.teacher.bank_details.name')) }}
+
+                                            {{ html()->text('bank_name')
+                                                ->class('form-control')
+                                                ->placeholder($trans.get('labels.teacher.bank_details.name')) }}
+                                        </div><!--form-group-->
+                                        </ValidationProvider>
+                                    </div><!--col-->
+
+                                    <div class="col-md-6">
+                                        <ValidationProvider
+                                            vid="first_name"
+                                            name="First Name"
+                                            rules="required|alpha_spaces"
+                                            v-slot="{ errors, changed, invalid }"
+                                        >
+                                        <div class="form-group">
+                                            {{ html()->label($trans.get('labels.teacher.bank_details.ifsc_code')) }}
+
+                                            {{ html()->text('ifsc_code')
+                                                ->class('form-control')
+                                                ->placeholder($trans.get('labels.teacher.bank_details.ifsc_code')) }}
+                                        </div><!--form-group-->
+                                        </ValidationProvider>
+                                    </div><!--col-->
+
+                                    <div class="col-md-6">
+                                        <ValidationProvider
+                                            vid="first_name"
+                                            name="First Name"
+                                            rules="required|alpha_spaces"
+                                            v-slot="{ errors, changed, invalid }"
+                                        >
+                                        <div class="form-group">
+                                            {{ html()->label($trans.get('labels.teacher.bank_details.account')) }}
+
+                                            {{ html()->text('account_number')
+                                                ->class('form-control')
+                                                ->placeholder($trans.get('labels.teacher.bank_details.account')) }}
+                                        </div><!--form-group-->
+                                        </ValidationProvider>
+                                    </div><!--col-->
+
+                                    <div class="col-md-6">
+                                        <ValidationProvider
+                                            vid="first_name"
+                                            name="First Name"
+                                            rules="required|alpha_spaces"
+                                            v-slot="{ errors, changed, invalid }"
+                                        >
+                                        <div class="form-group">
+                                            {{ html()->label($trans.get('labels.teacher.bank_details.holder_name')) }}
+
+                                            {{ html()->text('account_name')
+                                                ->class('form-control')
+                                                ->placeholder($trans.get('labels.teacher.bank_details.holder_name')) }}
+                                        </div><!--form-group-->
+                                        </ValidationProvider>
+                                    </div><!--col-->
+                                </div><!--row-->
+                            </div>
+
+                            <div class="paypal_details">
+                                <div class="row">
+                                    <div class="col">
+                                        <ValidationProvider
+                                            vid="first_name"
+                                            name="First Name"
+                                            rules="required|alpha_spaces"
+                                            v-slot="{ errors, changed, invalid }"
+                                        >
+                                        <div class="form-group">
+                                            {{ html()->label($trans.get('labels.teacher.paypal_email')) }}
+
+                                            {{ html()->text('paypal_email')
+                                                ->class('form-control')
+                                                ->placeholder($trans.get('labels.teacher.paypal_email')) }}
+                                        </div><!--form-group-->
+                                        </ValidationProvider>
+                                    </div><!--col-->
+                                </div><!--row-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <ValidationProvider
+                                        vid="first_name"
+                                        name="First Name"
+                                        rules="required|alpha_spaces"
+                                        v-slot="{ errors, changed, invalid }"
+                                    >
+                                    <div class="form-group">
+                                        {{ html()->label($trans.get('labels.teacher.description')) }}
+
+                                        {{ html()->textarea('description')
+                                            ->class('form-control')
+                                            ->placeholder($trans.get('labels.teacher.description')) }}
+                                    </div><!--form-group-->
+                                    </ValidationProvider>
+                                </div><!--col-->
+                            </div><!--row-->
+
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group mb-0 clearfix">
+                                        <button class="btn bg-base-2" type="submit">{{$trans.get('labels.frontend.modal.register_now')}}</button>
+                                    </div><!--form-group-->
+                                </div><!--col-->
+                            </div><!--row-->
+                            </form>
+                        </ValidationObserver>
+                            <!-- {{ html()->form()->close() }} -->
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                </div>
+            </div><!-- row -->
+        </div>
+    </section>
+</template>
+
+<script>
+
+import VueRecaptcha from 'vue-recaptcha'
+export default {
+    props: [ 'prevRoute'],
+    components: {VueRecaptcha},
+
+    data(){
+
+        return{
+            register: {
+                first_name: '',
+                last_name: '',
+                email:'',
+                password: '',
+                password_confirmation: ''
+            },
+            sitekey: process.env.RECAPTCHA_PUBLIC_KEY,
+            success: null,
+            teacher_register: '',
+            errors: null,
+            urls: Laravel.urls
+        }
+    },
+    mounted(){
+        this.teacher_register = Laravel.urls.teacher_register
+    },
+    methods: {
+        // validate (response) {
+        //   Validation.validate({Response: response}).then(result => {
+        //     this.$emit('validate', result.objectResult.success)
+        //   }).catch(error => console.log(error))
+        // },
+    hideModal() {
+
+        this.$root.$emit('hide.modal', 'myModal');
+
+        var all_routes = ['login', 'register'];
+
+        if (Object.keys(this.prevRoute).length !== 0 && this.prevRoute.hasOwnProperty('name')){
+            if(all_routes.indexOf(this.prevRoute.name) !== -1)
+            {
+                window.location.replace('/')
+            }
+            else
+            {
+                window.location.replace(this.prevRoute.path)
+            }
+        }else{
+
+            window.location.replace('/')
+        }
+
+    },
+    onSubmit() {
+      const userdata = {
+        first_name: this.register.first_name,
+        last_name: this.register.last_name,
+        email: this.register.email,
+        password: this.register.password,
+        password_confirmation: this.register.password_confirmation
+      };
+      this.$refs.registerform.setErrors({
+        email: [
+          "The email field is required",
+          "The email field must be a valid email",
+          "This email is already taken",
+        ],
+      });
+      this.$refs.registerform.validate().then((success) => {
+        if (success) {
+          axios
+            .post(Laravel.urls.register, userdata)
+            .then((response) => {
+
+                if (response.data.success) {
+
+                    this.$nextTick(() => {
+                    this.$refs.regsiterform.reset();
+                    });
+                    Event.$emit("update-user-message", response.data.verify_text);
+                    // if (response.data.redirect == "back") {
+
+                    //   this.hideModal()
+                    // }else if( response.data.redirect == "dashboard"){
+                    //     window.location.replace('/user/dashboard')
+                    // }
+              }
+
+
+                // this.hideModal()
+              //   window.location.href = "/login";
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          //   event.target.submit();
+          //   return;
+        }
+
+        // Resetting Values
+        this.register.first_name = this.register.last_name = this.register.email = this.register.password = this.register.password_confirmation =
+          "";
+
+        // Wait until the models are updated in the UI
+        this.$nextTick(() => {
+          this.$refs.registerform.reset();
+        });
+      });
+
+    //   if (data.success) {
+
+    //         $('#register').removeClass('active').addClass('fade')
+    //         $('.error-response').empty();
+    //         $('#modal_title').text('Vérification Email')
+    //         $('#modal_head_link').hide();
+    //         $('#verification').addClass('active').removeClass('fade')
+    //         $('.success-response').empty().html("$trans.get('labels.frontend.modal.registration_message')");
+
+    //         if( data.user_uuid) {
+    //             data_uuid = data.user_uuid;
+    //             url = "{{ route('frontend.auth.account.confirm.resend', ':uuid')}}"
+
+    //             url = url.replace(':uuid', data.user_uuid);
+    //             $('#verify_btn').empty().html(`<a href="${url}" class="btn btn-secondary">Renvoyer l'e-mail de confirmation</a>`)
+    //             $('#verify_modal_text').empty().html( data.verify_text)
+
+    //         }
+    //         // $('#verification').show();
+    //         // $('#login').addClass('active').removeClass('fade')
+
+    //     }
+
+
+    },
+    }
+}
+
+</script>

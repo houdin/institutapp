@@ -1,0 +1,50 @@
+.icon {
+    width: rem(35);
+    height: rem(35);
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+    // svg {
+    //     width: 60%;
+    //     position: absolute;
+    // }
+}
+.icon.nav-icon {
+    width: rem(23);
+    height: rem(23);
+    position: relative;
+    border-radius: 100%;
+    display: inline-block;
+
+    i {
+        position: absolute;
+    }
+
+    .badge {
+        position: absolute;
+    }
+}
+.icon.nav-icon.cart-icon {
+    svg {
+        fill: $base-color-2;
+    }
+    // border: rem(2) solid $base-color-2;
+}
+.icon.nav-icon.user-icon {
+    // border: rem(2) solid $base-color-2;
+}
+.contact-social {
+    li {
+        border-radius: 100%;
+        border: 2px solid $base-color-2;
+        text-align: center;
+        color: $gray-2;
+        i {
+            transform: translateY(25%);
+        }
+    }
+}

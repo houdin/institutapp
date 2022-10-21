@@ -1,0 +1,20 @@
+//INPUT
+$input-border-width: $border-width;
+$input-box-shadow: $box-shadow-inset;
+
+$input-border-radius: $border-radius;
+$input-border-radius-sm: $border-radius-sm;
+$input-border-radius-lg: $border-radius-lg;
+
+$input-focus-width: $border-radius;
+
+$input-btn-focus-width: 0.25rem !default;
+$input-btn-focus-color-opacity: 0.25 !default;
+$input-btn-focus-color: rgba(
+    $component-active-bg,
+    $input-btn-focus-color-opacity
+);
+$input-btn-focus-blur: 0;
+$input-btn-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width
+    $input-btn-focus-color;
+// $input-focus-box-shadow: $input-btn-focus-box-shadow !default;

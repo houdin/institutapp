@@ -1,0 +1,21 @@
+// .gray
+//   @include prefix(filter, grayscale(50%), moz webkit)
+
+@import "var_params";
+
+@import "var_color";
+
+@import "var_font";
+
+@import "var_border";
+
+@import "var_input";
+
+@import "var_accordion";
+
+@import "var_breakpoints";
+
+@import "var_pagination";
+
+$navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$gray-3}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+// Variables

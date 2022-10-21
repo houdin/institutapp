@@ -1,0 +1,104 @@
+.avrg-rating {
+    .avrg-rate {
+        display: block;
+        color: $base-color-1;
+        margin: 10px 0px;
+    }
+
+    li {
+        color: #ffc926;
+    }
+
+    .start-bar {
+        width: 100px;
+        height: 8px;
+        display: inline-block;
+        margin: 0px 10px;
+        background-color: #eeeeee;
+        transition: 0.3s all ease-in-out;
+    }
+
+    .rating-overview {
+        margin-top: 5px;
+
+        &:hover .start-bar {
+            background-color: $base-color-1;
+        }
+    }
+}
+
+.review-option {
+    display: inline-block;
+    width: 100%;
+}
+
+.rating {
+    display: inline-block;
+    position: relative;
+
+    float: right;
+    margin-left: 10px;
+}
+
+.rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+
+    span {
+        margin: 0px 2px;
+        color: #eee;
+    }
+}
+
+.rating label:last-child {
+    position: static;
+}
+
+.rating label:nth-child(1) {
+    z-index: 5;
+}
+
+.rating label:nth-child(2) {
+    z-index: 4;
+}
+
+.rating label:nth-child(3) {
+    z-index: 3;
+}
+
+.rating label:nth-child(4) {
+    z-index: 2;
+}
+
+.rating label:nth-child(5) {
+    z-index: 1;
+}
+
+.rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.rating label .icon {
+    float: left;
+    color: transparent;
+}
+
+.rating label:last-child .icon {
+    color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+    color: #ffc926;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: #000;
+    text-shadow: 0 0 5px #ffc926;
+}

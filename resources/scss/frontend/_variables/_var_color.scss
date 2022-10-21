@@ -1,0 +1,149 @@
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #ff6347;
+$orange: #f6993f;
+$choco: #d2691e;
+$yellow: #febe6a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$white: #fff;
+$black: #000;
+
+$red-alert: #ff5a5a;
+
+$dark-input: #202227;
+
+$gray-1: #d4d4dc;
+$gray-2: #b3b3b8;
+$gray-3: #666e83;
+$gray-4: #4b5262;
+$gray-5: #393f4d;
+$gray-6: #272931;
+$gray-7: #1f2025;
+$gray-8: #1d1e22;
+
+/////////
+$gray-100: $gray-1;
+$gray-200: $gray-2;
+$gray-300: $gray-3;
+$gray-400: $gray-4;
+$gray-500: $gray-5;
+$gray-600: $gray-6;
+$gray-700: $gray-7;
+$gray-800: $gray-8;
+
+$body-color: $gray-2;
+$body-bg: $gray-8;
+
+// $gray-colors: (
+//     $gray-1,
+//     $gray-2,
+//     $gray-3,
+//     $gray-4,
+//     $gray-5,
+//     $gray-6,
+//     $gray-7,
+//     $gray-8
+// );
+
+$base-color-1: #fdd765;
+$base-color-2: $yellow;
+$base-color-3: $orange;
+$base-color-4: $choco;
+$base-color-5: #4e4628;
+
+// $base-colors: (
+//     $base-color-1,
+//     $base-color-2,
+//     $base-color-3,
+//     $base-color-4,
+//     $base-color-5
+// );
+
+// scss-docs-start theme-color-variables
+
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-1;
+$dark: $gray-8;
+
+// scss-docs-start gray-colors-map
+// bgcolor, text, hover-bg, hover-text
+$grays: (
+    1 "gray" $gray-1 $gray-7,
+    2 "gray" $gray-2 $gray-7,
+    3 "gray" $gray-3 $gray-1,
+    4 "gray" $gray-4 $gray-1,
+    5 "gray" $gray-5 $gray-1,
+    6 "gray" $gray-6 $gray-1,
+    7 "gray" $gray-7 $gray-1,
+    8 "gray" $gray-8 $gray-2
+);
+
+// scss-docs-start colors-map
+// bgcolor, text, hover-bg, hover-text
+$colors: 1 "base" $base-color-1 $base-color-5 $base-color-5 $base-color-1,
+    2 "base" $base-color-2 $base-color-5 $base-color-5 $base-color-2,
+    3 "base" $base-color-3 $base-color-5 $base-color-5 $base-color-2,
+    4 "base" $base-color-4 $gray-1 $gray-6 $base-color-2,
+    5 "base" $base-color-5 $gray-1 $gray-6 $base-color-2;
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark,
+    "white": $white,
+);
+
+// Brands
+
+$brand-info: $info;
+$brand-success: $success;
+$brand-warning: $warning;
+$brand-danger: $danger;
+
+$text-color: $gray-2;
+
+$link-color: $base-color-2;
+$link-decoration: underline;
+$link-shade-percentage: 20%;
+$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-hover-decoration: null;
+
+// Buttons
+$btn-default-color: $text-color;
+
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+$component-active-color: $gray-7;
+$component-active-bg: $base-color-2;
+
+// Panels
+$panel-default-heading-bg: #fff;
+
+// Inputs
+$input-border: lighten($text-color, 40%);
+$input-border-focus: lighten($base-color-2, 25%);
+$input-color-placeholder: lighten($text-color, 30%);
+
+$input-bg: $body-bg !default;
+$input-disabled-bg: $gray-2 !default;
+$input-disabled-border-color: null !default;
+
+$input-color: $body-color !default;
+$input-border-color: $gray-4 !default;
+
+$input-focus-bg: $input-bg !default;
+$input-focus-border-color: tint-color($component-active-bg, 50%) !default;
+$input-focus-color: $input-color !default;

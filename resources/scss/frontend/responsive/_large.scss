@@ -1,0 +1,214 @@
+@media #{$large-down} {
+    header {
+        height: 65px;
+    }
+
+    .pt150 {
+        padding-top: 80px;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .main-menu-container.menu-bg-overlay {
+        padding: 0;
+    }
+
+    .main-menu-container {
+        padding: 0;
+    }
+
+    .navbar-header {
+        left: 0;
+
+        right: 0;
+
+        top: 0px;
+
+        margin: 0 auto;
+
+        position: absolute;
+    }
+    #mobile-menu.show {
+        display: flex !important;
+    }
+    ._lg_down {
+        display: none !important;
+    }
+    .b-not_found .b-page_header::before {
+        font-size: 300px;
+    }
+
+    .b-not_found h2 {
+        font-size: 28px;
+    }
+
+    .cart-search {
+        top: 0px;
+
+        right: 15px;
+
+        position: absolute;
+    }
+
+    .counter-icon {
+        width: 40px;
+
+        border-right: none;
+    }
+
+    .about-us-text {
+        padding-bottom: 30px;
+    }
+
+    .header-top {
+        display: none;
+    }
+
+    .latest-title {
+        font-size: 16px;
+    }
+
+    .crs-viewer li,
+    .tutotial-viewer li {
+        padding: 5px 5px;
+    }
+
+    .header-info {
+        display: inherit;
+
+        margin-left: 0;
+
+        text-align: center;
+    }
+
+    .counter-icon-number:before {
+        display: none;
+    }
+
+    .category-slide .owl-nav {
+        top: inherit;
+
+        left: inherit;
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .category-slide .owl-nav .owl-next,
+    .category-slide .owl-nav .owl-prev {
+        float: none;
+
+        display: inline-block;
+    }
+
+    .crs-page-section #tab2,
+    .tutorial-page-section #tab2 {
+        display: none !important;
+    }
+
+    .crs-page-section .product-tab,
+    .tutorial-page-section .product-tab {
+        display: none;
+    }
+
+    .leanth-crs,
+    .leanth-tutorial {
+        display: none;
+    }
+
+    .teacher-pic-content .teacher-hover-item {
+        top: 5px;
+
+        font-size: 13px;
+    }
+
+    .teacher-pic-content:hover .teacher-hover-item {
+        left: 5px;
+    }
+
+    #slider-item .owl-nav {
+        width: 100%;
+    }
+
+    .teacher-img-content .teacher-img {
+        width: 120px;
+    }
+    .select-lang {
+        display: none;
+    }
+
+    .cart-search {
+        margin-left: 0;
+
+        margin-top: 5px;
+    }
+
+    .navbar-header {
+        width: 220px;
+    }
+
+    .counter-icon {
+        width: 50px;
+
+        margin-right: 5px;
+    }
+
+    .teacher-img-content .teacher-img {
+        position: absolute;
+
+        right: 0;
+    }
+
+    .teacher-img-content .teacher-img:after {
+        display: none;
+    }
+
+    .teacher-img-content .teacher-category {
+        position: absolute;
+
+        bottom: 76px;
+
+        right: 25px;
+
+        top: inherit;
+    }
+
+    .genius-btn {
+        padding: 0px 10px;
+    }
+
+    .latest-title {
+        overflow: hidden;
+    }
+
+    .crs-page-section .crs-type-list span,
+    .tutorial-page-section .tutorial-type-list span {
+        padding: 10px 4px;
+    }
+
+    .slider-text .section-title h2 {
+        font-size: 58px;
+    }
+
+    #slider-item .secoud-title {
+        font-size: 50px;
+    }
+
+    #slider-item .search-crs,
+    #slider-item .search-tutorial {
+        max-width: 610px;
+    }
+}
+
+@media #{$large-up} {
+    #mobile-menu {
+        display: none !important;
+    }
+
+    ._lg_up {
+        display: inherit !important;
+    }
+}

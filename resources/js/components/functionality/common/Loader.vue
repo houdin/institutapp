@@ -1,0 +1,8 @@
+<template>
+  <div class="loader">
+    <div class="circle"></div>
+
+  </div>
+</template>
+
+

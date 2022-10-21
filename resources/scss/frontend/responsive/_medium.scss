@@ -1,0 +1,258 @@
+@media #{$medium-down} {
+    html {
+        overflow-x: hidden;
+    }
+
+    ._md_down {
+        display: inherit !important;
+    }
+
+    .slider-bg-1,
+    .slider-bg-2,
+    .slider-bg-3,
+    .slider-bg-4,
+    .slider-bg-5 {
+        height: 65vh;
+    }
+
+    .search-crs-section,
+    .search-tutorial-section {
+        padding: 45px 0px 40px 0px;
+    }
+
+    .popular-crs-section,
+    .popular-tutorial-section {
+        padding-bottom: 40px;
+    }
+
+    .bg-mockup {
+        display: none;
+    }
+
+    .slider-text .section-title h2 {
+        font-size: 30px !important;
+        color: #fff;
+        font-weight: 100;
+    }
+
+    .about-resigter-form {
+        margin: 0 auto;
+
+        border-radius: 4px;
+
+        background-color: #17d0cf;
+
+        margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+        // font-size: 40px;
+    }
+
+    .latest-area-content {
+        // max-width: 400px;
+
+        margin: 0 auto;
+
+        margin-bottom: 30px;
+    }
+
+    .best-crs-pic-text,
+    .best-tutorial-pic-text {
+        max-width: 270px;
+
+        margin: 0 auto;
+
+        margin-bottom: 10px;
+    }
+
+    .about-us-section {
+        padding: 65px 0px;
+    }
+
+    .why-choose-us-section .jarallax {
+        padding: 75px 0px 50px 0px;
+    }
+
+    .latest-area-section {
+        padding: 60px 0px 35px 0px;
+    }
+
+    .best-crs-area,
+    .best-tutorial-area {
+        margin-bottom: 0px;
+    }
+
+    .best-crs-section,
+    .best-tutorial-section {
+        padding: 80px 0px 70px 0px;
+    }
+
+    .teacher-img-content {
+        max-width: 270px;
+    }
+
+    .crs-teacher-section .jarallax,
+    .tutorial-teacher-section .jarallax {
+        padding: 60px 0px 70px 0px;
+    }
+
+    .category-icon-title {
+        max-width: 270px;
+
+        margin: 0 auto;
+
+        margin-bottom: 20px;
+    }
+
+    .best-product-section {
+        padding: 60px 0px 50px 0px;
+    }
+
+    .faq-section {
+        padding: 40px 0px 55px 0px;
+    }
+
+    .contact-area-section {
+        padding: 65px 0px 70px;
+    }
+
+    #google-map {
+        position: inherit;
+
+        top: inherit;
+
+        margin-top: 30px;
+
+        width: inherit;
+    }
+
+    .footer-menu {
+        margin-left: 0;
+
+        margin-right: 30px;
+    }
+
+    .subscribe-form {
+        margin-left: 0;
+    }
+
+    .copy-right-menu-item {
+        float: none !important;
+    }
+
+    .copy-right-menu-item li {
+        margin-left: 0;
+
+        margin-right: 10px;
+    }
+
+    .footer-social {
+        margin-bottom: 20px;
+
+        text-align: left !important;
+    }
+
+    .home-secound .about-resigter-form {
+        margin: 0 auto;
+
+        margin-bottom: 50px;
+    }
+
+    .app-mock-up {
+        margin-bottom: 20px;
+    }
+
+    .secound-teacher-section .teacher-img-text {
+        max-width: 275px;
+
+        margin: 0 auto;
+    }
+
+    .contact_secound_section {
+        background-image: url("/assets/img/banner/contact-b.jpg");
+    }
+
+    .secound-teacher-section {
+        padding: 60px 0px;
+    }
+
+    .contact_secound_section {
+        padding-top: 60px;
+    }
+
+    .contact_secound_form {
+        margin-left: 0;
+    }
+
+    .back-top {
+        margin-top: 20px;
+    }
+
+    .counter-icon-number {
+        margin-bottom: 20px;
+    }
+
+    .category-slide .owl-nav {
+        top: -55px;
+
+        text-align: right;
+    }
+
+    .side-bar {
+        margin-top: 20px;
+    }
+
+    .crs-page-section table,
+    .tutorial-page-section table {
+        min-width: 870px;
+    }
+
+    .teacher-pic-content .teacher-hover-item {
+        top: 35px;
+
+        font-size: 16px;
+    }
+
+    .teacher-pic-content:hover .teacher-hover-item {
+        left: 20px;
+    }
+
+    .teacher-details-img {
+        margin-bottom: 10px;
+    }
+
+    .teacher-address .address-details li {
+        width: 100%;
+    }
+
+    .first-widget {
+        margin-top: 20px !important;
+    }
+
+    .pt150 {
+        padding-top: 75px;
+    }
+    .b-not_found .b-page_header h1 {
+        font-size: 35px;
+        padding: 55px 0;
+    }
+
+    .b-not_found .b-page_header::before {
+        font-size: 150px;
+        line-height: 150px;
+    }
+
+    .b-not_found h2 {
+        font-size: 22px;
+    }
+
+    .b-not_found .b-searchform {
+        max-width: 300px;
+    }
+}
+@media #{$medium-up} {
+    ._md_up {
+        display: none !important;
+    }
+}

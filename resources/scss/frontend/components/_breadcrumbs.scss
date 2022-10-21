@@ -1,0 +1,77 @@
+.breadcrumb-section {
+    // background-image: url("/assets/images/fx/FX_slide.jpg");
+    // padding-bottom: 260px;
+    // background-position: center 15%;
+    // background-size: 100% auto !important;
+
+    // background-image: url(/assets/images/hero_bg.jpg);
+    width: 100%;
+    // min-height: 170px;
+    position: relative;
+    background-size: cover;
+    background-position: center top;
+    text-align: center;
+    margin-bottom: 4rem;
+    position: absolute;
+    z-index: 10;
+
+    // .blakish-overla {
+    //     // opacity: .5;
+    //     // visibility: visible;
+    //     background: rgba(0, 0, 0, 0.2);
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 100%;
+    //     left: 0px;
+    //     top: 0px;
+    // }
+
+    // .page-breadcrumb-content {
+    //     // position: absolute;
+    //     // top: 70%;
+    //     // transform: translateY(-60%);
+    //     // left: 0;
+    //     // right: 0;
+    //     max-height: 60px;
+    //     margin: 45px auto;
+    //     position: relative;
+    //     max-width: 100%;
+    //     height: auto;
+    // }
+
+    // .breadcrumb-head {
+    //     color: $white;
+
+    //     span {
+    //     }
+    // }
+
+    .breadcrumb {
+        // text-align: center;
+        // display: inherit;
+        font-size: 0.8rem;
+        background-color: transparent;
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .breadcrumb-item {
+        //background-color: $base-color-1;
+        // color: #fff;
+        //padding: 5px 15px;
+        //
+        //
+        // border-radius: 4px;
+
+        &::before {
+            // display: none;
+        }
+    }
+
+    .breadcrumb-item.active {
+        //background-color: #3b3b3b;
+        color: $gray-1;
+    }
+}

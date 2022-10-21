@@ -1,0 +1,12 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/backend.js": "/js/backend.js",
+    "/js/coreui/menu-create.js": "/js/coreui/menu-create.js",
+    "/js/coreui/menu-edit.js": "/js/coreui/menu-edit.js",
+    "/js/coreui/media.js": "/js/coreui/media.js",
+    "/js/coreui/media-cropp.js": "/js/coreui/media-cropp.js",
+    "/js/coreui/manifest.js": "/js/coreui/manifest.js",
+    "/css/app.css": "/css/app.css",
+    "/css/backend.css": "/css/backend.css",
+    "/js/coreui/vendor.js": "/js/coreui/vendor.js"
+}

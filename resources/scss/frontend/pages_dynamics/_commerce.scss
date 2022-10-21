@@ -1,0 +1,11 @@
+// // Bootstrap
+// @import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+/// Import main page layout
+
+@import "ecommerce/order";
+
+@import "ecommerce/payment";
+
+@import "ecommerce/shop";

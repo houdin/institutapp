@@ -1,0 +1,58 @@
+//// ecommerce
+
+.shopping-cart-drop {
+    border: 1px solid $base-color-5;
+    position: absolute;
+    width: 20rem;
+    background-color: $gray-8;
+    border-radius: 1rem;
+    list-style: none;
+    padding: 0.5rem;
+    // transform: translate3d(-100px, 35px, 0px) !important;
+    // right: 110px;
+    left: -10rem !important;
+    top: 2rem !important;
+    .dropdown-item {
+        padding: 2px 0;
+
+        display: flex;
+        color: $gray-2;
+
+        &:hover,
+        &:focus {
+            background-color: $gray-7;
+            color: $gray-2;
+        }
+    }
+    .dropdown-title {
+        color: $gray-2;
+        text-align: center;
+        padding: 10px;
+
+        border-bottom: 1px solid $base-color-5;
+    }
+    .dropdown-button {
+        margin: 5px;
+    }
+    .dropdown-item-info p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .dropdown-item-image {
+        float: left;
+        height: 50px;
+        width: auto;
+        padding: 0 10px 0 4px;
+    }
+
+    .dropdown-quantity {
+        position: absolute;
+        right: 45px;
+    }
+
+    .remove-item-icon {
+        position: absolute;
+        right: 10px;
+    }
+}

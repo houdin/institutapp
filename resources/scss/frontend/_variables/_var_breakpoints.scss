@@ -1,0 +1,34 @@
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+// scss-docs-start grid-breakpoints
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+) !default;
+
+$small-up: "only screen and (min-width : #{$sm})";
+$medium-up: "only screen and (min-width : #{$md})";
+$large-up: "only screen and (min-width : #{$lg})";
+$extra-large-up: "only screen and (min-width : #{$xl})";
+$extra-extra-up: "only screen and (min-width : #{$xxl})";
+
+$small-down: "only screen and (max-width : #{shrinker($sm)})";
+$medium-down: "only screen and (max-width : #{shrinker($md)})";
+$large-down: "only screen and (max-width : #{shrinker($lg)})";
+$extra-large-down: "only screen and (max-width : #{shrinker($xl)})";
+$extra-extra-down: "only screen and (max-width : #{shrinker($xxl)})";
+
+// $extra-small-only: "(min-width : 0px) and (max-width : #{shrinker($sm)})";
+$small-only: "(min-width : #{$md}) and (max-width : #{shrinker($sm)})";
+$medium-only: "(min-width : #{$lg}) and (max-width : #{shrinker($md)})";
+$large-only: "(min-width : #{$xl}) and (max-width : #{shrinker($lg)})";
+$extra-large-only: "(min-width : #{$xxl}) and (max-width : #{shrinker($xl)})";
+$extra-extra-only: "only screen and (min-width : #{shrinker($xxl)})";

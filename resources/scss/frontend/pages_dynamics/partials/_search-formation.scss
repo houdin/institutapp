@@ -1,0 +1,95 @@
+.search-crs-section {
+    padding: 125px 0px 100px 0px;
+}
+
+.search-crs,
+.subs-form {
+    input {
+        width: 100%;
+        height: 60px;
+        background-color: #f9f9f9;
+        border: none;
+        padding: 0px 20px;
+        border-radius: 5px;
+    }
+
+    .nws-button {
+        top: 0;
+        right: 0;
+        height: 60px;
+        width: 195px;
+        line-height: 60px;
+        position: absolute;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        button {
+            background-color: transparent;
+            border: none;
+
+            text-transform: uppercase;
+            color: $gray-8;
+        }
+    }
+}
+
+.counter-icon {
+    float: left;
+    width: 60px;
+    height: 45px;
+    line-height: 40px;
+    margin-right: 15px;
+    text-align: center;
+    border-right: 1px solid $gray-4;
+
+    i {
+    }
+}
+
+.counter-number {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.counter-number {
+    p {
+        font-color: $gray-4;
+    }
+
+    .counter-count {
+        color: $gray-8;
+        line-height: 0.9;
+    }
+
+    span {
+        @extend .counter-count;
+    }
+}
+
+.app-stor {
+    display: inline-block;
+
+    li {
+        color: $white;
+        margin-right: 25px;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 1px;
+            top: 4px;
+            right: -14px;
+            background-color: #9ad1f6;
+        }
+
+        &:last-child:after {
+            display: none;
+        }
+    }
+}
+
+#search-crs-2 .search-app {
+    margin-top: 50px;
+}

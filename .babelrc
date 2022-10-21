@@ -1,0 +1,15 @@
+
+// { "presets": ["@babel/preset-env"],
+// "env": {
+//     "development" : {
+//         "compact": false
+//     }
+//     }
+// }
+{
+    "presets": ["@babel/preset-env"],
+    // "env": {
+    // "development" : {
+    //     "compact": false
+    // }
+}

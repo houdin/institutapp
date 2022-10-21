@@ -1,0 +1,288 @@
+.tutorial-page-section {
+    padding: 80px 0px 0px;
+
+    .container {
+        max-width: 1000px;
+    }
+
+    .short-filter-tab {
+        border-bottom: 1px solid $base-color-5;
+        padding-bottom: 20px;
+    }
+
+    .tutorial-list-view {
+        overflow-x: auto;
+        padding: 5px;
+    }
+
+    .shorting-filter select {
+        margin-right: 10px;
+        padding: 10px 15px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td,
+    th {
+        text-align: left;
+        padding: 20px 15px;
+    }
+
+    th {
+        color: $gray-8;
+        border-bottom: 3px solid $base-color-2;
+    }
+
+    tr {
+        border-bottom: 1px solid #eee;
+        transition: 0.3s all ease-in-out;
+        padding: 15px;
+
+        &:hover {
+            box-shadow: 0px 2px 10px 3px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .list-head {
+        padding: 0;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    .tutorial-list-img {
+        height: 70px;
+        width: 70px;
+        float: left;
+        margin-right: 20px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: $gray-5;
+    }
+
+    .tutorial-list-text {
+        width: 200px;
+        display: inline-block;
+
+        h3 {
+            color: $white;
+        }
+    }
+
+    .tutorial-type-list {
+        span {
+            background-color: $base-color-1;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 4px;
+        }
+    }
+
+    .tutorial-meta .tutorial-rate li {
+        color: #bbbbbb;
+    }
+}
+
+// tutorial details
+.tutorial-details-section {
+    padding: 80px 0px 0px;
+}
+
+.tutorial-single-text {
+    .tutorial-title {
+        padding-bottom: 20px;
+
+        b {
+        }
+
+        h3 {
+        }
+    }
+
+    .tutorial-details-content {
+        img {
+            margin: 10px;
+        }
+    }
+
+    p {
+        margin-bottom: 30px;
+        color: $white;
+    }
+}
+
+.tutorial-details-category {
+    span {
+        float: left;
+        margin-right: 15px;
+
+        b {
+        }
+    }
+
+    li {
+        text-transform: uppercase;
+
+        background-color: #f7f7f7;
+        padding: 7px 15px;
+        border-radius: 4px;
+        margin-top: 5px;
+        transition: 0.3s all ease-in-out;
+
+        &:hover {
+            color: $gray-8;
+            @extend .gradient-bg;
+        }
+
+        &.active {
+            background: #e6e6e6;
+        }
+    }
+}
+
+.tutorial-details-item {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.tutorial-single-pic {
+    width: 100%;
+    height: 40rem;
+    background-size: cover;
+    background-position-y: 50%;
+}
+
+.tutorial-by {
+    position: absolute;
+    bottom: 15px;
+    left: 80px;
+
+    b {
+        color: $base-color-1;
+    }
+}
+.tutorial-review {
+    .section-title-2 {
+        h2 {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+.tutorial-review {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 50px;
+    margin-bottom: 30px;
+}
+
+.leanth-tutorial {
+    position: absolute;
+    right: 60px;
+    top: 20px;
+
+    span {
+        background-color: #f7f7f7;
+        padding: 12px 20px;
+
+        border-radius: 4px;
+        text-transform: uppercase;
+        color: #ccc !important;
+
+        &.completed {
+            color: white !important;
+        }
+    }
+}
+
+.tutorial-side-bar-widget {
+    h3 {
+        color: #333;
+        margin-bottom: 20px;
+
+        span {
+            color: $gray-8;
+        }
+    }
+}
+
+.like-tutorial {
+    height: 50px;
+    width: 50px;
+    background-color: #eeeeee;
+    color: #cccccc;
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.tutorial-side-bar-widget {
+    .genius-btn {
+        line-height: 50px;
+        padding: 0px 15px;
+    }
+}
+
+.student-number {
+    float: right;
+    color: $base-color-1;
+}
+
+.enrolled-student {
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+
+    li {
+        color: #ffc926;
+    }
+}
+
+.couse-feature {
+    margin-top: 15px;
+
+    li {
+        color: #c4c4c4;
+        position: relative;
+        padding: 5px 0px;
+        border: 1px solid #eeeeee;
+        border-left: none;
+        border-right: none;
+
+        &:after {
+            top: 5px;
+            left: 110px;
+            content: ":";
+            position: absolute;
+        }
+    }
+
+    span {
+        position: relative;
+        float: right;
+        color: $gray-8;
+    }
+}
+
+.listing-filter-form {
+    label {
+        color: $white;
+        display: block;
+    }
+
+    input,
+    select {
+        height: 50px;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        background-color: $gray-8;
+    }
+}

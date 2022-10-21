@@ -1,0 +1,1 @@
+import{s as o,x as a,o as n,g as t,a as s,F as r,d as c}from"./app.9db5585a.js";const m=c("h1",null,"Home",-1),u=o({__name:"Home",props:{name:String},setup(_){return(p,l)=>{const e=a("Nav");return n(),t(r,null,[m,s(e)],64)}}});export{u as default};

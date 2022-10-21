@@ -1,0 +1,88 @@
+@use "./../_variables/variables" as all_var;
+@use "sass:math";
+
+@function rem($size, $font-size: all_var.$font-size-base) {
+    @return 1rem *
+        math.div($size, strip-unit($font-size) * all_var.$font-size-base-px);
+}
+
+@function em($size, $font-size: all_var.$font-size-base) {
+    @return 1em *
+        math.div($size, strip-unit($font-size) * all_var.$font-size-base-px);
+}
+
+@function strip-unit($number) {
+    @if type-of($number) == "number" and not unitless($number) {
+        @return math.div($number, $number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@function shrinker($val) {
+    @return $val - 0.02;
+}
+
+@function breakpoint-min($name, $breakpoints: all_var.$grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: all_var.$grid-breakpoints) {
+    $max: map-get($breakpoints, $name);
+    @return if($max and $max > 0, $max - 0.02, null);
+}
+
+@function breakpoint-next(
+    $name,
+    $breakpoints: all_var.$grid-breakpoints,
+    $breakpoint-names: map-keys($breakpoints)
+) {
+    $n: index($breakpoint-names, $name);
+    @if not $n {
+        @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+    }
+    @return if(
+        $n < length($breakpoint-names),
+        nth($breakpoint-names, $n + 1),
+        null
+    );
+}
+
+@function str-split($string, $separator) {
+    // empty array/list
+    $split-arr: ();
+    // first index of separator in string
+    $index: str-index($string, $separator);
+    // loop through string
+    @while $index != null {
+        // get the substring from the first character to the separator
+        $item: str-slice($string, 1, $index - 1);
+        // push item to array
+        $split-arr: append($split-arr, $item);
+        // remove item and separator from string
+        $string: str-slice($string, $index + 1);
+        // find new index of separator
+        $index: str-index($string, $separator);
+    }
+    // add the remaining string to list (the last item)
+    $split-arr: append($split-arr, $string);
+
+    @return $split-arr;
+}
+
+@function str-to-list($string, $separator: " ", $startAt: 1) {
+    $workStr: str-slice($string, $startAt);
+    $list: ();
+    $indexOfFirstSpace: str-index($workStr, $separator);
+    @if $indexOfFirstSpace == null {
+        $list: ($workStr);
+    } @else {
+        $list: (str-slice($workStr, 1, $indexOfFirstSpace - 1));
+        $list: join(
+            $list,
+            str-to-list($workStr, $startAt: $indexOfFirstSpace + 1)
+        );
+    }
+    @return $list;
+}

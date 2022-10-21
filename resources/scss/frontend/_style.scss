@@ -1,0 +1,29 @@
+// Functions
+@import "_functions/functions";
+// Variables
+@import "_variables/variables";
+// Mixins
+@import "_mixins/mixins";
+
+@import "./root";
+
+//// Bootstrap
+@import "./../bootstrap/bootstrap";
+
+/*Plugins*/
+/*=====================================================================*/
+@import "./plugins/plugins";
+
+/*global area*/
+/*----------------------------------------------------*/
+@import "./predefine";
+/*---------------------------------------------------- */
+
+@import "components/_components";
+
+@import "_class/classes";
+
+// Pages
+@import "pages";
+
+@import "plugins/hljs/a11y-dark";

@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "types": [
+            "@inertiajs/Inertia-vue3"
+        ],
+        "plugins": [
+            {
+                "name": "@vuedx/typescript-plugin-vue"
+            }
+        ],
+        "paths": {
+            "@/*": [
+                "resources/js/*"
+            ],
+            "@/assets/*": [
+                "public/assets/*"
+            ],
+            "@components/*": [
+                "resources/js/components/*"
+            ],
+        }
+    },
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.vue",
+    ]
+}

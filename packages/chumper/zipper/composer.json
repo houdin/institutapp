@@ -1,0 +1,14 @@
+{
+    "name": "chumper/zipper",
+    "description": "This is a little neat helper for the ZipArchive methods with handy functions",
+    "type": "library",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Nils Plaschke",
+            "email": "github@nilsplaschke.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

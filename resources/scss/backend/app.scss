@@ -1,0 +1,17 @@
+@import "~jquery-ui-dist/jquery-ui.css";
+// If you want to override variables do it here
+@import "variables";
+
+@import "simplebar";
+
+@import "exemple";
+
+// Import styles
+@import "coreui/coreui";
+@import "coreui-chart";
+
+// $fa-font-path: "~font-awesome/fonts";
+// @import "~font-awesome/scss/font-awesome";
+// If you want to add something do it here
+@import "custom";
+@import "messageBox";
