@@ -307,6 +307,11 @@ class User extends Authenticatable implements MessageableInterface, MustVerifyEm
         return $this->hasMany(Order::class);
     }
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
     // /**
     //  * User can have one role
     //  *

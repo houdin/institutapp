@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/';
 
-    public const LOGOUT_REDIRECT = '/login';
+    public const LOGOUT_REDIRECT = '/connexion';
 
     /**
      * The controller namespace for the application.

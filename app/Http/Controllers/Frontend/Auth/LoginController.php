@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\Frontend\Auth\UserLoggedIn;
 use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use App\Events\Frontend\Auth\UserLoggedOut;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Repositories\Frontend\Auth\UserSessionRepository;
 
 
@@ -22,8 +21,6 @@ use App\Repositories\Frontend\Auth\UserSessionRepository;
  */
 class LoginController extends FrontendBaseController
 {
-    use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *

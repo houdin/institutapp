@@ -6,15 +6,15 @@ import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
+const path = require("path");
 
 const host = "fxinstitut.test";
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: "resources/js/app.ts",
-            ssr: "resources/js/ssr.ts",
-            valetTls: host,
+            input: "resources/js/app.js",
+            ssr: "resources/js/ssr.js",
             refresh: true,
         }),
         vue({
@@ -31,14 +31,14 @@ export default defineConfig({
 
             // allow auto import and register components used in markdown
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-            dirs: ["resources/js"],
-            dts: "./resources/js/components.d.ts",
-            types: [
-                {
-                    from: "@inertiajs/inertia-vue3",
-                    names: ["Link"],
-                },
+            dirs: [
+                "resources/js/Components",
+                "resources/js/Shared",
+                "resources/js/Layouts",
+                "resources/js/Pages",
             ],
+            dts: "./resources/js/components.d.ts",
+
             // custom resolvers
             resolvers: [
                 // auto import icons
@@ -62,10 +62,12 @@ export default defineConfig({
                 "@vueuse/head",
                 "@vueuse/core",
                 {
-                    // "@inertiajs/inertia-vue3": [
-                    //     // named imports
-                    //     "Link", // import { useMouse } from '@vueuse/core',
-                    // ],
+                    "@inertiajs/inertia-vue3": [
+                        "usePage","useForm"
+                    ],
+                    "@inertiajs/inertia": [
+                        "Inertia",
+                    ],
                     axios: [
                         // default imports
                         ["default", "axios"], // import { default as axios } from 'axios',
@@ -75,19 +77,18 @@ export default defineConfig({
             dts: "./resources/js/auto-imports.d.ts",
         }),
     ],
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./resources/js"),
+        },
+    },
     ssr: {
         noExternal: ["laravel-vite-plugin", "@inertiajs/server"],
     },
     server: {
         host,
         hmr: { host },
-        https: {
-            key: fs.readFileSync(
-                `/Users/houdini/.config/valet/Certificates/${host}.key`
-            ),
-            cert: fs.readFileSync(
-                `/Users/houdini/.config/valet/Certificates/${host}.crt`
-            ),
-        },
+
     },
 });
+

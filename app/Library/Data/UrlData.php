@@ -20,7 +20,7 @@ class UrlData
             /// AUTH  /////////////////
 
             'login' => route('frontend.auth.login'),
-            'logout' => route('frontend.auth.logout'),
+            'logout' => route('logout'),
             'register' => route('frontend.auth.register.post'),
             'teacher_register' => route('frontend.auth.teacher.register'),
             'register_confirm' => route('frontend.auth.account.confirm', ':token'),

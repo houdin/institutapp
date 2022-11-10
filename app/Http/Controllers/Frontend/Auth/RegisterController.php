@@ -15,7 +15,6 @@ use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Validator;
 use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use App\Events\Frontend\Auth\UserRegistered;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\ClosureValidationRule;
 use App\Repositories\Frontend\Auth\UserRepository;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
@@ -26,7 +25,6 @@ use App\Http\Controllers\Frontend\Auth\ConfirmAccountController;
  */
 class RegisterController extends FrontendBaseController
 {
-    use RegistersUsers;
 
     /**
      * @var UserRepository

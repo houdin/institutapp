@@ -23,8 +23,7 @@
             </li>
 
             <li class="nav-item px-3">
-                <a class="nav-link"
-                    href="{{ route('admin.dashboard') }}">@lang('backend/navs.frontend.dashboard')</a>
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">@lang('backend/navs.frontend.dashboard')</a>
             </li>
             {{-- @if (config('locale.status') && count(config('locale.languages')) > 1) --}}
             {{-- <li class="nav-item px-3 dropdown"> --}}
@@ -36,7 +35,6 @@
             {{-- </li> --}}
             {{-- @endif --}}
             @if (config('locale.status') && count($locales) > 1)
-
                 <li class="nav-item px-3 dropdown">
                     <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
@@ -82,8 +80,8 @@
         </ul>
         <ul class="header-nav ms-3">
             <li class="nav-item dropdown">
-                <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false">
+                <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">
                     <img src="{{ $logged_in_user->picture }}" class="img-avatar rounded-circle"
                         alt="{{ $logged_in_user->email }}" width="20%">
                     <span style="right: 0;left: inherit"
@@ -134,8 +132,7 @@
                             </use>
                         </svg> Settings</a><a class="dropdown-item" href="#">
                         <svg class="icon me-2">
-                            <use
-                                xlink:href="{{ asset('assets/img/backend/icons/sprites/free.svg#cil-credit-card') }}">
+                            <use xlink:href="{{ asset('assets/img/backend/icons/sprites/free.svg#cil-credit-card') }}">
                             </use>
                         </svg> Payments<span class="badge badge-sm bg-secondary ms-2">42</span></a><a
                         class="dropdown-item" href="#">
@@ -158,8 +155,7 @@
                             </use>
                         </svg> @lang('backend/navs.general.logout')</a>
 
-                    <form id="logout-form" action="{{ route('frontend.auth.logout') }}" method="POST"
-                        style="display: none;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
 

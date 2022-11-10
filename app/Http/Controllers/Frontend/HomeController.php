@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Response as HttpResponse;
 use App\Http\Controllers\Frontend\FrontendBaseController;
+use Inertia\Inertia;
 
 /**
  * Class HomeController.
@@ -44,34 +45,15 @@ class HomeController extends FrontendBaseController
 
     public function  index()
     {
-        if (request()->ajax()) {
-            return view('frontend.layouts.app');
-        }
-
-        return $this->home();
-    }
-
-    public function appConf(Request $request)
-    {
-        return response()->json(['conf' => config($request->conf)]);
-    }
-
-    public function home()
-    {
-
 
         // if (request('page')) {
         //     $page = Page::where('slug', '=', request('page'))
-        //         ->where('published', '=', 1)->first();
+        //     ->where('published', '=', 1)->first();
         //     if ($page != "") {
         //         return view('frontend.pages.index', compact('page'));
         //     }
         //     abort(404);
         // }
-
-        $sections = '{"search_section":{"title":"Search Section","status":1},"popular_formations":{"title":"Popular Formations","status":1},"latest_news":{"title":"Latest News, Formations","status":1},"portfolio":{"title":"Galerie","status":1},"premium":{"title":"Devenir Premium","status":1},"featured_formations":{"title":"Featured Formations","status":1},"teachers":{"title":"Teachers","status":1},"faq":{"title":"Frequently Asked Questions","status":1}}';
-        // dd($sections);
-        $sections = json_decode($sections);
 
         $featured_formations = Formation::withoutGlobalScope('filter')->where('published', '=', 1)
             ->whereHas('category')
@@ -98,26 +80,26 @@ class HomeController extends FrontendBaseController
 
         $categories = Category::get();
 
-        if (request()->ajax()) {
-            return response()->json([
-                'featured_formations' =>  $featured_formations,
-                'news' => $news,
-                'products' => $products,
-                'tutorials' => $tutorials,
-                'premiums' => $premiums,
-                'snipet' => $snipet,
-                'portfolios' => $portfolios,
-                'formation_categories' => $formation_categories,
-                'sections' => $sections,
-                'categories' => $categories,
+        return Inertia::render("Home", [
+            'featured_formations' =>  $featured_formations,
+            'news' => $news,
+            'products' => $products,
+            'tutorials' => $tutorials,
+            'premiums' => $premiums,
+            'snipet' => $snipet,
+            'portfolios' => $portfolios,
+            'formation_categories' => $formation_categories,
+            'categories' => $categories,
 
 
-            ]);
-        }
-
-
-        // return view('frontend.index', compact('featured_formations', 'news', 'trending_formations', 'products', 'tutorials', 'premiums', 'snipet', 'portfolios', 'product_head', 'faqs', 'formation_categories', 'sections', 'categories'));
+        ]);
     }
+
+    public function appConf(Request $request)
+    {
+        return response()->json(['conf' => config($request->conf)]);
+    }
+
 
 
     public function home_slides()
@@ -194,83 +176,6 @@ class HomeController extends FrontendBaseController
         return view('frontend.faq', compact('faq_categories'));
     }
 
-    public function subscribe(Request $request)
-    {
-        $this->validate($request, [
-            'subs_email' => 'required'
-        ]);
-
-        if (config('mail_provider') != "" && config('mail_provider') == "mailchimp") {
-            try {
-                if (!Newsletter::isSubscribed($request->subs_email)) {
-                    if (config('mailchimp_double_opt_in')) {
-                        Newsletter::subscribePending($request->subs_email);
-                        session()->flash('alert', "We've sent you an email, Check your mailbox for further procedure.");
-                    } else {
-                        Newsletter::subscribe($request->subs_email);
-                        session()->flash('alert', "You've subscribed successfully");
-                    }
-                    return back();
-                } else {
-                    session()->flash('alert', "Email already exist in subscription list");
-                    return back();
-                }
-            } catch (Exception $e) {
-                \Log::info($e->getMessage());
-                session()->flash('alert', "Something went wrong, Please try again Later");
-                return back();
-            }
-        } elseif (config('mail_provider') != "" && config('mail_provider') == "sendgrid") {
-            try {
-                $apiKey = config('sendgrid_api_key');
-                $sg = new \SendGrid($apiKey);
-                $query_params = json_decode('{"page": 1, "page_size": 1}');
-                $response = $sg->client->contactdb()->recipients()->get(null, $query_params);
-                if ($response->statusCode() == 200) {
-                    $users = json_decode($response->body());
-                    $emails = [];
-                    foreach ($users->recipients as $user) {
-                        array_push($emails, $user->email);
-                    }
-                    if (in_array($request->subs_email, $emails)) {
-                        session()->flash('alert', "Email already exist in subscription list");
-                        return back();
-                    } else {
-                        $request_body = json_decode(
-                            '[{
-                             "email": "' . $request->subs_email . '",
-                             "first_name": "",
-                             "last_name": ""
-                              }]'
-                        );
-                        $response = $sg->client->contactdb()->recipients()->post($request_body);
-                        if ($response->statusCode() != 201 || (json_decode($response->body())->new_count == 0)) {
-
-                            session()->flash('alert', "Email already exist in subscription list");
-                            return back();
-                        } else {
-                            $recipient_id = json_decode($response->body())->persisted_recipients[0];
-                            $list_id = config('sendgrid_list');
-                            $response = $sg->client->contactdb()->lists()->_($list_id)->recipients()->_($recipient_id)->post();
-                            if ($response->statusCode() == 201) {
-                                session()->flash('alert', "You've subscribed successfully");
-                            } else {
-                                session()->flash('alert', "Check your email and try again");
-                                return back();
-                            }
-                        }
-                    }
-                }
-            } catch (Exception $e) {
-                \Log::info($e->getMessage());
-                session()->flash('alert', "Something went wrong, Please try again Later");
-                return back();
-            }
-        } else {
-            session()->flash('alert', "Please configure Newsletter from Admin");
-            return back();
-        }
-    }
 
     public function getTeachers()
     {

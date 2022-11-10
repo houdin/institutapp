@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Premium;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PremiumController extends Controller
 {
@@ -18,14 +19,9 @@ class PremiumController extends Controller
         $premiums = Premium::where('published', 1)->get();
 
 
-        if (request()->ajax() || request()->api == true) {
-            return response()->json([
-                'premiums' => $premiums,
 
-            ]);
-        }
 
-        return view('frontend.premium.index', compact('premiums'));
+        return Inertia::render('Tarifs/Index', ['tarifs' => $premiums]);
     }
 
     public function premiums()

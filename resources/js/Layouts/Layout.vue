@@ -1,17 +1,34 @@
+<template>
+
+    <Head>
+        <title>Default Title</title>
+        <meta name="description" content="This is the description for my App" head-key="description">
+    </Head>
+    <NavMenuHeader></NavMenuHeader>
+
+    <transition name="custom-classes" mode="out-in" enter-active-class="animate__animated animate__fadeInLeft"
+        leave-active-class="animate__animated animate__fadeOutRight" appear>
+        <main :key="$page.url" class="container p-4 mx-auto mt-[60px] relative">
+            <slot />
+        </main>
+    </transition>
+
+    <Footer></Footer>
+
+    <!-- <main>
+
+        <slot />
+    </main> -->
+</template>
+
+
 <script setup lang="ts">
-import { Link } from '@inertiajs/inertia-vue3';
+
+//console.log(usePage.props)
+// const username = computed(() => usePage().props.value.auth.user.username)
+
 </script>
 
-<template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <Link href="/">
-                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-            </Link>
-        </div>
+<style>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
-        </div>
-    </div>
-</template>
+</style>

@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
             /*
 	         * Load third party local aliases
 	         */
-            $loader->alias('Debugbar', \Barryvdh\Debugbar\Facade::class);
+            $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
         }
         \Illuminate\Support\Collection::macro('lists', function ($a, $b = null) {
             return collect($this->items)->pluck($a, $b);

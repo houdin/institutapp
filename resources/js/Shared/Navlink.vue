@@ -1,14 +1,14 @@
 <template>
 
-    <li>
-        <Link href="/" class="text-blue-500 hover:underline"
-            :class="{ 'font-bold underline': $page.component === 'Home' }">
-        Home</Link>
-    </li>
+    <Link class="text-white hover:underline" :class="{ 'font-bold underline' : active }">
+    <slot />
+    </Link>
 
 </template>
 
 <script setup lang="ts">
+
+const props = defineProps({ active: Boolean })
 
 </script>
 

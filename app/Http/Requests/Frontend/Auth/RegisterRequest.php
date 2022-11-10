@@ -37,13 +37,13 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
-        ];
-    }
+    // /**
+    //  * @return array
+    //  */
+    // public function messages()
+    // {
+    //     return [
+    //         'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
+    //     ];
+    // }
 }

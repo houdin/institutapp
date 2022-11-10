@@ -50,14 +50,14 @@ class ShoppingCartController extends AbstractUserAPIController
     public function __construct()
     {
         /** PayPal api context **/
-        $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(
-            new OAuthTokenCredential(
-                $paypal_conf['client_id'],
-                $paypal_conf['secret']
-            )
-        );
-        $this->_api_context->setConfig($paypal_conf['settings']);
+        // $paypal_conf = \Config::get('paypal');
+        // $this->_api_context = new ApiContext(
+        //     new OAuthTokenCredential(
+        //         $paypal_conf['client_id'],
+        //         $paypal_conf['secret']
+        //     )
+        // );
+        // $this->_api_context->setConfig($paypal_conf['settings']);
 
 
         $this->currency = getCurrency(config('app.currency'));
@@ -304,81 +304,81 @@ class ShoppingCartController extends AbstractUserAPIController
         }
     }
 
-    public function paypalPayment(Request $request)
-    {
-        if ($this->checkDuplicate()) {
-            return $this->checkDuplicate();
-        }
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
-        $items = [];
+    // public function paypalPayment(Request $request)
+    // {
+    //     if ($this->checkDuplicate()) {
+    //         return $this->checkDuplicate();
+    //     }
+    //     $payer = new Payer();
+    //     $payer->setPaymentMethod('paypal');
+    //     $items = [];
 
-        $cartItems = Cart::session(auth()->user()->id)->getContent();
-        $cartTotal = Cart::session(auth()->user()->id)->getTotal();
-        $currency = $this->currency['short_code'];
+    //     $cartItems = Cart::session(auth()->user()->id)->getContent();
+    //     $cartTotal = Cart::session(auth()->user()->id)->getTotal();
+    //     $currency = $this->currency['short_code'];
 
-        foreach ($cartItems as $cartItem) {
+    //     foreach ($cartItems as $cartItem) {
 
-            $item_1 = new Item();
-            $item_1->setName($cartItem->name)
-                /** item name **/
-                ->setCurrency($currency)
-                ->setQuantity(1)
-                ->setPrice($cartItem->price);
-            /** unit price **/
-            $items[] = $item_1;
-        }
+    //         $item_1 = new Item();
+    //         $item_1->setName($cartItem->name)
+    //             /** item name **/
+    //             ->setCurrency($currency)
+    //             ->setQuantity(1)
+    //             ->setPrice($cartItem->price);
+    //         /** unit price **/
+    //         $items[] = $item_1;
+    //     }
 
-        $item_list = new ItemList();
-        $item_list->setItems($items);
+    //     $item_list = new ItemList();
+    //     $item_list->setItems($items);
 
-        $amount = new Amount();
-        $amount->setCurrency($currency)
-            ->setTotal($cartTotal);
+    //     $amount = new Amount();
+    //     $amount->setCurrency($currency)
+    //         ->setTotal($cartTotal);
 
 
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription(auth()->user()->name);
+    //     $transaction = new Transaction();
+    //     $transaction->setAmount($amount)
+    //         ->setItemList($item_list)
+    //         ->setDescription(auth()->user()->name);
 
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('cart.paypal.status'))
-            /** Specify return URL **/
-            ->setCancelUrl(URL::route('cart.paypal.status'));
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-        /** dd($payment->create($this->_api_context));exit; **/
-        try {
-            $payment->create($this->_api_context);
-        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            if (\Config::get('app.debug')) {
-                \Session::put('failure', trans('labels.frontend.cart.connection_timeout'));
-                return Redirect::route('cart.paypal.status');
-            } else {
-                \Session::put('failure', trans('labels.frontend.cart.unknown_error'));
-                return Redirect::route('cart.paypal.status');
-            }
-        }
+    //     $redirect_urls = new RedirectUrls();
+    //     $redirect_urls->setReturnUrl(URL::route('cart.paypal.status'))
+    //         /** Specify return URL **/
+    //         ->setCancelUrl(URL::route('cart.paypal.status'));
+    //     $payment = new Payment();
+    //     $payment->setIntent('Sale')
+    //         ->setPayer($payer)
+    //         ->setRedirectUrls($redirect_urls)
+    //         ->setTransactions(array($transaction));
+    //     /** dd($payment->create($this->_api_context));exit; **/
+    //     try {
+    //         $payment->create($this->_api_context);
+    //     } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+    //         if (\Config::get('app.debug')) {
+    //             \Session::put('failure', trans('labels.frontend.cart.connection_timeout'));
+    //             return Redirect::route('cart.paypal.status');
+    //         } else {
+    //             \Session::put('failure', trans('labels.frontend.cart.unknown_error'));
+    //             return Redirect::route('cart.paypal.status');
+    //         }
+    //     }
 
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-        /** add payment ID to session **/
-        Session::put('paypal_payment_id', $payment->getId());
-        if (isset($redirect_url)) {
-            /** redirect to paypal **/
-            return Redirect::away($redirect_url);
-        }
-        \Session::put('failure', trans('labels.frontend.cart.unknown_error'));
-        return Redirect::route('cart.paypal.status');
-    }
+    //     foreach ($payment->getLinks() as $link) {
+    //         if ($link->getRel() == 'approval_url') {
+    //             $redirect_url = $link->getHref();
+    //             break;
+    //         }
+    //     }
+    //     /** add payment ID to session **/
+    //     Session::put('paypal_payment_id', $payment->getId());
+    //     if (isset($redirect_url)) {
+    //         /** redirect to paypal **/
+    //         return Redirect::away($redirect_url);
+    //     }
+    //     \Session::put('failure', trans('labels.frontend.cart.unknown_error'));
+    //     return Redirect::route('cart.paypal.status');
+    // }
 
     public function offlinePayment(Request $request)
     {

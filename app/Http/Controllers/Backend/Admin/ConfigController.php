@@ -58,9 +58,6 @@ class ConfigController extends BackendBaseController
         if ($request->get('access_registration') == null) {
             $requests['access_registration'] = 0;
         }
-        if (!$request->get('mailchimp_double_opt_in')) {
-            $requests['mailchimp_double_opt_in'] = 0;
-        }
         if ($request->get('access_users_change_email') == null) {
             $requests['access_users_change_email'] = 0;
         }

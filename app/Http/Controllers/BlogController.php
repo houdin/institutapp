@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
@@ -52,13 +53,19 @@ class BlogController extends Controller
 
         $blogs = Blog::has('category')->with(['image'])->OrderBy('id', 'desc')->paginate(10);
 
-        if (request()->ajax() || request()->api == true) {
-            return response()->json([
-                'blogs' => $blogs,
-                'categories' => $categories,
-                'popular_tags' => $popular_tags
-            ]);
-        }
+        // if (request()->ajax() || request()->api == true) {
+        //     return response()->json([
+        //         'blogs' => $blogs,
+        //         'categories' => $categories,
+        //         'popular_tags' => $popular_tags
+        //     ]);
+        // }
+
+        return Inertia::render('Institut/Blog/BlogIndex', [
+            'blogs' => $blogs,
+            'categories' => $categories,
+            'popular_tags' => $popular_tags
+        ]);
         // return view(
         //     'frontend.blogs.index',
         //     compact('blogs', 'categories', 'popular_tags')

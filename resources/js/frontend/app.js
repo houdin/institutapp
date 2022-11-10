@@ -6,8 +6,6 @@
 
 require("./bootstrap");
 
-import { createApp } from "vue";
-
 require("owl.carousel");
 
 require("./plugins/chosen.jquery.min");
@@ -22,12 +20,6 @@ require("waypoints/lib/jquery.waypoints");
 import Alertifyjs from "alertifyjs/build/alertify";
 window.alertify = Alertifyjs;
 
-import { createRouter, createWebHistory } from "vue-router";
-
-import { createMetaManager } from "vue-meta";
-
-import VueProgressBar from "@aacassandra/vue3-progressbar";
-
 import Lang from "lang.js";
 
 import mitt from "mitt";
@@ -40,12 +32,6 @@ require("./script");
 
 import animateCSS from "./animation";
 
-import "./vee-validate/validators";
-
-import routes from "./routes/routes";
-import store from "./store";
-
-import VueRecaptcha from "vue3-recaptcha-v2";
 // require('highlight.js/lib/core');
 
 // import hljs from "highlight.js/lib/core";
@@ -65,12 +51,6 @@ window.Event.$emit = window.Event.emit = Evn.emit;
 // Vue.component("carousel", carousel);
 
 //Vue.mixin(require("./trans"));
-
-const app = createApp({
-    data() {
-        return {};
-    },
-});
 
 // app.config.performance = true;
 
@@ -115,14 +95,6 @@ import modelsFilters from "./filters/modelsFilters";
 app.config.globalProperties.$models = modelsFilters;
 app.provide("$models", modelsFilters);
 
-app.use(VueRecaptcha, {
-    siteKey: window.Laravel.app.recaptcha.sitekey,
-    alterDomain: false, // default: false
-});
-
-////GLOBALS VARIABLES ///////
-app.config.globalProperties.$SITE_NAME = window.Laravel.app.name;
-
 /// LODASH
 app.config.globalProperties.$_ = _;
 
@@ -134,16 +106,7 @@ app.config.globalProperties.$_ = _;
 //     true,
 //     /^(?!.*(?:formations)).*\.vue$/
 // );
-const requireComponent = require.context("./../components/", true, /\.vue$/);
 
-requireComponent.keys().forEach((fileName) => {
-    const componentConfig = requireComponent(fileName);
-    const componentName = fileName
-        .replace(/^.*[\\/]/, "")
-        .replace(/\.\w+$/, "");
-
-    app.component(componentName, componentConfig.default || componentConfig);
-});
 import VueSweetalert2 from "vue-sweetalert2";
 
 const optionsSweet = {
@@ -152,39 +115,6 @@ const optionsSweet = {
 };
 app.use(VueSweetalert2, optionsSweet);
 //////////////////////
-/// ROUTES //////////////////////////
-
-// const requireRoute = require.context("../frontend/routes", true, /\.js$/);
-// const routes = [];
-// requireRoute.keys().forEach((fileName) => {
-//     Array.prototype.push.apply(routes, requireRoute(fileName).default);
-// });
-/////////////////////////////////////////////////
-////// IMPLEMENTATION  /////////////////////////
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-    scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-            return savedPosition;
-        } else {
-            return { left: 0, top: 0 };
-        }
-    },
-});
-
-//window.vm = app;
-// app.use(BootstrapVue);
-// app.use(BootstrapVueIcons);
-
-const metaManager = createMetaManager();
-app.use(metaManager);
-// app.use(metaPlugin);
-// app.use(VueMeta, {
-//     // optional pluginOptions
-//     refreshOnceOnNavigation: true
-// });
 
 app.use(VueObserveVisibility);
 
@@ -192,28 +122,6 @@ app.use(VueObserveVisibility);
 
 // app.component("ValidationProvider", ValidationProvider);
 // app.component("ValidationObserver", ValidationObserver);
-
-app.use(router);
-
-app.use(store);
-
-app.use(VueProgressBar, {
-    options: {
-        color: "rgb(249 157 27)",
-        failedColor: "red",
-        thickness: "5px",
-        transition: {
-            speed: "0.3s",
-            opacity: "0.6s",
-            termination: 300,
-        },
-        autoRevert: true,
-        location: "left",
-        inverse: false,
-    },
-});
-
-app.provide("$Progress", app.config.globalProperties.$Progress);
 
 router.afterEach((to, from) => {
     if (to.name !== "home") {
@@ -226,11 +134,7 @@ router.afterEach((to, from) => {
 
     filters.Utility.segments();
 });
-router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title}`;
 
-    next();
-});
 // router.beforeEach((to, from, next) => {
 //     if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
 //     else next();
@@ -286,13 +190,3 @@ app.directive("click-outside", {
         Event.stopPropagation();
     },
 });
-
-router.isReady().then(() => {
-    app.mount(".page-wrapper");
-});
-
-let include_route = ["/login", "/register"];
-let path_segment = window.location.href.replace(window.Laravel.urls.index, "");
-if (include_route.indexOf(path_segment) !== -1) {
-    app.requestAjax = true;
-}

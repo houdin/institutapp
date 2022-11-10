@@ -10,6 +10,7 @@ use App\Models\Review;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Customer;
@@ -23,36 +24,52 @@ class FormationsController extends Controller
     {
     }
 
-    public function all()
+    public function index(Request $request)
     {
 
         if (request('type') == 'popular') {
             $formations = Formation::withoutGlobalScope('filter')
+                ->when($request->input('s'), function ($query, $s) {
+                    $query->where("title", 'like', "%{$s}%");
+                })
                 ->where('published', 1)
                 ->where('popular', '=', 1)
                 ->with('image')
                 ->orderBy('id', 'desc')
-                ->paginate(9);
+                ->paginate(9)
+                ->withQueryString();
         } else if (request('type') == 'trending') {
             $formations = Formation::withoutGlobalScope('filter')
+                ->when($request->input('s'), function ($query, $s) {
+                    $query->where("title", 'like', "%{$s}%");
+                })
                 ->where('published', 1)
                 ->where('trending', '=', 1)
                 ->with('image')
                 ->orderBy('id', 'desc')
-                ->paginate(9);
+                ->paginate(9)
+                ->withQueryString();
         } else if (request('type') == 'featured') {
             $formations = Formation::withoutGlobalScope('filter')
+                ->when($request->input('s'), function ($query, $s) {
+                    $query->where("title", 'like', "%{$s}%");
+                })
                 ->where('published', 1)
                 ->where('featured', '=', 1)
                 ->with('image')
                 ->orderBy('id', 'desc')
-                ->paginate(9);
+                ->paginate(9)
+                ->withQueryString();
         } else {
             $formations = Formation::withoutGlobalScope('filter')
+                ->when($request->input('s'), function ($query, $s) {
+                    $query->where("title", 'like', "%{$s}%");
+                })
                 ->where('published', 1)
                 ->with('image')
                 ->orderBy('id', 'desc')
-                ->paginate(9);
+                ->paginate(9)
+                ->withQueryString();
         }
         $purchased_formations = NULL;
         $purchased_bundles = NULL;
@@ -83,18 +100,27 @@ class FormationsController extends Controller
             ->take(2)
             ->get();
 
+        return Inertia::render('Ressources/Formations/FormationsIndex', [
+            'formations' => $formations,
+            'purchased_formations' => $purchased_formations,
+            'recent_news' => $recent_news,
+            'featured_formations' => $featured_formations,
+            'categories' => $categories,
+            'filters' => $request->only(['s'])
+        ]);
+        //     [
+        //     'users' => User::query()
+        //         ->when($request->input('search'), function ($query, $search) {
+        //             $query->whereRaw("concat(first_name,' ',last_name) like '%{$search}%'");
+        //         })
+        //         ->paginate(10)
+        //         ->withQueryString()
+        //         ->through(fn ($user) => [
+        //             'id' => $user->id,
+        //             'name' => $user->name,
+        //         ]),
 
-        if (request()->ajax() || request()->api == true) {
-            return response()->json([
-                'formations' => $formations,
-                'purchased_formations' => $purchased_formations,
-                'recent_news' => $recent_news,
-                'featured_formations' => $featured_formations,
-                'categories' => $categories
-            ]);
-        }
-
-        return view('frontend.formations.index', compact('formations', 'purchased_formations', 'recent_news', 'featured_formations', 'categories'));
+        // ])
     }
 
     public function show($formation_slug)
@@ -162,20 +188,17 @@ class FormationsController extends Controller
                     ->orderby('sequence', 'asc')->first();
             }
         }
-        if (request()->ajax() || request()->api == true) {
-            return response()->json([
-                'formation' => $formation,
-                'purchased_formation' => $purchased_formation,
-                'formation_rating' => $formation_rating,
-                'completed_modules' => $completed_modules,
-                'total_ratings' => $total_ratings,
-                'is_reviewed' => $is_reviewed,
-                'modules' => $modules,
-                'continue_formation' => $continue_formation
-            ]);
-        }
 
-        return view('frontend.formations.index', compact('formation', 'purchased_formation', 'formation_rating', 'completed_modules', 'total_ratings', 'is_reviewed', 'modules', 'continue_formation'));
+        return Inertia::render('Ressources/Formations/FormationShow', [
+            'formation' => $formation,
+            'purchased_formation' => $purchased_formation,
+            'formation_rating' => $formation_rating,
+            'completed_modules' => $completed_modules,
+            'total_ratings' => $total_ratings,
+            'is_reviewed' => $is_reviewed,
+            'modules' => $modules,
+            'continue_formation' => $continue_formation
+        ]);
     }
 
     public function isPurchased($formation_id)

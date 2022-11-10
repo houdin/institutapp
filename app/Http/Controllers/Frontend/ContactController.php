@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Frontend\Contact\SendContact;
 use App\Http\Requests\Frontend\Contact\SendContactRequest;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 /**
  * Class ContactController.
@@ -27,7 +28,7 @@ class ContactController extends FrontendBaseController
      */
     public function index()
     {
-        return view('frontend.contact');
+        return Inertia::render('Institut/Contact/ContactIndex');
     }
 
     /**

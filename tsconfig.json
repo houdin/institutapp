@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
+        "target": "ES6",
+        "module": "ESNext",
         "baseUrl": ".",
         "moduleResolution": "node",
         "strict": true,
@@ -14,7 +14,8 @@
             "dom"
         ],
         "types": [
-            "@inertiajs/Inertia-vue3"
+            "vite/client",
+            "node"
         ],
         "plugins": [
             {
@@ -27,15 +28,15 @@
             ],
             "@/assets/*": [
                 "public/assets/*"
-            ],
-            "@components/*": [
-                "resources/js/components/*"
-            ],
+            ]
         }
     },
     "include": [
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
         "resources/js/**/*.vue",
+        "resources/js/app.js",
+        "resources/js/bootstrap.js",
+        "resources/js/ssr.js",
     ]
 }
