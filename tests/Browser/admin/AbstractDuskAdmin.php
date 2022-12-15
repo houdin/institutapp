@@ -17,5 +17,4 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AbstractDuskAdmin extends AbstractBrowser
 {
-
 }

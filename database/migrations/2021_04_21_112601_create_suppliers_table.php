@@ -34,6 +34,8 @@ class CreateSuppliersTable extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('active')->default(0);
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

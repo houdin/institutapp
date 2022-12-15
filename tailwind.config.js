@@ -1,64 +1,170 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.vue",
     ],
 
     theme: {
-
         extend: {
-            colors: ({ colors }) => ({
-                slate: {
-                    900: "#1E2028"
-                }
+            colors: {
+                gray: {
+                    50: "#f9fafb",
+                    100: "#f3f4f6",
+                    200: "#d4d4dc",
+                    300: "#b3b3b8",
+                    400: "#666e83",
+                    500: "#484f5b",
+                    600: "#393f4d",
+                    700: "#2b3139",
+                    800: "#202226",
+                    900: "#1d1e22",
+                },
+                yellow: {
+                    DEFAULT: "#ffc565",
+                    50: "#fefce8",
+                    100: "#FFEFB8",
+                    200: "#FFE69A",
+                    300: "#FFDB88",
+                    400: "#FFD276",
+                    500: "#ffc565",
+                    600: "#D2A458",
+                    700: "#AF8A4B",
+                    800: "#876C3E",
+                    900: "#524227",
+                },
+                green: {
+                    DEFAULT: "#36D399",
+                    50: "#CDF4E5",
+                    100: "#BCF0DD",
+                    200: "#9AE9CC",
+                    300: "#79E2BB",
+                    400: "#57DAAA",
+                    500: "#36D399",
+                    600: "#26AB7A",
+                    700: "#1B7D59",
+                    800: "#114F38",
+                    900: "#072118",
+                },
+                red: {
+                    DEFAULT: "#FA6B6B",
+                    50: "#FEDADA",
+                    100: "#FDCECE",
+                    200: "#FCB5B5",
+                    300: "#FB9D9D",
+                    400: "#FB8484",
+                    500: "#FA6B6B",
+                    600: "#F83030",
+                    700: "#E20808",
+                    800: "#A70606",
+                    900: "#6C0404",
+                },
+                blue: {
+                    DEFAULT: "#3ABFF8",
+                    50: "#EBF9FE",
+                    100: "#D8F2FE",
+                    200: "#B0E5FC",
+                    300: "#89D9FB",
+                    400: "#61CCF9",
+                    500: "#3ABFF8",
+                    600: "#09ABF1",
+                    700: "#0785BB",
+                    800: "#055E85",
+                    900: "#03384F",
+                },
+                base: {
+                    100: "#FFEFB8",
+                    200: "#ffc565",
+                    300: "#AF8A4B",
+                    400: "#524227",
+                    500: "#d2691e",
+                },
+                primary: "#ffc565",
+                secondary: "#524227",
+                neutral: "#393f4d",
+                black: "#000000",
+                white: "#ffffff",
 
-            }),
-            animatedSettings: {
-                animatedSpeed: 1000,
-                heartBeatSpeed: 500,
-                hingeSpeed: 2000,
-                bounceInSpeed: 750,
-                bounceOutSpeed: 750,
-                animationDelaySpeed: 500,
-                classes: ['bounce', 'heartBeat', 'bounceOutRight', 'tada', 'fadeInLeft', 'fadeOutRight']
-        }
+                blender: "#2d3137",
+                choco: "#d2691e",
+                light: "#f3f4f6",
+                dark: "#1d1e22",
+
+                accent: "#1FB2A6",
+                info: "#3ABFF8",
+                success: "#36D399",
+                warning: "#FBBD23",
+                danger: "#F87272",
+                error: "#F87272",
+            },
+            fontFamily: {
+                // sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+            },
+            fontSize: {
+                xs: "0.75rem",
+                sm: "0.9rem",
+                base: "1rem",
+                xl: "1.25rem",
+                // sm: ['14px', '20px'],
+                // base: ['16px', '24px'],
+                // lg: ['20px', '28px'],
+                // xl: ['24px', '32px'],
+                "2xl": "1.563rem",
+                "3xl": "1.953rem",
+                "5xl": "3.052rem",
+                // '2xl': ['1.5rem', {
+                //     lineHeight: '2rem',
+                //     letterSpacing: '-0.01em',
+                //     fontWeight: '500',
+                // }],
+                // '3xl': ['1.875rem', {
+                //     lineHeight: '2.25rem',
+                //     letterSpacing: '-0.02em',
+                //     fontWeight: '700',
+                // }],
+            },
+        },
+        textColor: ({ theme }) => theme("colors"),
+        borderColor: ({ theme }) => theme("colors"),
+        ringColor: ({ theme }) => theme("colors"),
+        backgroundColor: ({ theme }) => theme("colors"),
+
+        borderRadius: {
+            none: "0",
+            sm: ".25rem",
+            md: ".5rem",
+            DEFAULT: "1rem",
+            lg: "1.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            full: "9999px",
+        },
     },
 
-        },
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      black: colors.black,
-      white: colors.white,
-      slate: colors.slate,
-      gray: colors.gray,
-      zinc: colors.zinc,
-      neutral: colors.neutral,
-      stone: colors.stone,
-      red: colors.red,
-      orange: colors.orange,
-      amber: colors.amber,
-      yellow: colors.yellow,
-      lime: colors.lime,
-      green: colors.green,
-      emerald: colors.emerald,
-      teal: colors.teal,
-      cyan: colors.cyan,
-      sky: colors.sky,
-      blue: colors.blue,
-    }),
-
-
-
     plugins: [
-        require('@tailwindcss/forms'),
-        require('tailwindcss-animatecss'),
+        require("@tailwindcss/forms"),
+        require("@tailwindcss/typography"),
+        require("@tailwindcss/aspect-ratio"),
+        require("daisyui"),
     ],
 
+    daisyui: {
+        styled: true,
+        base: false,
+        utils: true,
+        logs: true,
+        rtl: false,
+        prefix: "",
+        darkTheme: "dark",
+        themes: true,
+    },
 };

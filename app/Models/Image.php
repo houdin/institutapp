@@ -2,30 +2,46 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Image extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+
     protected $table = "images";
     protected $guarded = [];
 
     protected $hidden = ['pivot'];
 
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            $path = Storage::path(Str::replace('/storage', 'public', $model->url));
+            $colors = colorPalette($path);
+            $model->colors = json_encode($colors);
+        });
+    }
+
     public function model()
     {
         return $this->morphTo();
     }
-    public function getColorsAttribute($value)
-    {
-        return json_decode($value, true);
-    }
+
 
     public function delete()
     {
-        dd($this);
+
         $date = $this->created_at->format('Y/m/');
         $extension = $this->extension;
         $file_name = $this->file_name . '.' . $extension;
@@ -43,6 +59,14 @@ class Image extends Model
             }
         }
         parent::delete();
+    }
+
+    public function colors(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => json_decode($value),
+
+        );
     }
 
     // public function featured_image($num_size = null)
@@ -65,7 +89,7 @@ class Image extends Model
 
         $url = str_replace("origin", "resizing/" . $size, $this->url);
 
-        $url = str_replace($this->file_name, $this->file_name . "-" . $size . "w" , $url);
+        $url = str_replace($this->file_name, $this->file_name . "-" . $size . "w", $url);
 
         return $url;
     }

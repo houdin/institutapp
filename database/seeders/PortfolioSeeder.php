@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\Image;
 use App\Models\Category;
 use App\Models\Formation;
@@ -22,11 +23,13 @@ class PortfolioSeeder extends Seeder
     {
 
 
-        Portfolio::factory(30)->create()->each(function ($portfolio) {
+        Portfolio::factory(20)->create()->each(function ($portfolio) {
 
-            $category = Category::inRandomOrder()->first();
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
+            $tags = Tag::inRandomOrder()->take(rand(1, 7))->pluck('id')->toArray();
 
-            $portfolio->category()->associate($category);
+            $portfolio->categories()->attach($categories);
+            $portfolio->tags()->attach($tags);
 
             $name = 'portfolio_' . rand(1, 10) . '.jpg';
 

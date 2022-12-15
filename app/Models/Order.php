@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-	use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'user_id',
@@ -58,8 +58,7 @@ class Order extends Model
      */
     public function formatShipDate()
     {
-        if(is_null($this->ship_date))
-        {
+        if (is_null($this->ship_date)) {
             return false;
         }
         $date = \DateTime::createFromFormat('Y-m-d', $this->ship_date);
@@ -67,19 +66,23 @@ class Order extends Model
     }
 
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items(){
+    public function items()
+    {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function invoice(){
+    public function invoice()
+    {
         return $this->hasOne(Invoice::class);
     }
 
-    public function coupon(){
+    public function coupon()
+    {
         return $this->belongsTo(Coupon::class);
     }
 
@@ -93,14 +96,14 @@ class Order extends Model
         return $this->belongsTo(Address::class);
     }
 
-        /**
+    /**
      * does the order belong to the user
      *
      * @return bool
      */
     public function belongsToUser($userID)
     {
-       return ((int)$this->user_id === (int)$userID);
+        return ((int)$this->user_id === (int)$userID);
     }
 
     /**
@@ -113,5 +116,4 @@ class Order extends Model
     {
         return (is_null($this->find((int)$id))) ? false : true;
     }
-
 }

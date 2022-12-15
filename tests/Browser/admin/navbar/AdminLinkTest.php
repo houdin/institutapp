@@ -15,9 +15,10 @@
 |   When: I am on the user page
 |   Then: I should see a link to the admin site on the navbar
 */
+
 namespace Tests\Browser\admin\navbar;
 
-use App\Models\User;
+use App\Models\Auth\User;
 use Tests\Browser\admin\AbstractDuskAdmin;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;

@@ -2,16 +2,10 @@
 
 namespace App\Providers;
 
-use Laravel\Passport\Passport;
-
-use App\Policies\CommentPolicy;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Config;
+use App\Models\Team;
+use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-/**
- * Class AuthServiceProvider.
- */
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -20,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Team::class => TeamPolicy::class,
     ];
 
     /**
@@ -32,10 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::routes();
-
-        foreach (Config::get('comments.permissions', []) as $permission => $policy) {
-            Gate::define($permission, [CommentPolicy::class, $policy]);
-        }
+        //
     }
 }

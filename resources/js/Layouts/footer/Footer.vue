@@ -44,9 +44,11 @@
                             <h3 class="text-base font-medium text-gray-900">Company</h3>
                             <ul role="list" class="mt-4 space-y-4">
                                 <li v-for="item in navigation.company" :key="item.name">
-                                    <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{
-                                            item.name
-                                    }}</a>
+                                    <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">
+                                        {{
+                                                item.name
+                                        }}
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -71,7 +73,7 @@
     </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineComponent, h } from 'vue'
 
 const navigation = {

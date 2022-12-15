@@ -13,7 +13,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\ecommerce\UserOrderRequest;
-use App\Http\Controllers\Frontend\User\UserPagesController;
+use App\Http\Controllers\User\UserPagesController;
 
 use App\Library\API\ApiResponseTracker;
 use App\Library\Transformer\AddressTransformer;

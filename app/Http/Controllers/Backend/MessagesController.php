@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Auth\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Backend\BackendBaseController;
-use Jenssegers\Agent\Agent;
 use Messenger;
+use App\Models\Auth\User;
+use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
+use App\Http\Controllers\Backend\BackendBaseController;
 
 class MessagesController extends BackendBaseController
 {
@@ -92,13 +93,18 @@ class MessagesController extends BackendBaseController
 
     public function getUnreadMessages(Request $request)
     {
+        // dd(auth()->user()->unreadMessagesCount);
+
         $unreadMessageCount = auth()->user()->unreadMessagesCount;
         $unreadThreads = [];
+
         foreach (auth()->user()->threads as $item) {
+
+
             if ($item->unreadMessagesCount > 0) {
                 $data = [
                     'thread_id' => $item->id,
-                    'message' => str_limit($item->lastMessage->body, 35),
+                    'message' => Str::limit($item->lastMessage->body, 35),
                     'unreadMessagesCount' => $item->unreadMessagesCount,
                     'title' => $item->title
                 ];

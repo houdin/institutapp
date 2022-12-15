@@ -1,8 +1,8 @@
 
 <template>
-  <nav-menu-header></nav-menu-header>
+    <NavMenuHeader />
 
-  <!-- <header id="header">
+    <!-- <header id="header">
     <div id="main-menu" class="main-menu-container menu-bg-overlay">
       <div class="main-menu position-relative" style="z-index: 100">
         <div class="container h-100">
@@ -16,5 +16,7 @@
     </div>
   </header> -->
 </template>
-<script setup>
+<script setup lang="ts">
+
+
 </script>

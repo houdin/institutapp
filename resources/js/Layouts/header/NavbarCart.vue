@@ -26,7 +26,8 @@
             <select-cart-quantity v-if="product.attributes.type === 'product'" :current="product.quantity" :product_id="product.id" @quantity="updateQuantity">
             </select-cart-quantity>
           </div> -->
-            <remove-item-icon :product_id="product.id" :product="product.title" :mainClass="'remove-item-icon'" :sizeClass="'fa fa-times'">
+            <remove-item-icon :product_id="product.id" :product="product.title" :mainClass="'remove-item-icon'"
+              :sizeClass="'fa fa-times'">
             </remove-item-icon>
             <hr />
           </li>
@@ -42,7 +43,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref, computed } = require("@vue/reactivity");
 const { useStore } = require("vuex");
 

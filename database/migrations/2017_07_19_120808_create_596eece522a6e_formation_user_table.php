@@ -12,7 +12,7 @@ class Create596eece522a6eFormationUserTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('formation_user')) {
+        if (!Schema::hasTable('formation_user')) {
             Schema::create('formation_user', function (Blueprint $table) {
                 $table->foreignId('formation_id')->constrained()->onDelete('cascade');
                 $table->foreignId('user_id')->constrained()->onDelete('cascade');

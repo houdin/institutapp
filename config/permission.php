@@ -86,4 +86,9 @@ return [
      */
 
     'log_registration_exception' => true,
+
+    // 'teams' => true,
+    // 'column_names' => [
+    //     'team_foreign_key' => 'team_id'
+    // ],
 ];

@@ -3,7 +3,8 @@
   <div id="faq" class="faq-section">
 
     <div class="section-title mb45 headline text-center ">
-      <span class="subtitle text-uppercase">{{$laravel.app.name}} {{trans.get('labels.frontend.layouts.partials.faq')}}</span>
+      <span class="subtitle text-uppercase">{{$laravel.app.name}}
+        {{trans.get('labels.frontend.layouts.partials.faq')}}</span>
       <h2><span v-html="trans.get('labels.frontend.layouts.partials.faq_full')"></span></h2>
     </div>
     <!-- ////////// -->
@@ -19,14 +20,18 @@
           <ul class="nav nav-tabs justify-content-center border-base-5" id="myTab" role="tablist">
 
             <li class="nav-item " v-for="(faq, index) in faqs" :key="faq.id">
-              <a :class="'nav-link color-gray-6 bg-base-2 ' + (index == 0 ? 'active': '')" :id="faq.name + '-tab'" data-toggle="tab" :href="'#' + faq.name" role="tab" :aria-controls="faq.name" aria-selected="true">{{faq.name}}</a>
+              <a :class="'nav-link color-gray-6 bg-base-2 ' + (index == 0 ? 'active': '')" :id="faq.name + '-tab'"
+                data-toggle="tab" :href="'#' + faq.name" role="tab" :aria-controls="faq.name"
+                aria-selected="true">{{faq.name}}</a>
             </li>
 
           </ul>
         </div>
         <div class="tab-content tab-container" id="myTabContent">
           <!-- tab -->
-          <div v-for="(faq, index) in faqs" :key="faq.id" :id="faq.name" :class="'tab-pane fade pt35 ' + (index == 0 ? 'show active': '')" role="tabpanel" :aria-labelledby="faq.name + '-tab'">
+          <div v-for="(faq, index) in faqs" :key="faq.id" :id="faq.name"
+            :class="'tab-pane fade pt35 ' + (index == 0 ? 'show active': '')" role="tabpanel"
+            :aria-labelledby="faq.name + '-tab'">
             <div class="row">
 
               <div class="col-md-6" v-for="item in faq.faqs.slice(0, 4)" :key="item.id">
@@ -58,7 +63,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref } = require("@vue/reactivity");
 const { onMounted, inject } = require("@vue/runtime-core");
 

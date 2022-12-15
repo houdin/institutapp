@@ -14,11 +14,10 @@ class CreateBundlesTable extends Migration
     public function up()
     {
 
-        if(! Schema::hasTable('bundles')) {
+        if (!Schema::hasTable('bundles')) {
 
             Schema::create('bundles', function (Blueprint $table) {
                 $table->id();
-                $table->integer('category_id')->nullable();
                 // $table->integer('user_id')->unsigned()->nullable();
                 $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
                 $table->string('title');

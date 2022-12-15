@@ -11,7 +11,7 @@
     <!-- <faq-home></faq-home> -->
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useMeta } from "vue-meta";
 useMeta({ title: "FXinstitut.com", description: "FXinstitut.com" });
 

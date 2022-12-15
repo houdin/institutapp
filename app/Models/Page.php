@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Page extends Model
 {
-	use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
     use SoftDeletes;
     protected $appends = ['page_image'];
     protected $guarded = [];
@@ -28,7 +28,6 @@ class Page extends Model
                 }
             }
         });
-
     }
 
 

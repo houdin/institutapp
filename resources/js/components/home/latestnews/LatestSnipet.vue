@@ -10,7 +10,8 @@
 
       </h3>
       <p class="latest-content">
-        <router-link :to="{ name:'tipstricks.show', params : { slug : snipet.slug }}">{{ $filters.Text.truncate(snipet.description, 100)}}</router-link>
+        <router-link :to="{ name:'tipstricks.show', params : { slug : snipet.slug }}">{{
+        $filters.Text.truncate(snipet.description, 100)}}</router-link>
 
       </p>
       <div>
@@ -21,13 +22,15 @@
       <!-- /post -->
 
       <div class="view-all-btn ">
-        <router-link :to="{ name:'tipstricks.index'}" class="color-base-2">{{trans.get('labels.frontend.layouts.partials.view_all_news')}}<i class="fas fa-chevron-circle-right"></i></router-link>
+        <router-link :to="{ name:'tipstricks.index'}" class="color-base-2">
+          {{trans.get('labels.frontend.layouts.partials.view_all_news')}}<i class="fas fa-chevron-circle-right"></i>
+        </router-link>
 
       </div>
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 const { computed } = require("@vue/reactivity");
 
 const props = defineProps(["snipet"]);

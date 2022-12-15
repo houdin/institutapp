@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Faq extends Model
 {
-	use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
     protected  $guarded = [];
 
-    public function category(){
+
+
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 }

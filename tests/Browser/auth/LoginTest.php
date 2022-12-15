@@ -2,7 +2,7 @@
 
 namespace Tests\Browser\auth;
 
-use App\Models\User;
+use App\Models\Auth\User;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 

@@ -17,7 +17,8 @@
           <img :src="$filters.Image.featuredImageUrl(item.image, 1)" alt="">
           <div class="overlay"></div>
           <div class="portfolio-details-btn">
-            <router-link :to="{ name:'portfolios.show', params:{slug: item.slug} }" class="text-uppercase">{{item.title}}<i class="fas fa-arrow-right"></i>
+            <router-link :to="{ name:'portfolios.show', params:{slug: item.slug} }" class="text-uppercase">
+              {{item.title}}<i class="fas fa-arrow-right"></i>
             </router-link>
           </div>
 
@@ -31,7 +32,7 @@
   <!-- End popular formation
         ============================================= -->
 </template>
-<script setup>
+<script setup lang="ts">
 // import carousel from "vue-owl-carousel";
 
 const { ref } = require("@vue/reactivity");

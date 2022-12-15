@@ -2,14 +2,15 @@
   <div>
     <label for="quantity" v-show="showLabel">Quantity: </label>
     <select id="quantity" v-on:change="updateQuantity">
-      <option v-for="(quantity, index) in quantities" :key="index" :selected="current == quantity ? 'selected' : ''" :value="quantity">
+      <option v-for="(quantity, index) in quantities" :key="index" :selected="current == q uantity ? 's elected' : ''"
+        :value="quantity">
         {{ quantity }}
       </option>
     </select>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref } = require("@vue/reactivity");
 
 const props = defineProps(["current", "product_id", "showLabel"]);

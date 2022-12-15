@@ -5,6 +5,8 @@ setInterval(() => {
     axios
         .get(messageNotificationRoute)
         .then((response) => {
+            console.log("DATA/////");
+            console.log(response.data);
             if (response.data.unreadMessageCount > 0) {
                 $(".unreadMessages").empty();
                 $(".mob-notification").removeClass("d-none").html("!");

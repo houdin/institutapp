@@ -15,9 +15,10 @@
 |   When: I submit my results
 |   Then: I should receive an error message
 */
+
 namespace Tests\Feature\acceptance\http\register;
 
-use App\Models\User;
+use App\Models\Auth\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\Feature\acceptance\http\AbstractHttpTestClass;
 
@@ -40,7 +41,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'TomSmith',
-            'first_name'=> '',
+            'first_name' => '',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -63,7 +64,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'TomSmith',
-            'first_name'=> '$(#(@)',
+            'first_name' => '$(#(@)',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -86,7 +87,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'TomSmith',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => '',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -109,7 +110,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'TomSmith',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => '$(#(@)',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -132,7 +133,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => '',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -155,7 +156,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'Cake9(@#*@',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -179,7 +180,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->setUpUser();
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -202,7 +203,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => '',
             'password' => 'secret',
@@ -225,7 +226,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
     {
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email',
             'password' => 'secret',
@@ -249,7 +250,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->setUpUser();
         $this->setPostResponse([
             'username' => 'candy2',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secret',
@@ -261,7 +262,6 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->assertDatabaseMissing('users', [
             'username' => "TomSmith"
         ]);
-
     }
 
 
@@ -275,7 +275,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->setUpUser();
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => '',
@@ -299,7 +299,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->setUpUser();
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'sec',
@@ -323,7 +323,7 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         $this->setUpUser();
         $this->setPostResponse([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => 'secretpassword',
@@ -337,4 +337,3 @@ class RegisterUserFailedValidationTest extends AbstractHttpTestClass
         ]);
     }
 }
-

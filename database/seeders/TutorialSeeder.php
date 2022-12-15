@@ -2,13 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Http\Traits\FileUploadTrait;
 use App\Models\Test;
-use App\Models\Tutorial;
+use App\Models\Image;
 use App\Models\Module;
+use App\Models\Category;
+use App\Models\Tutorial;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use App\Models\Image;
+use App\Http\Traits\FileUploadTrait;
+use App\Models\Tag;
 
 class TutorialSeeder extends Seeder
 {
@@ -18,13 +20,20 @@ class TutorialSeeder extends Seeder
      *
      * @return void
      */
+    public $count = 20;
 
 
     public function run()
     {
 
         //Creating Tutorial
-        Tutorial::factory(30)->create()->each(function ($tutorial) {
+        Tutorial::factory($this->count)->create()->each(function ($tutorial) {
+
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
+            $tags = Tag::inRandomOrder()->take(rand(1, 7))->pluck('id')->toArray();
+
+            $tutorial->categories()->attach($categories);
+            $tutorial->tags()->attach($tags);
 
             $tutorial->teachers()->sync([2]);
             // dd($tutorial->id);

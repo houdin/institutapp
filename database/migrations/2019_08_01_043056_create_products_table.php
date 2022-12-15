@@ -28,7 +28,6 @@ class CreateProductsTable extends Migration
             $table->integer('discount')->nullable();
             $table->boolean('product_available')->default(0);
             $table->boolean('discount_available')->default(0);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->boolean('published')->default(0);
             $table->tinyInteger('free')->default(0)->nullable();
             $table->text('meta_title')->nullable();

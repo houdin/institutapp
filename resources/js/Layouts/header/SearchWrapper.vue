@@ -1,5 +1,6 @@
 <template>
-  <div id="search-wrapper" :class="{'search-wrapper nav-menu' : true, 'search--hidden' : hideSearch}" style="z-index: -10">
+  <div id="search-wrapper" :class="{'search-wrapper nav-menu' : true, 'search--hidden' : hideSearch}"
+    style="z-index: -10">
     <div @click.self="hideSearch = true" class="container d-flex justify-content-center" v-click-outside="hide">
       <!-- <div class="second-menu-nav pt-1">
         <ul id="menu-sub-menu" class="nav ms-3">
@@ -11,7 +12,9 @@
       <div class="col-sm-12 col-md-6 my-4">
         <Form v-slot="{ errors, values }" @submit.prevent="handleSubmit" id="searchForm" class="search_form">
           <div class="searchBox">
-            <input id="searchInput" v-focus type="text" name="search" rules="required" class="searchInput form-control" v-model="search" placeholder="Rechercher…" v-on:keyup="toggleResults" v-on:keyup.esc="searchToggle" autocomplete="off" />
+            <input id="searchInput" v-focus type="text" name="search" rules="required" class="searchInput form-control"
+              v-model="search" placeholder="Rechercher…" v-on:keyup="toggleResults" v-on:keyup.esc="searchToggle"
+              autocomplete="off" />
 
           </div>
 
@@ -19,10 +22,12 @@
         <div id="search-results" class="search-results" v-show="showResults">
           <ul class="_search-results-list d-flex flex-column">
             <li class="p-0 d-flex _search-results-item" v-for="(product, index) in searchResults" :key="index">
-              <router-link class="_search-result-link p-0 text-lowercase" :to="{ name:'products.show', params: { slug: product.slug}}">
+              <router-link class="_search-result-link p-0 text-lowercase"
+                :to="{ name:'products.show', params: { slug: product.slug}}">
                 <img v-if="product.image" :src="$filters.Image.featuredImageUrl(product.image, 1)" />
 
-                <span class="_search-result-span"><span class="badge bg-gray-5 color-base-2">{{ product.category_id }}</span>
+                <span class="_search-result-span"><span class="badge bg-gray-5 color-base-2">{{ product.category_id
+                }}</span>
                   <span :id="`_sr_${index}`" class="ms-2">{{ product.title }}</span></span>
 
               </router-link>
@@ -38,7 +43,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   inject,
   nextTick,

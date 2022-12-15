@@ -19,7 +19,6 @@ class CreateTutorialsTable extends Migration
                 $table->id();
                 $table->string('title');
                 $table->string('slug')->nullable();
-                $table->integer('category_id')->nullable();
                 $table->text('description')->nullable();
                 $table->text('content')->nullable();
                 $table->decimal('price', 15, 2)->nullable();

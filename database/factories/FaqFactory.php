@@ -24,7 +24,6 @@ class FaqFactory extends Factory
         $question = $this->faker->sentence($nbWords = 6, $variableNbWords = true) . '?';
         $answer = $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true);
         return [
-            'category_id' => rand(1, 6),
             'question' => $question,
             'answer' => $answer
         ];

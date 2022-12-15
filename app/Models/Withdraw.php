@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Withdraw extends Model
 {
-	use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
     protected $guarded = [];
 
     /**
-    * Get the teacher profile that owns the user.
-    */
+     * Get the teacher profile that owns the user.
+     */
     public function teacher()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

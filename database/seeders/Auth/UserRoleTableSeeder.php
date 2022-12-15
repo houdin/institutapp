@@ -26,8 +26,8 @@ class UserRoleTableSeeder extends Seeder
         User::find(4)->assignRole('student');
         User::find(5)->assignRole(config('access.users.default_role'));
         $index = 1;
-        foreach (User::all() as $user ){
-            if($index > 5){
+        foreach (User::all() as $user) {
+            if ($index > 5) {
                 User::find($index)->assignRole(config('access.users.default_role'));
             }
             $index++;

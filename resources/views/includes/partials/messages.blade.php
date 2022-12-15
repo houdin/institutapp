@@ -1,12 +1,3 @@
-<div class="alert alert-warning alert-dismissible fade show" role="alert"">
-
-    <strong>Bonjour à Vous monsieur mesdames !</strong>
-    <button class=" btn-close" type="button" data-coreui-dismiss="alert" aria-label="Close"></button>
-</div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <div class="fw-semibold">Holy guacamole!</div> You should check in on some of those fields below.
-    <button class="btn-close" type="button" data-coreui-dismiss="alert" aria-label="Close"></button>
-</div>
 @if (Session::has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert"">
         <span aria-hidden=" true">&times;</span>

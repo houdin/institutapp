@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Auth\User;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Auth\User;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Tutorial
@@ -23,10 +23,12 @@ use Illuminate\Support\Facades\File;
  * @property tinyInteger $published
  */
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Searchable\Searchable;
 
-class Tutorial extends Model
+class Tutorial extends Model implements Searchable
 {
     use HasFactory, Notifiable;
     use SoftDeletes;
@@ -36,6 +38,8 @@ class Tutorial extends Model
     protected $appends = ['students_count'];
 
     protected $tutorial_image;
+
+    public $searchableType = 'Tutoriel';
 
     protected static function boot()
     {
@@ -68,6 +72,17 @@ class Tutorial extends Model
                 }
             }
         });
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('tutorials.show', $this->slug);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
     }
 
     // public function getImageAttribute()
@@ -174,9 +189,9 @@ class Tutorial extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function tests()

@@ -5,26 +5,41 @@ namespace App\Models;
 use App\Models\Auth\User;
 use Illuminate\Support\Str;
 use App\Models\Traits\Commentable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Searchable\Searchable;
 
-class Blog extends Model
+class Blog extends Model implements Searchable
 {
 
 
     use HasFactory, Notifiable, Commentable;
+    use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
-
-    protected $appends = ['blog_author', 'comments_count'];
+    // protected $appends = ['blog_author', 'comments_count'];
 
     const EXCERPT_LENGTH = 100;
 
     protected $hidden = ['pivot'];
 
-    protected $with = ['image', 'category', 'tags', 'comments'];
+    public $searchableType = 'Article';
+
+    // protected $with = ['image', 'category', 'tags', 'comments'];
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('blogs.show', $this->slug);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
+    }
 
 
     public function getBlogAuthorAttribute()
@@ -82,9 +97,9 @@ class Blog extends Model
         return $this->comments()->count();
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'category_blog');
     }
 
     public function author()

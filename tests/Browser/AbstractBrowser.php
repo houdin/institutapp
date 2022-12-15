@@ -27,8 +27,7 @@ class AbstractBrowser extends DuskTestCase
         factory(Category::class)->create(['name' => 'clothes']);
         factory(Tax::class)->create(['name' => 'local']);
         factory(Image::class)->create();
-        if($number === 1)
-        {
+        if ($number === 1) {
             $override = [
                 'title' => 'book',
                 'description' => 'A basic book.'
@@ -60,8 +59,7 @@ class AbstractBrowser extends DuskTestCase
     public function addUser($admin = false)
     {
         $user = factory(User::class)->create();
-        if($admin)
-        {
+        if ($admin) {
             factory(Role::class)->create();
             $role = Role::first();
             $user->assignRole($role);
@@ -99,10 +97,10 @@ class AbstractBrowser extends DuskTestCase
     public function addShoppingCart()
     {
         $this->addProduct(5);
-        foreach(Product::all() as $product)
-        {
+        foreach (Product::all() as $product) {
             CartProvider::instance()
-                ->add(new Item($product->id,
+                ->add(new Item(
+                    $product->id,
                     $product->title,
                     1,
                     $product->price,
@@ -110,7 +108,9 @@ class AbstractBrowser extends DuskTestCase
                     true,
                     new TaxRule(
                         'local',
-                        20)));
+                        20
+                    )
+                ));
         }
     }
 }

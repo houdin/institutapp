@@ -53,9 +53,9 @@ class Portfolio extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function image()

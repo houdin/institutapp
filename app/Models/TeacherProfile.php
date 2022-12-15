@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TeacherProfile extends Model
 {
-	use HasFactory, Notifiable;
-     /**
+    use HasFactory, Notifiable;
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -20,9 +20,10 @@ class TeacherProfile extends Model
     ];
 
     /**
-    * Get the teacher profile that owns the user.
-    */
-    public function teacher(){
+     * Get the teacher profile that owns the user.
+     */
+    public function teacher()
+    {
         return $this->belongsTo(User::class);
     }
 }

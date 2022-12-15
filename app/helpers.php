@@ -579,3 +579,32 @@ if (!function_exists('make_storage_dir')) {
         }
     }
 }
+
+
+if (!function_exists('colorPalette')) {
+    function colorPalette($path)
+    {
+        $extractor = new ColorExtractor();
+        $extractor->setImage($path)->setTotalColors(3)->setGranularity(1);
+        $palette = $extractor->extractPalette();
+
+        $colors = [];
+        for ($i = 0; $i < count($palette); $i++) {
+
+            $split = str_split($palette[$i], 2);
+            $r = hexdec($split[0]);
+            $g = hexdec($split[1]);
+            $b = hexdec($split[2]);
+
+            $colors[$i]['index'] = $i;
+            $colors[$i]['color'] = ['r' => $r, 'g' => $g, 'b' => $b];
+            $colors[$i]['hex'] = $palette[$i];
+        }
+
+        array_multisort(array_map(function ($element) {
+            return array_sum($element['color']);
+        }, $colors), SORT_DESC, $colors);
+
+        return $colors;
+    }
+}

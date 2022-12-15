@@ -21,8 +21,8 @@ class CreateTipstricksTable extends Migration
             $table->text('content')->nullable();
             $table->string('language')->nullable();
             $table->integer('media')->nullable();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->integer('published')->default(0);
+            $table->softDeletes();
             $table->timestamps();
 
             // $table->foreign('category_id')

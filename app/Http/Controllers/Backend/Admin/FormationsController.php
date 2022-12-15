@@ -341,6 +341,7 @@ class FormationsController extends BackendBaseController
         //Saving  videos
         if ($request->media_type != "" || $request->media_type  != null) {
             if ($formation->mediavideo) {
+
                 $formation->mediavideo->delete();
             }
             $model_type = Formation::class;

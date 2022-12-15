@@ -20,15 +20,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create(config('access.table_names.users'), function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->uuid('uuid')->nullable(false);
+            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('avatar_type')->default('gravatar');
             $table->string('avatar_location')->nullable();
             $table->string('password')->nullable();
-            // $table->string('phone')->nullable();
+            $table->foreignId('current_team_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->json('profile_color')->nullable();
             $table->string('fb_id')->nullable();
             $table->string('google_id')->nullable();
             $table->timestamp('password_changed_at')->nullable();

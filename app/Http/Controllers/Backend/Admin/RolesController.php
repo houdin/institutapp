@@ -19,12 +19,12 @@ class RolesController extends BackendBaseController
      */
     public function index()
     {
-        if (! Gate::allows('role_access')) {
+        if (!Gate::allows('role_access')) {
             return abort(401);
         }
 
 
-                $roles = Role::all();
+        $roles = Role::all();
 
         return view('backend..roles.index', compact('roles'));
     }
@@ -36,7 +36,7 @@ class RolesController extends BackendBaseController
      */
     public function create()
     {
-        if (! Gate::allows('role_create')) {
+        if (!Gate::allows('role_create')) {
             return abort(401);
         }
         $permissions = Permission::get()->pluck('title', 'id');
@@ -52,7 +52,7 @@ class RolesController extends BackendBaseController
      */
     public function store(StoreRolesRequest $request)
     {
-        if (! Gate::allows('role_create')) {
+        if (!Gate::allows('role_create')) {
             return abort(401);
         }
         $role = Role::create($request->all());
@@ -72,7 +72,7 @@ class RolesController extends BackendBaseController
      */
     public function edit($id)
     {
-        if (! Gate::allows('role_edit')) {
+        if (!Gate::allows('role_edit')) {
             return abort(401);
         }
         $permissions = Permission::get()->pluck('title', 'id');
@@ -91,7 +91,7 @@ class RolesController extends BackendBaseController
      */
     public function update(UpdateRolesRequest $request, $id)
     {
-        if (! Gate::allows('role_edit')) {
+        if (!Gate::allows('role_edit')) {
             return abort(401);
         }
         $role = Role::findOrFail($id);
@@ -112,13 +112,16 @@ class RolesController extends BackendBaseController
      */
     public function show($id)
     {
-        if (! Gate::allows('role_view')) {
+        if (!Gate::allows('role_view')) {
             return abort(401);
         }
-        $permissions = Permission::get()->pluck('title', 'id');$users = \App\Models\Auth\User::whereHas('role',
-                    function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })->get();
+        $permissions = Permission::get()->pluck('title', 'id');
+        $users = \App\Models\Auth\User::whereHas(
+            'role',
+            function ($query) use ($id) {
+                $query->where('id', $id);
+            }
+        )->get();
 
         $role = Role::findOrFail($id);
 
@@ -134,7 +137,7 @@ class RolesController extends BackendBaseController
      */
     public function destroy($id)
     {
-        if (! Gate::allows('role_delete')) {
+        if (!Gate::allows('role_delete')) {
             return abort(401);
         }
         $role = Role::findOrFail($id);
@@ -150,7 +153,7 @@ class RolesController extends BackendBaseController
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('role_delete')) {
+        if (!Gate::allows('role_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -161,5 +164,4 @@ class RolesController extends BackendBaseController
             }
         }
     }
-
 }

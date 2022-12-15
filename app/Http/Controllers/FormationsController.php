@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Bundle;
 use App\Models\Category;
 use App\Models\Formation;
 use App\Models\Review;
@@ -27,57 +26,23 @@ class FormationsController extends Controller
     public function index(Request $request)
     {
 
-        if (request('type') == 'popular') {
-            $formations = Formation::withoutGlobalScope('filter')
-                ->when($request->input('s'), function ($query, $s) {
-                    $query->where("title", 'like', "%{$s}%");
-                })
-                ->where('published', 1)
-                ->where('popular', '=', 1)
-                ->with('image')
-                ->orderBy('id', 'desc')
-                ->paginate(9)
-                ->withQueryString();
-        } else if (request('type') == 'trending') {
-            $formations = Formation::withoutGlobalScope('filter')
-                ->when($request->input('s'), function ($query, $s) {
-                    $query->where("title", 'like', "%{$s}%");
-                })
-                ->where('published', 1)
-                ->where('trending', '=', 1)
-                ->with('image')
-                ->orderBy('id', 'desc')
-                ->paginate(9)
-                ->withQueryString();
-        } else if (request('type') == 'featured') {
-            $formations = Formation::withoutGlobalScope('filter')
-                ->when($request->input('s'), function ($query, $s) {
-                    $query->where("title", 'like', "%{$s}%");
-                })
-                ->where('published', 1)
-                ->where('featured', '=', 1)
-                ->with('image')
-                ->orderBy('id', 'desc')
-                ->paginate(9)
-                ->withQueryString();
-        } else {
-            $formations = Formation::withoutGlobalScope('filter')
-                ->when($request->input('s'), function ($query, $s) {
-                    $query->where("title", 'like', "%{$s}%");
-                })
-                ->where('published', 1)
-                ->with('image')
-                ->orderBy('id', 'desc')
-                ->paginate(9)
-                ->withQueryString();
-        }
+
+        $formations = Formation::withoutGlobalScope('filter')
+            ->when($request->input('s'), function ($query, $s) {
+                $query->where("title", 'like', "%{$s}%");
+            })
+            ->where('published', 1)
+            ->with(['image'])
+            ->orderBy('id', 'desc')
+            ->paginate(9)
+            ->withQueryString();
+
         $purchased_formations = NULL;
-        $purchased_bundles = NULL;
         // $categories = Category::where('status', '=', 1)->get();
 
-        $categories = Category::whereHas('formations', function ($q) {
-            $q->where('published', 1);
-        })->get();
+        // $categories = Category::whereHas('formations', function ($q) {
+        //     $q->where('published', 1);
+        // })->get();
 
 
         // dd($categories);
@@ -91,22 +56,18 @@ class FormationsController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         }
-        $featured_formations = Formation::withoutGlobalScope('filter')->where('published', '=', 1)
-            ->with('image')
-            ->where('featured', '=', 1)->take(8)->get();
+        // $featured_formations = Formation::withoutGlobalScope('filter')->where('published', '=', 1)
+        //     ->with('image')
+        //     ->where('featured', '=', 1)->take(8)->get();
 
-        $recent_news = Blog::orderBy('created_at', 'desc')
-            ->with('image')
-            ->take(2)
-            ->get();
 
-        return Inertia::render('Ressources/Formations/FormationsIndex', [
+        return Inertia::render('Formations/FormationsIndex', [
             'formations' => $formations,
             'purchased_formations' => $purchased_formations,
-            'recent_news' => $recent_news,
-            'featured_formations' => $featured_formations,
-            'categories' => $categories,
-            'filters' => $request->only(['s'])
+            // 'featured_formations' => $featured_formations,
+            // 'categories' => $categories,
+            'filters' => $request->only(['s']),
+
         ]);
         //     [
         //     'users' => User::query()
@@ -127,28 +88,21 @@ class FormationsController extends Controller
     {
         $continue_formation = NULL;
         //$recent_news = Blog::orderBy('created_at', 'desc')->take(2)->get();
+
+
         $formation = Formation::withoutGlobalScope('filter')
             ->where('slug', $formation_slug)
-            // ->withCount(['bundles.formations', 'bundles.students'])
             ->with([
                 'publishedModules',
                 'image',
                 'reviews',
                 'students:active',
                 'mediaVideo',
-                'category',
+                'categories',
 
             ])
             ->firstOrFail();
 
-        // dd($formation);
-        // $bundles = Formation::withoutGlobalScope('filter')
-        //     ->where('slug', $formation_slug)->with('bundles')->get()->pluck('bundles')->toArray()[0];
-        // $bundles = Bundle::whereIn('id', $formation->bundles->pluck('id')->toArray())
-        //     ->withCount(['formations', 'students'])
-        //     ->with(['image:name,slug'])
-        //     ->get();
-        // dd($bundles);
 
 
         $purchased_formation = \Auth::check() && $formation->students()->where('user_id', \Auth::id())->count() > 0;
@@ -160,15 +114,20 @@ class FormationsController extends Controller
         }
         $formation_rating = 0;
         $total_ratings = 0;
-        $completed_modules = "";
+        $completed_modules = [];
         $is_reviewed = false;
         if (auth()->check() && $formation->reviews()->where('user_id', '=', auth()->user()->id)->first()) {
             $is_reviewed = true;
         }
-        // if ($formation->reviews->count() > 0) {
-        //     $formation_rating = $formation->reviews->avg('rating');
-        //     $total_ratings = $formation->reviews()->where('rating', '!=', "")->get()->count();
-        // }
+
+
+        if ($formation->reviews->count() > 0) {
+            $formation_rating = $formation->reviews->avg('rating');
+            $total_ratings = $formation->reviews()->where('rating', '!=', "")->get()->count();
+        }
+
+
+
         $modules = $formation->formationTimeline()->with('model')->orderby('sequence', 'asc')->get();
         if (\Auth::check()) {
 
@@ -189,7 +148,7 @@ class FormationsController extends Controller
             }
         }
 
-        return Inertia::render('Ressources/Formations/FormationShow', [
+        return Inertia::render('Formations/FormationShow', [
             'formation' => $formation,
             'purchased_formation' => $purchased_formation,
             'formation_rating' => $formation_rating,
@@ -197,7 +156,10 @@ class FormationsController extends Controller
             'total_ratings' => $total_ratings,
             'is_reviewed' => $is_reviewed,
             'modules' => $modules,
-            'continue_formation' => $continue_formation
+            'continue_formation' => $continue_formation,
+
+            'enterClass' => "animate__animated animate__fadeInRight",
+            'leaveClass' => "animate__animated animate__fadeOutLeft",
         ]);
     }
 

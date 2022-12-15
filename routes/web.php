@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\BundlesController;
 // use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\PremiumController;
@@ -20,23 +19,23 @@ use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\FormationsController;
 use App\Http\Controllers\QuotationsController;
 use App\Http\Controllers\TipstricksController;
-use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\MessagesController;
-use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Backend\CertificateController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\Frontend\Auth\LoginController;
-use App\Http\Controllers\Frontend\User\OrderController;
-use App\Http\Controllers\Frontend\User\SearchController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\SearchController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\Frontend\User\API\UserController;
-use App\Http\Controllers\Frontend\User\API\StateController;
-use App\Http\Controllers\Frontend\User\API\AddressController;
-use App\Http\Controllers\Frontend\User\API\BillingController;
-use App\Http\Controllers\Frontend\User\UserAccountController;
-use App\Http\Controllers\Frontend\User\API\ShoppingCartController;
-use App\Http\Controllers\Frontend\User\API\OrderController as ApiOrderController;
-use App\Http\Controllers\Frontend\User\API\SearchController as ApiSearchController;
+use App\Http\Controllers\User\API\UserController;
+use App\Http\Controllers\User\API\StateController;
+use App\Http\Controllers\User\API\AddressController;
+use App\Http\Controllers\User\API\BillingController;
+use App\Http\Controllers\User\UserAccountController;
+use App\Http\Controllers\User\API\ShoppingCartController;
+use App\Http\Controllers\User\API\OrderController as ApiOrderController;
+use App\Http\Controllers\User\API\SearchController as ApiSearchController;
 use App\Models\Auth\User;
 
 /*
@@ -66,7 +65,7 @@ Route::get('/sitemap-' . Str::slug(config('app.name')) . '/{file?}', [SitemapCon
 
 
 
-Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
+// Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
 
 
 
@@ -77,6 +76,11 @@ Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
 Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
     include_route_files(__DIR__ . '/frontend/');
 });
+
+require_once __DIR__ . '/fortify.php';
+require_once __DIR__ . '/jetstream.php';
+require_once __DIR__ . '/project.php';
+require_once __DIR__ . '/staticPages.php';
 
 /*
  * Backend Routes
@@ -96,14 +100,14 @@ Route::group(['prefix' => 'user', 'as' => 'admin.', 'middleware' => 'admin'], fu
 
 
 
-Route::group(['namespace' => 'Backend', 'prefix' => 'user', 'as' => 'admin.', 'middleware' => ['auth', 'verified']], function () {
+// Route::group(['namespace' => 'Backend', 'prefix' => 'user', 'as' => 'admin.', 'middleware' => ['auth', 'verified']], function () {
 
-    //==== Messages Routes =====//
-    Route::get('messages', [MessagesController::class, 'index'])->name('messages');
-    Route::get('messages/unread', [MessagesController::class, 'getUnreadMessages'])->name('messages.unread');
-    Route::post('messages/send', [MessagesController::class, 'send'])->name('messages.send');
-    Route::post('messages/reply', [MessagesController::class, 'reply'])->name('messages.reply');
-});
+//     //==== Messages Routes =====//
+//     Route::get('messages', [MessagesController::class, 'index'])->name('messages');
+//     Route::get('messages/unread', [MessagesController::class, 'getUnreadMessages'])->name('messages.unread');
+//     Route::post('messages/send', [MessagesController::class, 'send'])->name('messages.send');
+//     Route::post('messages/reply', [MessagesController::class, 'reply'])->name('messages.reply');
+// });
 
 
 Route::get('certificates', [CertificateController::class, 'getCertificates'])->name('certificates.index');
@@ -125,46 +129,51 @@ Route::get('certificates/download', [CertificateController::class, 'download'])-
 
 
 
+Route::prefix('/blog')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('blogs.index');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+    Route::post('/{slug}', [BlogController::class, 'storeComment'])->name('blogs.comment');
+    Route::post('/{id}/comment', [BlogController::class, 'storeComment'])->name('blogs.comment');
+    Route::get('/comment/delete/{id}', [BlogController::class, 'deleteComment'])->name('blogs.comment.delete');
+    Route::get('/{category}', [BlogController::class, 'getByCategory'])->name('blogs.category');
+    Route::get('/{tag}', [BlogController::class, 'getByTag'])->name('blogs.tag');
+});
 
-
-Route::get('category/{category}/blogs', [BlogController::class, 'getByCategory'])->name('blogs.category');
-Route::get('tag/{tag}/blogs', [BlogController::class, 'getByTag'])->name('blogs.tag');
-Route::get('blog', [BlogController::class, 'getIndex'])->name('blogs.index');
-Route::get('blog/{slug}', [BlogController::class, 'show'])->name('blogs.show');
-Route::post('blog/{id}/comment', [BlogController::class, 'storeComment'])->name('blogs.comment');
-Route::get('blog/comment/delete/{id}', [BlogController::class, 'deleteComment'])->name('blogs.comment.delete');
+// Route::get('category/{category}/blogs', [BlogController::class, 'getByCategory'])->name('blogs.category');
+// Route::get('tag/{tag}/blogs', [BlogController::class, 'getByTag'])->name('blogs.tag');
+// Route::get('blog', [BlogController::class, 'index'])->name('blogs.index');
+// Route::get('blog/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+// Route::post('blog/{id}/comment', [BlogController::class, 'storeComment'])->name('blogs.comment');
+// Route::get('blog/comment/delete/{id}', [BlogController::class, 'deleteComment'])->name('blogs.comment.delete');
 
 Route::get('teachers', [HomeController::class, 'getTeachers'])->name('teachers.index');
-Route::get('teachers/{id}/show', [HomeController::class, 'showTeacher'])->name('teachers.show');
+Route::get('teachers/{teacher}/show', [HomeController::class, 'showTeacher'])->name('teachers.show');
 
 
 Route::post('app-conf', [HomeController::class, 'appConf'])->name('app.config');
 
 Route::post('newsletter/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
 
-//============Premium Routes=================//
-// Route::get('premium', [PremiumController::class, 'index'])->name('premium');
-Route::get('/tarifs', [PremiumController::class, 'index'])->name('pricing.index');
 
 
 //============Formation Routes=================//
 Route::get('formations', [FormationsController::class, 'index'])->name('formations.index');
-Route::get('formation/{slug}', [FormationsController::class, 'show'])->name('formations.show');
+Route::get('formations/{slug}', [FormationsController::class, 'show'])->name('formations.show');
 //Route::post('formation/payment', [FormationsController::class, 'payment'])->name('formations.payment');
-Route::post('formation/{formation_id}/rating', [FormationsController::class, 'rating'])->name('formations.rating');
+Route::post('formations/{formation_id}/rating', [FormationsController::class, 'rating'])->name('formations.rating');
 Route::get('category/{category}/formations', [FormationsController::class, 'getByCategory'])->name('formations.category');
 Route::post('formations/{id}/review', [FormationsController::class, 'addReview'])->name('formations.review');
 Route::get('formations/review/{id}/edit', [FormationsController::class, 'editReview'])->name('formations.review.edit');
 Route::post('formations/review/{id}/edit', [FormationsController::class, 'updateReview'])->name('formations.review.update');
 Route::get('formations/review/{id}/delete', [FormationsController::class, 'deleteReview'])->name('formations.review.delete');
 
-Route::get('/formation/formation-cart-elem/{id}', [FormationsController::class, 'getCartSessionElem'])->name('formations.cartsession.elem');
+Route::get('/formations/formation-cart-elem/{id}', [FormationsController::class, 'getCartSessionElem'])->name('formations.cartsession.elem');
 
-Route::get('formation/purchased/{formation_id}', [FormationsController::class, 'isPurchased'])->name('formations.purchased');
+Route::get('formations/purchased/{formation_id}', [FormationsController::class, 'isPurchased'])->name('formations.purchased');
 
 //============Tutorial Routes=================//
 Route::get('tutoriels', [TutorialsController::class, 'all'])->name('tutorials.all');
-Route::get('tutoriel/{slug}', [TutorialsController::class, 'show'])->name('tutorials.show');
+Route::get('tutoriels/{slug}', [TutorialsController::class, 'show'])->name('tutorials.show');
 //Route::post('tutorial/payment', [TutorialsController::class, 'payment'])->name('tutorials.payment');
 Route::post('tutoriel/{tutorial_id}/rating', [TutorialsController::class, 'rating'])->name('tutorials.rating');
 Route::get('category/{category}/tutoriels', [TutorialsController::class, 'getByCategory'])->name('tutorials.category');
@@ -175,56 +184,29 @@ Route::get('tutoriels/review/{id}/delete', [TutorialsController::class, 'deleteR
 
 //===============Tips and Tricks Routes==================//
 Route::get('tips-tricks', [TipstricksController::class, 'index'])->name('tipstricks.all');
-Route::get('tips-trick/{slug}', [TipstricksController::class, 'show'])->name('tipstricks.show');
+Route::get('tips-tricks/{slug}', [TipstricksController::class, 'show'])->name('tipstricks.show');
 //Route::post('formation/payment', [FormationsController::class, 'payment'])->name('formations.payment');
-Route::post('tips-trick/{tipstrick_id}/rating', [TipstricksController::class, 'rating'])->name('tipstricks.rating');
+Route::post('tips-tricks/{tipstrick_id}/rating', [TipstricksController::class, 'rating'])->name('tipstricks.rating');
 Route::get('category/{category}/tips-tricks', [TipstricksController::class, 'getByCategory'])->name('tipstricks.category');
 
 
 
 //==============Portfolio Routes==========================//
-Route::get('portfolio', [PortfolioController::class, 'index'])->name('portfolios.all');
-Route::get('portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolios.show');
+Route::get('portfolios', [PortfolioController::class, 'index'])->name('portfolios.all');
+Route::get('portfolios/{slug}', [PortfolioController::class, 'show'])->name('portfolios.show');
 //Route::post('formation/payment', [FormationsController::class, 'payment'])->name('formations.payment');
-Route::post('portfolio/{portfolio_id}/rating', [PortfolioController::class, 'rating'])->name('portfolios.rating');
+Route::post('portfolios/{portfolio_id}/rating', [PortfolioController::class, 'rating'])->name('portfolios.rating');
 Route::get('category/{category}/portfolios', [PortfolioController::class, 'getByCategory'])->name('portfolios.category');
 
-//============Bundle Routes=================//
-Route::get('bundles', [BundlesController::class, 'all'])->name('bundles.all');
-Route::get('bundle/{slug}', [BundlesController::class, 'show'])->name('bundles.show');
-//Route::post('formation/payment', [FormationsController::class, 'payment'])->name('formations.payment');
-Route::post('bundle/{bundle_id}/rating', [BundlesController::class, 'rating'])->name('bundles.rating');
-Route::get('category/{category}/bundles', [BundlesController::class, 'getByCategory'])->name('bundles.category');
-Route::post('bundles/{id}/review', [BundlesController::class, 'addReview'])->name('bundles.review');
-Route::get('bundles/review/{id}/edit', [BundlesController::class, 'editReview'])->name('bundles.review.edit');
-Route::post('bundles/review/{id}/edit', [BundlesController::class, 'updateReview'])->name('bundles.review.update');
-Route::get('bundles/review/{id}/delete', [BundlesController::class, 'deleteReview'])->name('bundles.review.delete');
 
-
-Route::group(['middleware' => 'auth'], function () {
-
-    //==============Quotation Routes =========================//
-    Route::get('devis/{stage}', [QuotationsController::class, 'index'])->name('quotation');
-
-    Route::get('module/{formation_id}/{slug}/', [ModulesController::class, 'show'])->name('modules.show');
-    Route::post('module/{slug}/test', [ModulesController::class, 'test'])->name('modules.test');
-    Route::post('module/{slug}/retest', [ModulesController::class, 'retest'])->name('modules.retest');
-    Route::post('video/progress', [ModulesController::class, 'videoProgress'])->name('update.videos.progress');
-    Route::post('module/progress', [ModulesController::class, 'formationProgress'])->name('update.formation.progress');
-
-    Route::get('module/question/{question_id}/{result_id}/', [ModulesController::class, 'check_result_question'])->name('modules.question.result');
-    Route::get('module/question/option/{option_id}/{result_id}/', [ModulesController::class, 'question_option_answered'])->name('modules.option.result');
-    Route::get('module/media/progress/{media_id}', [ModulesController::class, 'media_progress'])->name('modules.media.progress');
-});
 // Search
-Route::get('boutique/produit/{category}', [SearchController::class, 'category'])->name('shopping.search.product.category');
-Route::post('boutique/produits', [SearchController::class, 'scout'])->name('shopping.search.products');
-Route::get('boutique/produits/{search}', [SearchController::class, 'show'])->name('shopping.search.products.search');
-Route::post('boutique/produits/api', [ApiSearchController::class, 'store'])->name('shopping.search.products.api');
+Route::get('produits/{category}', [SearchController::class, 'category'])->name('shopping.search.product.category');
+Route::post('produits', [SearchController::class, 'scout'])->name('shopping.search.products');
+Route::get('produits/{search}', [SearchController::class, 'show'])->name('shopping.search.products.search');
+Route::post('produits/api', [ApiSearchController::class, 'store'])->name('shopping.search.products.api');
 
 Route::get('/search', [HomeController::class, 'searchFormation'])->name('search');
 Route::get('/search-formation', [HomeController::class, 'searchFormation'])->name('search-formation');
-Route::get('/search-bundle', [HomeController::class, 'searchBundle'])->name('search-bundle');
 Route::get('/search-blog', [HomeController::class, 'searchBlog'])->name('blogs.search');
 
 
@@ -240,7 +222,28 @@ Route::post('contact/send', [ContactController::class, 'send'])->name('contact.s
 
 Route::get('download', [HomeController::class, 'getDownload'])->name('download');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group([
+    'middleware' =>
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+], function () {
+
+    //==============Quotation Routes =========================//
+    Route::get('devis/{stage}', [QuotationsController::class, 'index'])->name('quotation');
+
+    Route::get('modules/{formation_id}/{slug}/', [ModulesController::class, 'show'])->name('modules.show');
+    Route::post('modules/{slug}/test', [ModulesController::class, 'test'])->name('modules.test');
+    Route::post('modules/{slug}/retest', [ModulesController::class, 'retest'])->name('modules.retest');
+    Route::post('modules/video/progress', [ModulesController::class, 'videoProgress'])->name('update.videos.progress');
+    Route::post('modules/progress', [ModulesController::class, 'formationProgress'])->name('update.formation.progress');
+
+
+
+
+    Route::get('module/question/{question_id}/{result_id}/', [ModulesController::class, 'check_result_question'])->name('modules.question.result');
+    Route::get('module/question/option/{option_id}/{result_id}/', [ModulesController::class, 'question_option_answered'])->name('modules.option.result');
+    Route::get('module/media/progress/{media_id}', [ModulesController::class, 'media_progress'])->name('modules.media.progress');
     Route::post('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.addToCart');
     Route::get('cart', [CartController::class, 'index'])->name('cart.index');
@@ -309,6 +312,12 @@ Route::get('order/invoice/{order}', [ApiOrderController::class, 'show'])->name('
 
 
 
+if (config('show_offers') == 1) {
+    Route::get('offers', [CartController::class, 'getOffers'])->name('frontend.offers');
+}
+
+// Route::get('email/verification', fn () => view('frontend.auth.verify-email'))->name('verification.notice');
+
 
 
 Route::get('/users', function () {
@@ -331,6 +340,35 @@ Route::get('/users/create', function () {
     return Inertia::render('Users/Create');
 });
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
+
+Route::get('/back', function () {
+
+    return redirect()->back();
+})->name('back');
+
+Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
+    Route::get('/{page?}', [HomeController::class, 'index'])->name('index');
+});
+
+
+
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// })->name('home');
 
 // Route::post('/users', function () {
 
@@ -348,12 +386,5 @@ Route::get('/users/create', function () {
 // });
 
 
-Route::post('/logout', function () {
-    dd("Logging the user out");
-});
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';

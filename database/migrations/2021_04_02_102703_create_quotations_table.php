@@ -26,6 +26,7 @@ class CreateQuotationsTable extends Migration
             $table->string('client_name');
             $table->string('deadline')->nullable();
             $table->string('image_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

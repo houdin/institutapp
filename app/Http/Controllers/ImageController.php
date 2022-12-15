@@ -70,13 +70,13 @@ class ImageController extends Controller
     public function update(Request $request)
     {
         // dd($request);
-        $image = Image::findOrFail($request->id);
-        $image->colors = $request->colors;
-        $image->save();
+        // $image = Image::findOrFail($request->id);
+        // $image->colors = $request->colors;
+        // $image->save();
 
-        return response()->json([
-            'success' => 'image colors is OK !'
-        ]);
+        // return response()->json([
+        //     'success' => 'image colors is OK !'
+        // ]);
     }
 
     /**

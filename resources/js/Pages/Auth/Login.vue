@@ -1,72 +1,67 @@
 <script setup lang="ts">
 
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+
 
 defineProps({
     canResetPassword: Boolean,
     status: String,
 });
+const modal = inject('modal');
+
+// const modal = reactive({
+//     container: null,
+//     open: false,
+//     switch: false,
+//     type: '',
+//     class: 'px-6 pb-4 sm:my-8 sm:w-full sm:max-w-lg sm:px-10',
+//     data: {},
+//     background: true
+// })
+
 
 const form = useForm({
     email: '',
     password: '',
-    remember: false
+    remember: false,
 });
 
+
+
 const submit = () => {
-    form.post(route('login'), {
+    form.transform(data => ({
+        ...data,
+        remember: form.remember ? 'on' : '',
+    })).post(route('login'), {
         onFinish: () => form.reset('password'),
     });
 };
-
 </script>
 
 <template>
-    <GuestLayout>
 
-        <Head title="Log in" />
+    <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
+    <!--
+  This example requires some changes to your config:
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
-                    autocomplete="username" />
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+    <!--
+  This example requires updating your template:
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
-                    autocomplete="current-password" />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+  ```
+  <html class="h-full bg-gray-50">
+  <body class="h-full">
+  ```
+-->
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900">
-                Forgot your password?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
 </template>

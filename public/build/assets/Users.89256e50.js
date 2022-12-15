@@ -1,1 +1,0 @@
-import{_ as o}from"./_plugin-vue_export-helper.cdc0426e.js";import{x as s,o as t,g as a,a as n,F as r,d as c}from"./app.9db5585a.js";const _={},l=c("h1",null,"Users",-1);function m(d,f){const e=s("Nav");return t(),a(r,null,[l,n(e)],64)}const u=o(_,[["render",m]]);export{u as default};

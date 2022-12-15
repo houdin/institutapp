@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 @if (config('app.display_type') == 'rtl' || (session()->has('display_type') && session('display_type') == 'rtl'))
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
-
 @else
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 @endif
 {{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl"> --}}
 {{-- @else --}}
@@ -20,7 +18,7 @@
     <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
     @if (config('app.favicon_image') != '')
         <link rel="shortcut icon" type="image/x-icon"
-            href="{{ asset('storage/logos/' . config('app.favicon_image')) }}" />
+            href="{{ asset('assets/images/logos/' . config('app.favicon_image')) }}" />
     @endif
     @yield('meta')
     <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
@@ -42,7 +40,7 @@
 
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
-    {{ style(mix('assets/css/backend.css')) }}
+    {{ style(asset('assets/css/backend.css')) }}
 
 
     @stack('after-styles')
@@ -56,7 +54,6 @@
             .float-right {
                 float: left !important;
             }
-
         </style>
     @endif
 
@@ -88,7 +85,10 @@
     </div>
     @stack('before-scripts')
     <!-- CoreUI and necessary plugins-->
-    <script src="{{ mix('assets/js/backend.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    @vite(['resources/js/backend/app_backend.js'])
+    {{-- <script src="{{ asset('assets/js/backend.js') }}"></script> --}}
     <script>
         //Route for message notification
         const messageNotificationRoute = '{{ route('admin.messages.unread') }}'
@@ -97,8 +97,8 @@
             $(this).toggleClass('show')
         })
     </script>
-    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js""></script>
-    <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"> </script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="{{ asset('assets/js/backend/pdfmake.min.js') }}"></script>

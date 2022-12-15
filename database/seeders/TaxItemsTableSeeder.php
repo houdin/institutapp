@@ -16,13 +16,12 @@ class TaxItemsTableSeeder extends Seeder
         // factory('App\Models\Tax', 10)->create();
         $taxes = \App\Models\Tax::all();
         // $taxes = \App\Models\Tax::inRandomOrder()->first();
-        foreach ($taxes as $taxe)
-        {
+        foreach ($taxes as $taxe) {
             $product = \App\Models\Product::inRandomOrder()->first();
             $formation = \App\Models\Formation::inRandomOrder()->first();
 
-            $model = array( $product, $formation);
-            $key = array_rand( $model);
+            $model = array($product, $formation);
+            $key = array_rand($model);
             $model = $model[$key];
 
             $user = \App\Models\Auth\User::inRandomOrder()->first();

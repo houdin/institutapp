@@ -1,5 +1,5 @@
 // Here you can add other styles
-@import "~simple-line-icons/scss/simple-line-icons";
+@import "./../../../node_modules/simple-line-icons/scss/simple-line-icons";
 
 html:not([dir="rtl"]) .wrapper {
     padding-left: var(--#{$variable-prefix}sidebar-occupy-start, 0);

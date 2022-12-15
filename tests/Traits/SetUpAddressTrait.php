@@ -1,7 +1,8 @@
 <?php
+
 use App\Models\Address;
 use App\Models\State;
-use App\Models\User;
+use App\Models\Auth\User;
 
 /**
  * Created by PhpStorm.
@@ -54,8 +55,7 @@ trait SetUpAddressTrait
     {
         $this->setUpUser();
         $this->setUpState();
-        foreach ($this->predefinedAddresses as $addressDetails)
-        {
+        foreach ($this->predefinedAddresses as $addressDetails) {
             $address = new Address();
             $address->user_id = $this->user->id;
             $address->state_id = $this->state->id;

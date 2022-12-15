@@ -1,0 +1,37 @@
+@import "./components/daisyui.css";
+
+@import "./components/animation_params.css";
+@import "./components/animation.css";
+@import "./components/anim_parall.css";
+
+.navbar {
+    @apply min-h-16;
+}
+
+.loader {
+    width: 100%;
+    /* heigth : 100vh; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 350px;
+    height: 350px;
+    border: 45px solid #30343b;
+
+    border-top-color: #373b43;
+    border-radius: 100%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

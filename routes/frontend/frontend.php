@@ -3,11 +3,11 @@
 namespace Routes\Frontend;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\User\AccountController;
-use App\Http\Controllers\Frontend\User\ProfileController;
-use App\Http\Controllers\Frontend\User\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\User\AccountController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\DashboardController;
 
 /*
  * Frontend Controllers
@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\User\DashboardController;
  * All route names are prefixed with 'frontend.'
  * These routes can not be hit if the password is expired
  */
+
 Route::group(['middleware' => ['auth', 'password_expires', 'verified']], function () {
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         /*
@@ -38,9 +39,3 @@ Route::group(['middleware' => ['auth', 'password_expires', 'verified']], functio
         Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     });
 });
-
-
-
-
-
-

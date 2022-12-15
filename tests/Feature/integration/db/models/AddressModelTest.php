@@ -4,7 +4,7 @@ namespace Tests\Feature\integration\db\models;
 
 use App\Models\Address;
 use App\Models\State;
-use App\Models\User;
+use App\Models\Auth\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

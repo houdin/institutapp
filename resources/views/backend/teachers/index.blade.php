@@ -1,17 +1,16 @@
 @extends('backend.layouts.app')
-@section('title', __('backend/labels.backend.teachers.title').' | '.app_name())
+@section('title', __('backend/labels.backend.teachers.title') . ' | ' . app_name())
 @push('after-styles')
-    <link rel="stylesheet" href="{{asset('assets/css/colors/switch.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/colors/switch.css') }}">
 @endpush
 @section('content')
 
     <div class="card">
         <div class="card-header">
-                <h3 class="page-title d-inline">@lang('backend/labels.backend.teachers.title')</h3>
+            <h3 class="page-title d-inline">@lang('backend/labels.backend.teachers.title')</h3>
             @can('formation_create')
                 <div class="float-right">
-                    <a href="{{ route('admin.teachers.create') }}"
-                       class="btn btn-success">@lang('backend/strings.backend.general.app_add_new')</a>
+                    <a href="{{ route('admin.teachers.create') }}" class="btn btn-success">@lang('backend/strings.backend.general.app_add_new')</a>
 
                 </div>
             @endcan
@@ -24,40 +23,41 @@
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <a href="{{ route('admin.teachers.index') }}"
-                                       style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">{{trans('backend/labels.general.all')}}</a>
+                                        style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">{{ trans('backend/labels.general.all') }}</a>
                                 </li>
                                 |
                                 <li class="list-inline-item">
                                     <a href="{{ route('admin.teachers.index') }}?show_deleted=1"
-                                       style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">{{trans('backend/labels.general.trash')}}</a>
+                                        style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">{{ trans('backend/labels.general.trash') }}</a>
                                 </li>
                             </ul>
                         </div>
 
 
                         <table id="myTable"
-                               class="table table-bordered table-striped @if(auth()->user()->isAdmin()) @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+                            class="table table-bordered table-striped @if (auth()->user()->isAdmin()) @if (request('show_deleted') != 1) dt-select @endif @endcan">
                             <thead>
-                            <tr>
+                                <tr>
 
-                                @can('category_delete')
-                                    @if ( request('show_deleted') != 1 )
-                                        <th style="text-align:center;"><input type="checkbox" class="mass"
-                                                                              id="select-all"/>
-                                        </th>@endif
-                                @endcan
+                                    @can('category_delete')
+                                        @if (request('show_deleted') != 1)
+                                            <th style="text-align:center;"><input type="checkbox" class="mass"
+                                                    id="select-all" />
+                                            </th>
+                                        @endif
+                                    @endcan
 
-                                <th>@lang('backend/labels.general.sr_no')</th>
-                                <th>@lang('backend/labels.backend.teachers.fields.first_name')</th>
-                                <th>@lang('backend/labels.backend.teachers.fields.last_name')</th>
-                                <th>@lang('backend/labels.backend.teachers.fields.email')</th>
-                                <th>@lang('backend/labels.backend.teachers.fields.status')</th>
-                                @if( request('show_deleted') == 1 )
-                                    <th>&nbsp; @lang('backend/strings.backend.general.actions')</th>
-                                @else
-                                    <th>&nbsp; @lang('backend/strings.backend.general.actions')</th>
-                                @endif
-                            </tr>
+                                    <th>@lang('backend/labels.general.sr_no')</th>
+                                    {{-- <th>@lang('backend/labels.backend.teachers.fields.first_name')</th> --}}
+                                    <th>@lang('backend/labels.backend.teachers.fields.name')</th>
+                                    <th>@lang('backend/labels.backend.teachers.fields.email')</th>
+                                    <th>@lang('backend/labels.backend.teachers.fields.status')</th>
+                                    @if (request('show_deleted') == 1)
+                                        <th>&nbsp; @lang('backend/strings.backend.general.actions')</th>
+                                    @else
+                                        <th>&nbsp; @lang('backend/strings.backend.general.actions')</th>
+                                    @endif
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -73,12 +73,11 @@
 
 @push('after-scripts')
     <script>
+        $(document).ready(function() {
+            var route = '{{ route('admin.teachers.get_data') }}';
 
-        $(document).ready(function () {
-            var route = '{{route('admin.teachers.get_data')}}';
-
-            @if(request('show_deleted') == 1)
-                route = '{{route('admin.teachers.get_data',['show_deleted' => 1])}}';
+            @if (request('show_deleted') == 1)
+                route = '{{ route('admin.teachers.get_data', ['show_deleted' => 1]) }}';
             @endif
 
             $('#myTable').DataTable({
@@ -87,68 +86,92 @@
                 iDisplayLength: 10,
                 retrieve: true,
                 dom: 'lfBrtip<"actions">',
-                buttons: [
-                    {
+                buttons: [{
                         extend: 'csv',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [1, 2, 3, 4, 5]
 
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5 ]
+                            columns: [1, 2, 3, 4, 5]
                         }
                     },
                     'colvis'
                 ],
                 ajax: route,
                 columns: [
-                        @if(request('show_deleted') != 1)
-                    {
-                        "data": function (data) {
-                            return '<input type="checkbox" class="single" name="id[]" value="' + data.id + '" />';
-                        }, "orderable": false, "searchable": false, "name": "id"
+                    @if (request('show_deleted') != 1)
+                        {
+                            "data": function(data) {
+                                return '<input type="checkbox" class="single" name="id[]" value="' +
+                                    data.id + '" />';
+                            },
+                            "orderable": false,
+                            "searchable": false,
+                            "name": "id"
+                        },
+                    @endif {
+                        data: "DT_RowIndex",
+                        name: 'DT_RowIndex'
                     },
-                        @endif
-                    {data: "DT_RowIndex", name: 'DT_RowIndex'},
-                    {data: "first_name", name: 'first_name'},
-                    {data: "last_name", name: 'last_name'},
-                    {data: "email", name: 'email'},
-                    {data: "status", name: 'status'},
-                    {data: "actions", name: 'actions'}
+                    // {data: "first_name", name: 'first_name'},
+                    {
+                        data: "name",
+                        name: 'name'
+                    },
+                    {
+                        data: "email",
+                        name: 'email'
+                    },
+                    {
+                        data: "status",
+                        name: 'status'
+                    },
+                    {
+                        data: "actions",
+                        name: 'actions'
+                    }
                 ],
-                @if(request('show_deleted') != 1)
-                columnDefs: [
-                    {"width": "5%", "targets": 0},
-                    {"className": "text-center", "targets": [0]}
-                ],
+                @if (request('show_deleted') != 1)
+                    columnDefs: [{
+                            "width": "5%",
+                            "targets": 0
+                        },
+                        {
+                            "className": "text-center",
+                            "targets": [0]
+                        }
+                    ],
                 @endif
 
-                createdRow: function (row, data, dataIndex) {
+                createdRow: function(row, data, dataIndex) {
                     $(row).attr('data-entry-id', data.id);
                 },
-                language:{
-                    url : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/{{$locale_full_name}}.json",
-                    buttons :{
-                        colvis : '{{trans("datatable.colvis")}}',
-                        pdf : '{{trans("datatable.pdf")}}',
-                        csv : '{{trans("datatable.csv")}}',
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/{{ $locale_full_name }}.json",
+                    buttons: {
+                        colvis: '{{ trans('datatable.colvis') }}',
+                        pdf: '{{ trans('datatable.pdf') }}',
+                        csv: '{{ trans('datatable.csv') }}',
                     }
                 }
             });
-            @if(auth()->user()->isAdmin())
-            $('.actions').html('<a href="' + '{{ route('admin.teachers.mass_destroy') }}' + '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">Delete selected</a>');
+            @if (auth()->user()->isAdmin())
+                $('.actions').html('<a href="' + '{{ route('admin.teachers.mass_destroy') }}' +
+                    '" class="btn btn-xs btn-danger js-delete-selected" style="margin-top:0.755em;margin-left: 20px;">Delete selected</a>'
+                );
             @endif
         });
-        $(document).on('click', '.switch-input', function (e) {
+        $(document).on('click', '.switch-input', function(e) {
             var id = $(this).data('id');
             $.ajax({
                 type: "POST",
                 url: "{{ route('admin.teachers.status') }}",
                 data: {
-                    _token:'{{ csrf_token() }}',
+                    _token: '{{ csrf_token() }}',
                     id: id,
                 },
             }).done(function() {
@@ -156,7 +179,5 @@
                 table.ajax.reload();
             });
         })
-
     </script>
-
 @endpush

@@ -1,6 +1,7 @@
 <template>
 
-  <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="appModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div :class="'modal-content animate__animated animate__' + animation">
 
@@ -25,7 +26,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { onMounted } = require("@vue/runtime-core");
 
 const props = defineProps({

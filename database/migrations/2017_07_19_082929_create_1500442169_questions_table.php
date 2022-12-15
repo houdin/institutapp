@@ -12,7 +12,7 @@ class Create1500442169QuestionsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('questions')) {
+        if (!Schema::hasTable('questions')) {
             Schema::create('questions', function (Blueprint $table) {
                 $table->id();
                 $table->text('question');

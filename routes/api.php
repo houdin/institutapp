@@ -1,21 +1,19 @@
 <?php
 
-namespace Routes\api;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\ApiController;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\User\API\UserController;
-use App\Http\Controllers\Frontend\User\API\StateController;
-use App\Http\Controllers\Frontend\Auth\SocialLoginController;
-use App\Http\Controllers\Frontend\User\API\AddressController;
-use App\Http\Controllers\Frontend\User\UserAccountController;
-use App\Http\Controllers\Frontend\Auth\ResetPasswordController;
-use App\Http\Controllers\Frontend\Auth\ConfirmAccountController;
-use App\Http\Controllers\Frontend\Auth\ForgotPasswordController;
-use App\Http\Controllers\Frontend\Auth\TeacherRegisterController;
-use App\Http\Controllers\Frontend\Auth\RegisterValidationController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\API\UserController;
+use App\Http\Controllers\User\API\StateController;
+use App\Http\Controllers\Auth\SocialLoginController;
+use App\Http\Controllers\User\API\AddressController;
+use App\Http\Controllers\User\UserAccountController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ConfirmAccountController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\TeacherRegisterController;
+use App\Http\Controllers\Auth\RegisterValidationController;
 
 
 /*
@@ -29,7 +27,7 @@ use App\Http\Controllers\Frontend\Auth\RegisterValidationController;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
 
@@ -44,7 +42,7 @@ Route::prefix('v1')->group(function () {
             Route::post('signup-form', [ApiController::class, 'signupForm'])->name('api.register.form');
             Route::post('signup-save', [ApiController::class, 'signup'])->name('api.register.post');
 
-            // Route::middleware(['auth:api'])->group(function () {
+            // Route::middleware(['auth:sanctum'])->group(function () {
 
 
             // });
@@ -53,24 +51,16 @@ Route::prefix('v1')->group(function () {
 
 
 
-    //Route::get('home-slides', [HomeController::class, 'home-slides'])->name('fxins-index');
-    Route::post('home-data', [HomeController::class, 'home'])->name('home.data');
-
-
-
-
-    Route::middleware(['auth:api'])
+    Route::middleware(['auth:sanctum'])
         ->namespace('api\v1')
         ->group(function () {
 
             Route::post('formations', [ApiController::class, 'getFormations']);
-            Route::post('bundles', [ApiController::class, 'getBundles']);
             Route::post('search', [ApiController::class, 'search']);
             Route::post('latest-news', [ApiController::class, 'getLatestNews']);
             Route::post('teachers', [ApiController::class, 'getTeachers']);
             Route::post('single-teacher', [ApiController::class, 'getSingleTeacher']);
             Route::post('teacher-formations', [ApiController::class, 'getTeacherFormations']);
-            Route::post('teacher-bundles', [ApiController::class, 'getTeacherBundles']);
             Route::post('get-faqs', [ApiController::class, 'getFaqs']);
             Route::post('contact-us', [ApiController::class, 'saveContactUs']);
             Route::post('single-formation', [ApiController::class, 'getSingleFormation']);
@@ -80,7 +70,6 @@ Route::prefix('v1')->group(function () {
             Route::post('video-progress', [ApiController::class, 'videoProgress']);
             Route::post('formation-progress', [ApiController::class, 'formationProgress']);
             Route::post('generate-certificate', [ApiController::class, 'generateCertificate']);
-            Route::post('single-bundle', [ApiController::class, 'getSingleBundle']);
             Route::post('add-to-cart', [ApiController::class, 'addToCart']);
             Route::post('getnow', [ApiController::class, 'getNow']);
             Route::post('remove-from-cart', [ApiController::class, 'removeFromCart']);
@@ -114,13 +103,13 @@ Route::prefix('v1')->group(function () {
             Route::post('remove-coupon', [ApiController::class, 'removeCoupon']);
             Route::post('order-confirmation', [ApiController::class, 'orderConfirmation']);
         });
-    Route::middleware(['auth:api'])
+    Route::middleware(['auth:sanctum'])
         ->namespace('api\v1')
         ->group(function () {
 
             Route::post('send-reset-link', [ApiController::class]);
         });
-    Route::middleware(['auth:api'])
+    Route::middleware(['auth:sanctum'])
         ->namespace('api\v1')
         ->group(function () {
 
@@ -165,7 +154,7 @@ Route::prefix('v1')->group(function () {
             Route::post('teacher/register', [TeacherRegisterController::class, 'register'])->name('teacher.register.post');
         });
 
-        Route::group(['middleware' => 'auth:api'], function () {
+        Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
             Route::post('logout', [ApiController::class, 'logout'])->name('logout');

@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogTable extends Migration {
+class CreateBlogTable extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,10 +13,8 @@ class CreateBlogTable extends Migration {
      */
     public function up()
     {
-        Schema::create('blogs', function(Blueprint $table)
-        {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->nullable();
@@ -27,8 +26,6 @@ class CreateBlogTable extends Migration {
             $table->timestamps();
             $table->softDeletes();
         });
-
-
     }
 
     /**
@@ -41,8 +38,5 @@ class CreateBlogTable extends Migration {
         //take backup before dropping table
 
         Schema::drop('blogs');
-
-
     }
-
 }

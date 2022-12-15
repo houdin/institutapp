@@ -24,9 +24,6 @@ use Barryvdh\TranslationManager\Models\Translation;
 use Coderello\SocialGrant\Resolvers\SocialUserResolverInterface;
 use KgBot\LaravelLocalization\Facades\ExportLocalizations as ExportLocalization;
 
-/**
- * Class AppServiceProvider.
- */
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -82,33 +79,13 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, config('app.locale_php'));
 
 
-        /*
-	     * Set the session variable for whether or not the app is using RTL support
-	     * For use in the blade directive in BladeServiceProvider
-	     */
-        //        if (! app()->runningInConsole()) {
-        //            if (config('locale.languages')[config('app.locale')][2]) {
-        //                session(['lang-rtl' => true]);
-        //            } else {
-        //                session()->forget('lang-rtl');
-        //            }
-        //        }
-
         // Force SSL in production
-        // if ($this->app->environment() == 'production') {
-        //     URL::forceScheme('https');
-        // }
-        $url->forceScheme('https');
+        if ($this->app->environment('production') || $this->app->environment('staging')) {
+            \URL::forceScheme('https');
+        }
         // if (env('APP_ENV') !== 'local') {
 
         // }
-
-        // Set the default string length for Laravel5.4
-        Schema::defaultStringLength(191);
-
-        Paginator::defaultView('vendor.pagination.bootstrap-4');
-
-        Paginator::defaultSimpleView('vendor.pagination.simple-bootstrap-4');
 
 
         if (Schema::hasTable('configs')) {
@@ -133,46 +110,32 @@ class AppServiceProvider extends ServiceProvider
         //     });
         // }
 
-        view()->composer('*', function ($view) {
-            // $captcha = null;
-            // if (config('access.captcha.registration')) {
-            //     $captcha = new NoCaptchaV2(config('no-captcha.secret'), config('no-captcha.sitekey'));
-            // }
 
-            $custom_menus = config('app.main_menu');
-            $second_menus = config('app.second_menu');
-            $footer_menus = config('app.footer_menu');
-            $fxinstitut_lang = ExportLocalization::export()->toFlat();
-            $max_depth = 1;
-            $view->with(compact('custom_menus', 'second_menus', 'footer_menus', 'max_depth', 'fxinstitut_lang'));
-        });
+        // view()->composer('frontend.layouts.partials.right-sidebar', function ($view) {
 
-        view()->composer('frontend.layouts.partials.right-sidebar', function ($view) {
+        //     $recent_news = Blog::orderBy('created_at', 'desc')->whereHas('category')->take(2)->get();
+
+        //     $view->with(compact('recent_news'));
+        // });
 
 
-            $recent_news = Blog::orderBy('created_at', 'desc')->whereHas('category')->take(2)->get();
+        // view()->composer('frontend.*', function ($view) {
 
-            $view->with(compact('recent_news'));
-        });
+        //     $global_featured_formation = Formation::withoutGlobalScope('filter')
+        //         ->whereHas('category')
+        //         ->where('published', '=', 1)
+        //         ->where('featured', '=', 1)->where('trending', '=', 1)->first();
 
-        view()->composer('frontend.*', function ($view) {
-
-            $global_featured_formation = Formation::withoutGlobalScope('filter')
-                ->whereHas('category')
-                ->where('published', '=', 1)
-                ->where('featured', '=', 1)->where('trending', '=', 1)->first();
-
-            $featured_formations = Formation::withoutGlobalScope('filter')->where('published', '=', 1)
-                ->whereHas('category')
-                ->where('featured', '=', 1)->take(8)->get();
+        //     $featured_formations = Formation::withoutGlobalScope('filter')->where('published', '=', 1)
+        //         ->whereHas('category')
+        //         ->where('featured', '=', 1)->take(8)->get();
 
 
+        //     $view->with('image')->with(compact('global_featured_formation', 'featured_formations'));
+        // });
 
-            $view->with('image')->with(compact('global_featured_formation', 'featured_formations'));
-        });
 
-        view()->composer(['frontend.*', 'backend.*', 'vendor.invoices.*'], function ($view) {
-
+        view()->composer(['backend.*', 'vendor.invoices.*'], function ($view) {
 
             $appCurrency = getCurrency(config('app.currency'));
 
@@ -191,20 +154,7 @@ class AppServiceProvider extends ServiceProvider
             if ($locale) {
                 $locale_full_name = $locale->name;
             }
-            // dd($locale);
             $view->with(compact('locale_full_name'));
         });
-    }
-
-    function menuList($array)
-    {
-        $temp_array = array();
-        foreach ($array as $item) {
-            if ($item->getsons($item->id)->except($item->id)) {
-                $item->subs = $this->menuList($item->getsons($item->id)->except($item->id)); // here is the recursion
-                $temp_array[] = $item;
-            }
-        }
-        return $temp_array;
     }
 }

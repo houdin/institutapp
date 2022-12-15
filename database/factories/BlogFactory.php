@@ -29,7 +29,6 @@ class BlogFactory extends Factory
             'title' => $name,
             'slug' => Str::slug($name),
             'content' => $this->faker->text(1000),
-            'category_id' => rand(1,10),
             'user_id' => 1,
         ];
     }

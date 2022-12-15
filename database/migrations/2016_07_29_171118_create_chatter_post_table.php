@@ -10,9 +10,9 @@ class CreateChatterPostTable extends Migration
         Schema::create('chatter_post', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chatter_discussion_id')->constrained('chatter_discussion')->onDelete('cascade')
-                        ->onUpdate('cascade');;
+                ->onUpdate('cascade');;
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')
-                        ->onUpdate('cascade');;
+                ->onUpdate('cascade');;
             $table->text('body');
             $table->timestamps();
         });

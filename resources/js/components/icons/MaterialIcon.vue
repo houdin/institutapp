@@ -7,7 +7,7 @@
   </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /// link
 // https://materialdesignicons.com/
 

@@ -10,11 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class VideoProgress extends Model
 {
-	use HasFactory, Notifiable;
+    use HasFactory, Notifiable;
     //Relations
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-
-
 }

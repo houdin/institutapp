@@ -22,7 +22,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(["confirm", "cancel"]);
 
 const confirm = (e) => {

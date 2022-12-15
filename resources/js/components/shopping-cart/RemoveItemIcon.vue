@@ -13,7 +13,8 @@
 
   <div :class="mainClass">
     <div class="event-icon">
-      <i :class="sizeClass" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#appModal" @click="isOpen = true"></i>
+      <i :class="sizeClass" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#appModal"
+        @click="isOpen = true"></i>
     </div>
 
     <confirm-modal v-if="isOpen" @confirm="updateCart">
@@ -24,7 +25,7 @@
             <h3>Remove</h3>
             <!-- <h2 id="modal_title_login">Se Connecter</h2> -->
           </div>
-          <p id="modal_head_register" class="">{{ product }}
+          <p id="modal_head_register" class="">{{  product }}
           </p>
         </div>
 
@@ -39,7 +40,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from "@vue/reactivity";
 import { provide } from "@vue/runtime-core";
 import { animateCSS } from "../../frontend/animation";

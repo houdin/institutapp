@@ -32,7 +32,6 @@ class TutorialFactory extends Factory
 
         return [
             'title' => $name,
-            'category_id' => rand(1, 10),
             'slug' => Str::slug($name),
             // 'image_id' => $placeholder[rand(0, 2)],
             'description' => $this->faker->text(),

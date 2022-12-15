@@ -18,7 +18,6 @@ class CreatePermissionTables extends Migration
             $table->id();
             $table->string('name');
             $table->string('guard_name');
-            $table->string('ref');
             $table->timestamps();
         });
 
@@ -26,7 +25,6 @@ class CreatePermissionTables extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('guard_name');
-            $table->string('ref');
             $table->timestamps();
         });
 

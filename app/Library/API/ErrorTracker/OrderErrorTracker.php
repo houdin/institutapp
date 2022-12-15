@@ -70,11 +70,12 @@ class OrderErrorTracker extends AbstractErrorTracker
      */
     protected function addressBelongsToUser()
     {
-        if((int)$this->address->user_id !== (int)$this->user->id)
-        {
-            $this->responseTracker->setResult(422,
+        if ((int)$this->address->user_id !== (int)$this->user->id) {
+            $this->responseTracker->setResult(
+                422,
                 "Error: we are unable to process your request",
-                true);
+                true
+            );
         }
     }
 
@@ -85,11 +86,12 @@ class OrderErrorTracker extends AbstractErrorTracker
      */
     protected function orderBelongsToUser()
     {
-        if((int)$this->model->user_id !== (int)$this->user->id)
-        {
-            $this->responseTracker->setResult(403,
+        if ((int)$this->model->user_id !== (int)$this->user->id) {
+            $this->responseTracker->setResult(
+                403,
                 "Error: we are unable to process your request",
-                true);
+                true
+            );
         }
     }
 
@@ -101,13 +103,11 @@ class OrderErrorTracker extends AbstractErrorTracker
     protected function arePropertiesSet()
     {
         $error = 'Error: ' . __CLASS__ . ' requires ';
-        if(!isset($this->address))
-        {
+        if (!isset($this->address)) {
             $error .= 'an ' . Address::class . ' property to be set';
             throw new \Exception($error);
         }
-        if(!isset($this->user))
-        {
+        if (!isset($this->user)) {
             $error .= 'an ' . User::class . ' property to be set';
             throw new \Exception($error);
         }

@@ -6,4 +6,4 @@ import "./plugins";
 import * as coreui from "@coreui/coreui/dist/js/coreui";
 window.coreui = global.coreui = coreui;
 
-import "./after";
+// import "./after";

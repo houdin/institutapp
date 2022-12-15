@@ -85,7 +85,7 @@ class UserRegistrationTest extends TestCase
         $user = factory(User::class)->states('unconfirmed')->create();
         Event::fake();
 
-        $response = $this->get('/account/confirm/'.$user->confirmation_code);
+        $response = $this->get('/account/confirm/' . $user->confirmation_code);
 
         $response->assertSessionHas(['flash_success' => __('exceptions.frontend.auth.confirmation.success')]);
         $this->assertEquals(1, $user->fresh()->confirmed);
@@ -99,7 +99,7 @@ class UserRegistrationTest extends TestCase
 
         $user = factory(User::class)->states('unconfirmed')->create();
 
-        $response = $this->get('/account/confirm/resend/'.$user->uuid);
+        $response = $this->get('/account/confirm/resend/' . $user->uuid);
 
         $response->assertSessionHas(['flash_success' => __('exceptions.frontend.auth.confirmation.resent')]);
 

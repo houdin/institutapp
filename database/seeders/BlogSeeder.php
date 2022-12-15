@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use App\Http\Traits\FileUploadTrait;
+use App\Models\Tag;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BlogSeeder extends Seeder
@@ -32,11 +33,14 @@ class BlogSeeder extends Seeder
         // }
 
         //Creating Blog
-        Blog::factory(35)->create()->each(function ($blog) {
+        Blog::factory(30)->create()->each(function ($blog) {
 
-            $category = Category::inRandomOrder()->first();
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
+            $tags = Tag::inRandomOrder()->take(rand(1, 7))->pluck('id')->toArray();
 
-            $blog->category()->associate($category);
+            $blog->categories()->attach($categories);
+            $blog->tags()->attach($tags);
+            // $blog->category()->associate($category);
 
 
 

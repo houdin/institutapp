@@ -13,7 +13,7 @@ class Messenger
     /**
      * Message sender.
      *
-     * @var \App\Models\User
+     * @var \App\Models\Auth\User
      */
     protected $from;
 
@@ -51,7 +51,7 @@ class Messenger
     /**
      * Message sender.
      *
-     * @param \App\Models\User
+     * @param \App\Models\Auth\User
      *
      * @return $this
      */
@@ -152,7 +152,7 @@ class Messenger
         $from = $this->from;
         $to = $this->to;
 
-        return DB::transaction(function () use ($from,$to) {
+        return DB::transaction(function () use ($from, $to) {
             $thread = App::make(MessageThreadInterface::class);
             $thread->save();
 

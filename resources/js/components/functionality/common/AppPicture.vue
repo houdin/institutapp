@@ -8,7 +8,7 @@
   </picture>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { inject } = require("@vue/runtime-core");
 
 const props = defineProps({

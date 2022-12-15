@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Searchable\Searchable;
 
-class Product extends Model
+class Product extends Model implements Searchable
 {
     use HasFactory;
+    use SoftDeletes;
     //use Searchable;
     /**
      * The attributes that are mass assignable.
@@ -22,6 +25,8 @@ class Product extends Model
     ];
 
     protected $appends = ['sale_price', 'has_sale'];
+
+    public $searchableType = 'Produit';
 
     protected static function boot()
     {
@@ -45,6 +50,17 @@ class Product extends Model
                 }
             }
         });
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('products.show', $this->slug);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
     }
 
     /**
@@ -130,9 +146,9 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     /**

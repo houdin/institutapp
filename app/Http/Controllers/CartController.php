@@ -11,7 +11,6 @@ use PayPal\Api\Item;
 use Stripe\Customer;
 use App\Models\Order;
 use PayPal\Api\Payer;
-use App\Models\Bundle;
 use App\Models\Coupon;
 use PayPal\Api\Amount;
 use App\Models\Premium;
@@ -100,8 +99,7 @@ class CartController extends Controller
             $products->push(('\App\Models\\' . ucfirst($item->attributes->type))::findOrFail($item->id));
         }
         $formations = new Collection(Formation::find($formation_ids));
-        $bundles = Bundle::find($bundle_ids);
-        $formations = $bundles->merge($formations);
+
 
         // $total = $formations->sum('price');
         $total = $products->sum('price');
@@ -375,8 +373,7 @@ class CartController extends Controller
             }
         }
         $formations = new Collection(Formation::find($formation_ids));
-        $bundles = Bundle::find($bundle_ids);
-        $formations = $bundles->merge($formations);
+
 
         $total = $formations->sum('price');
 

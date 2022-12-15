@@ -44,14 +44,13 @@ class BlogController extends Controller
         return abort(404);
     }
 
-    public function getIndex()
+    public function index()
     {
         $popular_tags = Tag::has('blogs', '>', 4)->get();
-        $categories = Category::has('blogs')->where('status', '=', 1)
-            ->take(10)->get();
+        $categories = Category::has('blogs')->where('status', '=', 1)->get();
 
 
-        $blogs = Blog::has('category')->with(['image'])->OrderBy('id', 'desc')->paginate(10);
+        $blogs = Blog::OrderBy('id', 'desc')->with(['image', 'categories', 'tags', 'comments'])->paginate(9);
 
         // if (request()->ajax() || request()->api == true) {
         //     return response()->json([
@@ -61,10 +60,14 @@ class BlogController extends Controller
         //     ]);
         // }
 
-        return Inertia::render('Institut/Blog/BlogIndex', [
-            'blogs' => $blogs,
+        return Inertia::render('Blog/BlogIndex', [
+            'articles' => $blogs,
             'categories' => $categories,
-            'popular_tags' => $popular_tags
+            'popular_tags' => $popular_tags,
+
+            'enterClass' => "animate__animated animate__fadeInLeft",
+            'leaveClass' => "animate__animated animate__fadeOutRight",
+
         ]);
         // return view(
         //     'frontend.blogs.index',
@@ -78,27 +81,38 @@ class BlogController extends Controller
         $categories = Category::has('blogs')->where('status', '=', 1)
             ->take(10)->get();
 
-        $blog = Blog::where('slug', $slug)->firstOrFail();
+        $blog = Blog::where('slug', $slug)->with(['image', 'tags', 'categories', 'comments'])->firstOrFail();
         // get previous user id
-        $previous_id = Blog::where('id', '<', $blog->id)->max('id');
-        $previous = Blog::find($previous_id);
+        $previous = Blog::where('id', '<', $blog->id)->orderBy('id', 'desc')->first();
 
         // get next user id
-        $next_id = Blog::where('id', '>', $blog->id)->min('id');
-        $next = Blog::find($next_id);
+        $next = Blog::where('id', '>', $blog->id)->orderBy('id')->first();
 
-        $related_news = $blog->category->blogs()->where('id', '!=', $blog->id)->take(2)->get();
 
-        if (request()->ajax() || request()->api == true) {
-            return response()->json([
-                'blog' => $blog,
-                'previous' => $previous,
-                'next' => $next,
-                'popular_tags' => $popular_tags,
-                'categories' => $categories,
-                'related_news' => $related_news
-            ]);
-        }
+        // $related_news = $blog->category->blogs()->where('id', '!=', $blog->id)->take(2)->get();
+
+        return Inertia::render('Blog/BlogShow', [
+            'blog' => $blog,
+            'previous' => $previous,
+            'next' => $next,
+            'popular_tags' => $popular_tags,
+            'categories' => $categories,
+
+            'enterClass' => "animate__animated animate__fadeInRight",
+            'leaveClass' => "animate__animated animate__fadeOutLeft",
+            // 'related_news' => $related_news
+        ]);
+
+        // if (request()->ajax() || request()->api == true) {
+        //     return response()->json([
+        //         'blog' => $blog,
+        //         'previous' => $previous,
+        //         'next' => $next,
+        //         'popular_tags' => $popular_tags,
+        //         'categories' => $categories,
+        //         'related_news' => $related_news
+        //     ]);
+        // }
 
 
 
@@ -112,7 +126,7 @@ class BlogController extends Controller
     {
         $popular_tags = Tag::has('blogs', '>', 4)->get();
         $tag = Tag::where('slug', '=', Str::slug($request->tag))->first();
-        $categories = Category::has('blogs')->where('status', '=', 1)->paginate(10);
+        // $categories = Category::has('blogs')->where('status', '=', 1)->paginate(10);
         if ($tag != "") {
             $blogs = $tag->blogs()->paginate(6);
 
@@ -120,7 +134,7 @@ class BlogController extends Controller
                 return response()->json([
                     'tag' => $tag,
                     'blogs' => $blogs,
-                    'categories' => $categories,
+                    // 'categories' => $categories,
                     'popular_tags' => $popular_tags
                 ]);
             }

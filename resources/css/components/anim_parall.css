@@ -1,0 +1,115 @@
+.__slideLeavePrev {
+    animation-duration: 1s !important;
+    animation-name: slide-leave-prev;
+}
+.__slideLeaveNext {
+    animation-duration: 1s !important;
+    animation-name: slide-leave-next;
+}
+.__slideEnterPrev {
+    animation-duration: 1s !important;
+    animation-name: slide-enter-prev;
+}
+.__slideEnterNext {
+    animation-duration: 1s !important;
+    animation-name: slide-enter-next;
+}
+
+.__slideLeaveBigPrev {
+    animation-duration: 1s !important;
+    animation-name: slide-leave-big-prev;
+}
+.__slideLeaveBigNext {
+    animation-duration: 1s !important;
+    animation-name: slide-leave-big-next;
+}
+.__slideEnterBigPrev {
+    animation-duration: 1s !important;
+    animation-name: slide-enter-big-prev;
+}
+.__slideEnterBigNext {
+    animation-duration: 1s !important;
+    animation-name: slide-enter-big-next;
+}
+
+@keyframes slide-leave-prev {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100px) scale(0.95);
+        opacity: 0.3;
+    }
+}
+@keyframes slide-leave-next {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100px) scale(0.95);
+        opacity: 0.3;
+    }
+}
+@keyframes slide-enter-prev {
+    0% {
+        transform: translateX(-100px) scale(0.95);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@keyframes slide-enter-next {
+    0% {
+        transform: translateX(100px) scale(0.95);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-leave-big-prev {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-150px);
+        opacity: 0.3;
+    }
+}
+@keyframes slide-leave-big-next {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(150px);
+        opacity: 0.3;
+    }
+}
+@keyframes slide-enter-big-prev {
+    0% {
+        transform: translateX(-150px);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@keyframes slide-enter-big-next {
+    0% {
+        transform: translateX(150px);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}

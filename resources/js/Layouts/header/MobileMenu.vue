@@ -10,7 +10,8 @@
           <!-- <a href="#!" :class="{'nav-link' : true, 'router-link-active router-link-exact-active' : isActive(index, $route.path)  }">{{index}}</a> -->
           <ul class="">
 
-            <nav-dropdown v-for="(item, index2) in value" :key="index2" :item="item" :label="index2" :home="$laravel.urls.index">
+            <nav-dropdown v-for="(item, index2 ) in value" :key="index2" :item="item" :label="index2"
+              :home="$laravel.urls.index">
 
             </nav-dropdown>
 
@@ -29,5 +30,5 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 </script>

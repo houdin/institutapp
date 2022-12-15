@@ -23,17 +23,17 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->word;
+        $name = fake()->words(rand(1, 2), true);
         $icon = [
             'fab fa-accessible-icon',
-            'fab fa-accusoft' ,
-            'fas fa-address-book' ,
-            'far fa-address-card' ,
+            'fab fa-accusoft',
+            'fas fa-address-book',
+            'far fa-address-card',
             'fas fa-adjust',
             'fab fa-adn',
             'fab fa-adversal',
-            'fab fa-affiliatetheme' ,
-            'fab fa-algolia' ,
+            'fab fa-affiliatetheme',
+            'fab fa-algolia',
             'fas fa-allergies',
             'fab fa-amazon',
             'fab fa-amazon-pay',

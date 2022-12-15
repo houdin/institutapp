@@ -12,10 +12,9 @@ class Create1500441827FormationsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('formations')) {
+        if (!Schema::hasTable('formations')) {
             Schema::create('formations', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
                 $table->string('title');
                 $table->string('slug')->nullable();
                 $table->text('description')->nullable();

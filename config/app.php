@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Facade;
 
 return [
 
@@ -69,7 +70,7 @@ return [
 
     'url' => env('APP_URL', 'http://fxinstitut.test'),
 
-    'asset_url' => env('ASSET_URL', null),
+    'asset_url' => env('ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -121,7 +122,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'fr',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -133,8 +134,8 @@ return [
     | localized telephone numbers, street address information and more.
     |
     */
-    'faker_locale' => 'en_US',
 
+    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +151,24 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance Mode Driver
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the driver used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
+    |
+    */
+
+    'maintenance' => [
+        'driver' => 'file',
+        // 'store'  => 'redis',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -200,7 +219,6 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Gerardojbaez\Messenger\MessengerServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         ConsoleTVs\Invoices\InvoicesServiceProvider::class,
@@ -214,8 +232,9 @@ return [
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        KgBot\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Chumper\Zipper\ZipperServiceProvider::class,
         Mtownsend\ReadTime\Providers\ReadTimeServiceProvider::class,
 
         /*
@@ -223,19 +242,19 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        App\Providers\BladeServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\SideBarServiceProvider::class,
-        App\Providers\NavBarServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
+        App\Providers\JetstreamServiceProvider::class,
         App\Providers\ValidationServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
         App\Providers\TranslationServiceProvider::class,
+
 
 
 
@@ -252,51 +271,13 @@ return [
     |
     */
 
-    'aliases' => [
+    'aliases' => Facade::defaultAliases()->merge([
 
 
-        'App' => Illuminate\Support\Facades\App::class,
-        'Arr' => Illuminate\Support\Arr::class,
-        'Artisan' => Illuminate\Support\Facades\Artisan::class,
-        'Auth' => Illuminate\Support\Facades\Auth::class,
-        'Blade' => Illuminate\Support\Facades\Blade::class,
-        'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
-        'Bus' => Illuminate\Support\Facades\Bus::class,
-        'Cache' => Illuminate\Support\Facades\Cache::class,
-        'Config' => Illuminate\Support\Facades\Config::class,
-        'Cookie' => Illuminate\Support\Facades\Cookie::class,
-        'Crypt' => Illuminate\Support\Facades\Crypt::class,
-        'DB' => Illuminate\Support\Facades\DB::class,
-        'Eloquent' => Illuminate\Database\Eloquent\Model::class,
-        'Event' => Illuminate\Support\Facades\Event::class,
-        'File' => Illuminate\Support\Facades\File::class,
-        'Gate' => Illuminate\Support\Facades\Gate::class,
-        'Hash' => Illuminate\Support\Facades\Hash::class,
-        'Http' => Illuminate\Support\Facades\Http::class,
-        'Lang' => Illuminate\Support\Facades\Lang::class,
-        'Log' => Illuminate\Support\Facades\Log::class,
-        'Mail' => Illuminate\Support\Facades\Mail::class,
-        'Notification' => Illuminate\Support\Facades\Notification::class,
-        'Password' => Illuminate\Support\Facades\Password::class,
-        'Queue' => Illuminate\Support\Facades\Queue::class,
-        'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
-        'Request' => Illuminate\Support\Facades\Request::class,
-        'Response' => Illuminate\Support\Facades\Response::class,
-        'Route' => Illuminate\Support\Facades\Route::class,
-        'Schema' => Illuminate\Support\Facades\Schema::class,
-        'Session' => Illuminate\Support\Facades\Session::class,
-        'Storage' => Illuminate\Support\Facades\Storage::class,
-        'Str' => Illuminate\Support\Str::class,
-        'URL' => Illuminate\Support\Facades\URL::class,
-        'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
-
-
 
         /*
          * Package Aliases
@@ -308,14 +289,14 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Messenger' => Gerardojbaez\Messenger\Facades\Messenger::class,
+        // 'Messenger' => Gerardojbaez\Messenger\Facades\Messenger::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
 
+        'ColorExtractor' => PHPColorExtractor\PHPColorExtractor::class,
 
-
-    ],
+    ])->toArray(),
 
     /*
 
@@ -381,334 +362,6 @@ return [
             'password',
         ],
     ],
-
-    'main_menu' => [
-        [
-            "name" => "Solutions",
-            "submenu" => [
-                'Effets Spéciaux' => [
-                    "href" =>
-                    'effets-speciaux',
-                    "icon" =>
-                    'Bolt',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                '3D & Modélisation' => [
-                    "href" =>
-                    '3d-&-modelisation',
-                    "icon" =>
-                    'Cube',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Motion & Design Graphics' =>
-                [
-                    "href" =>
-                    'motion-&-design-graphics',
-                    "icon" =>
-                    'ChartBar',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Animation' => [
-                    "href" =>
-                    'animation',
-                    "icon" =>
-                    'ArrowTrendingUp',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'TV & Broadcast' => [
-                    "href" =>
-                    'tv-&-broadcast',
-                    "icon" =>
-                    'Tv',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Storyboard' => [
-                    "href" =>
-                    'storyboard',
-                    "icon" =>
-                    'PaintBrush',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Architecture' => [
-                    "href" =>
-                    'architecture',
-                    "icon" =>
-                    'BuildingOffice',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Web & Applications' => [
-                    "href" =>
-                    'web-&-applications',
-                    "icon" =>
-                    'GlobeAlt',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Marketing' => [
-                    "href" =>
-                    'marketing',
-                    "icon" =>
-                    'Megaphone',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'callToAction' => [
-                    'Demande Devis' => [
-                        "href" =>
-                        'devis/type',
-                        "icon" =>
-                        'DocumentText',
-                        "description" =>
-                        'effets-speciaux',
-                    ],
-                    'Assistance' => [
-                        "href" =>
-                        'assistance',
-                        "icon" =>
-                        'Phone',
-                        "description" =>
-                        'effets-speciaux',
-                    ]
-                ]
-
-            ]
-        ],
-        // [
-        //     "name" => "Clients",
-        //     "href" => "clients",
-        // ],
-        [
-            "name" => "Tarifs",
-            "href" => "tarifs",
-        ],
-        [
-            "name" => "Produits",
-            "submenu" => [
-                'Boutique' =>
-                [
-                    "href" =>
-                    'boutique',
-                    "icon" =>
-                    'ShoppingCart',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Plugins' => [
-                    "href" =>
-                    'plugins',
-                    "icon" =>
-                    'ArrowRightCircle',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Modèles 3D' =>
-                [
-                    "href" =>
-                    'modeles-3d',
-                    "icon" =>
-                    'Cube',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Applications' =>
-                [
-                    "href" =>
-                    'applications',
-                    "icon" =>
-                    'DevicePhoneMobile',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'callToAction' => [
-                    'Assistance' => [
-                        "href" =>
-                        'assistance',
-                        "icon" =>
-                        'Phone',
-                        "description" =>
-                        'effets-speciaux',
-                    ]
-                ]
-
-            ]
-        ],
-        [
-            "name" => "Ressources",
-            "submenu" => [
-                'Formations' => [
-                    "href" =>
-                    'formations',
-                    "icon" =>
-                    'Bookmark',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Tutoriels' => [
-                    "href" =>
-                    'tutoriels',
-                    "icon" =>
-                    'BookmarkSquare',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Cursus' => [
-                    "href" =>
-                    'cursus',
-                    "icon" =>
-                    'Share',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Support' => [
-                    "href" =>
-                    'support',
-                    "icon" =>
-                    'QuestionMarkCircle',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Tips & Tricks' => [
-                    "href" =>
-                    'tips-tricks',
-                    "icon" =>
-                    'CommandLine',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-
-            ],
-        ],
-        [
-            "name" => "Institut",
-            "submenu" => [
-                // 'Portfolio' => [
-                //     "href" =>
-                //     'portfolio',
-                //     "icon" =>
-                //     'Photo',
-                //     "description" =>
-                //     'effets-speciaux',
-                // ],
-                // 'Events' => [
-                //     "href" =>
-                //     'events',
-                //     "icon" =>
-                //     'Rss',
-                //     "description" =>
-                //     'effets-speciaux',
-                // ],
-                'Team' => [
-                    "href" =>
-                    'team',
-                    "icon" =>
-                    'UserGroup',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Recrutement' => [
-                    "href" =>
-                    'recrutement',
-                    "icon" =>
-                    'UserPlus',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Challenge' => [
-                    "href" =>
-                    'challenge',
-                    "icon" =>
-                    'Trophy',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Blog' => [
-                    "href" =>
-                    'blog',
-                    "icon" =>
-                    'PencilSquare',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Forum' => [
-                    "href" =>
-                    'forums',
-                    "icon" =>
-                    'ChatBubbleLeftRight',
-                    "description" =>
-                    'effets-speciaux',
-                ],
-                'Contact' => [
-                    "href" =>
-                    'contact',
-                    "icon" =>
-                    'Phone',
-                    "description" =>
-                    'effets-speciaux',
-                ]
-            ]
-        ],
-
-
-
-    ],
-
-    'second_menu' => [
-        'Blog' => 'blog',
-        'Premium' => 'premium',
-        'Challenge' => 'challenge',
-
-        'Forum' => 'forums',
-        'Support' => 'support'
-
-    ],
-    'footer_menu' => [
-        [
-            "name" => "Solutions",
-            'submenu' => [
-                'Effets Spéciaux' => 'effets-speciaux',
-                '3D & After Effetcs' => '3d-&-after-effects',
-                'Design Graphics' => 'design-graphics',
-                'Storyboard' => 'storyboard',
-                'Web & Applications' => 'web-&-applications',
-                'Location' => 'location',
-                'Assistance' => 'assistance',
-                'Devis' => 'devis/type',
-
-            ]
-        ],
-        [
-            "name" => "Produits",
-            'submenu' => [
-                'Shop' => 'boutique',
-                'Plugins' => 'plugins',
-                'Modèles 3D' => 'modeles-3d',
-                'Applications' => 'applications',
-                'Assistance' => 'assistance',
-
-            ]
-        ],
-        [
-            "name" => "Public",
-            'submenu' => [
-                'Blog' => 'blog',
-                'Challenge' => 'challenge',
-                'Forum' => 'forums',
-                'Support' => 'support',
-                'Recrutement' => 'recrutement'
-
-            ]
-        ]
-
-
-    ]
-
 
 
 ];

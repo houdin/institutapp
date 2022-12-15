@@ -7,12 +7,13 @@
 | Created by Shawn Legge
 | This class is responsible for creating an environement
 */
+
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\State;
 use App\Models\Tax;
-use App\Models\User;
+use App\Models\Auth\User;
 use App\Models\Address;
 
 trait SetUpOrderTrait
@@ -49,8 +50,7 @@ trait SetUpOrderTrait
     public function setUpOrderDatabase($single = false)
     {
         $this->setUpAddress();
-        foreach ($this->orderDetails as $orderDetail)
-        {
+        foreach ($this->orderDetails as $orderDetail) {
             $order = new Order();
             $order->user_id = $this->user->id;
             $order->address_id = $this->addresses[0]->id;
@@ -60,8 +60,7 @@ trait SetUpOrderTrait
             $order->order_date = $orderDetail['order_date'];
             $order->ship_date = $orderDetail['ship_date'];
             $order->save();
-            if($single)
-            {
+            if ($single) {
                 break;
             }
         }
@@ -77,8 +76,7 @@ trait SetUpOrderTrait
     public function addProductsToOrder($order = 0)
     {
         $this->setUpProduct();
-        foreach ($this->products as $product)
-        {
+        foreach ($this->products as $product) {
             $this->orders[$order]->products()->attach($product->id, ['quantity' => 1]);
         }
     }

@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('order_id');
             $table->integer('user_id');
             $table->text('url')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

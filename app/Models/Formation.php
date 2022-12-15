@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Auth\User;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Auth\User;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Formation
@@ -23,10 +23,12 @@ use Illuminate\Support\Facades\File;
  * @property tinyInteger $published
  */
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Searchable\Searchable;
 
-class Formation extends Model
+class Formation extends Model implements Searchable
 {
     use HasFactory, Notifiable;
     use SoftDeletes;
@@ -35,9 +37,13 @@ class Formation extends Model
 
     // protected $hidden = ['image'];
 
-    protected $appends = ['chapter_count', 'students_count'];
+    protected $appends = ['chapter_count', 'students_count', 'rating'];
 
     protected $hidden = ['pivot'];
+
+    // protected $with = ['rating'];
+
+    public $searchableType = 'Formation';
 
 
     protected static function boot()
@@ -52,26 +58,37 @@ class Formation extends Model
                 });
             }
         }
-
-        // static::deleting(function ($formation) { // before delete() method call this
-        //     $date = $formation->created_at->format('Y/m/');
-        //     $extension = $formation->image->extension;
-        //     $file_name = $formation->image->file_name . '.' . $extension;
-        //     if ($formation->isForceDeleting()) {
-        //         if (File::exists(public_path('/storage/uploads/images/' . $date . 'origin/' . $file_name))) {
-        //             File::delete(public_path('/storage/uploads/images/' . $date . 'origin/' . $file_name));
-
-        //             for ($i = 1; $i <= 5; $i++) {
-        //                 $size = get_image_size($i, true);
-        //                 $filename = $file_name . '-' . $size[0] . 'w.' . $extension;
-        //                 if (File::exists(public_path('/storage/uploads/images/' . $date . 'resizing/' . $size[0] . '/' . $filename))) {
-        //                     File::delete(public_path('/storage/uploads/images/' . $date . 'resizing/' . $size[0] . '/' . $filename));
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
     }
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('formations.show', $this->slug);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
+    }
+
+    // static::deleting(function ($formation) { // before delete() method call this
+    //     $date = $formation->created_at->format('Y/m/');
+    //     $extension = $formation->image->extension;
+    //     $file_name = $formation->image->file_name . '.' . $extension;
+    //     if ($formation->isForceDeleting()) {
+    //         if (File::exists(public_path('/storage/uploads/images/' . $date . 'origin/' . $file_name))) {
+    //             File::delete(public_path('/storage/uploads/images/' . $date . 'origin/' . $file_name));
+
+    //             for ($i = 1; $i <= 5; $i++) {
+    //                 $size = get_image_size($i, true);
+    //                 $filename = $file_name . '-' . $size[0] . 'w.' . $extension;
+    //                 if (File::exists(public_path('/storage/uploads/images/' . $date . 'resizing/' . $size[0] . '/' . $filename))) {
+    //                     File::delete(public_path('/storage/uploads/images/' . $date . 'resizing/' . $size[0] . '/' . $filename));
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
 
 
     public function getImageNameAttribute()
@@ -183,9 +200,9 @@ class Formation extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function tests()
@@ -239,10 +256,6 @@ class Formation extends Model
         return $this->morphMany(OrderItem::class, 'item');
     }
 
-    public function bundles()
-    {
-        return $this->belongsToMany(Bundle::class, 'bundle_formations');
-    }
 
     public function chapterCount()
     {

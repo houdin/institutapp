@@ -9,8 +9,9 @@
 
       <div v-for="item in homeData.premiums" :key="item.id" class="col-md-4 col-lg-4 mb-5 mb-lg-0">
         <div class="bg-gray-6 p-5 rounded-lg shadow border border-base-5">
-          <h1 class="h6 text-uppercase font-weight-bold mb-4">{{ item.name }}</h1>
-          <h2 class="h1 font-weight-bold">${{ item.price }}<span class="text-small font-weight-normal ms-2">/ month</span></h2>
+          <h1 class="h6 text-uppercase font-weight-bold mb-4">{{  item.name }}</h1>
+          <h2 class="h1 font-weight-bold">${{ item.price }}<span class="text-small font-weight-normal ms-2">/
+              month</span></h2>
           <div class="custom-separator my-4 mx-auto bg-base-2"></div>
           <ul class="list-unstyled my-3 text-small text-left" style="height: 180px;">
 
@@ -32,7 +33,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref } = require("@vue/reactivity");
 const { onMounted, inject } = require("@vue/runtime-core");
 

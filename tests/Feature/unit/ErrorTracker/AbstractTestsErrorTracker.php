@@ -5,7 +5,7 @@ namespace Tests\Feature\unit\ErrorTracker;
 use App\Models\Address;
 use App\Library\API\ApiResponseTracker;
 use App\Models\Order;
-use App\Models\User;
+use App\Models\Auth\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -35,8 +35,7 @@ class AbstractTestsErrorTracker extends TestCase
     protected function mockAddress($return = true, $user = 1, $hasResult = true)
     {
         $this->address = \Mockery::mock(Address::class);
-        if($hasResult)
-        {
+        if ($hasResult) {
             $this->address->shouldReceive('hasResult')
                 ->once()
                 ->andReturn($return);

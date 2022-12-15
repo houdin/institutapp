@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Portfolio;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -29,24 +29,33 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LocaleSeeder::class,
             AuthTableSeeder::class,
+            ConfigSeeder::class,
+            PremiumSeeder::class,
+            SliderSeeder::class,
+            StaffingSeeder::class,
             CategoryTableSeeder::class,
+            TagSeeder::class,
+
+            ClientsTableSeeder::class,
+            SolutionSeeder::class,
+            ProjectsTableSeeder::class,
+            ProjectusersTableSeeder::class,
+            // TasksTableSeeder::class,
+            IssueSeeder::class,
+            IssueNoteSeeder::class,
+
             TipstrickSeeder::class,
             PortfolioSeeder::class,
-            PremiumSeeder::class,
-            StaffingSeeder::class,
             BlogSeeder::class,
             SupplierSeeder::class,
             ProductTableSeeder::class,
             StateTableSeeder::class,
-            PageSeeder::class,
             FormationSeeder::class,
             TutorialSeeder::class,
             QuestionsSeeder::class,
             ReviewTableSeeder::class,
             TaxTableSeeder::class,
             TaxItemsTableSeeder::class,
-            ConfigSeeder::class,
-            SliderSeeder::class,
             FaqSeeder::class,
             CommissionRateSeeder::class,
             TeacherProfileSeeder::class,

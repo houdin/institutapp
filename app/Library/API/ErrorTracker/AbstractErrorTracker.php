@@ -50,8 +50,7 @@ abstract class AbstractErrorTracker implements ErrorTrackerInterface
      */
     public function __set($name, $value)
     {
-        if(in_array($name, $this->models) && $value instanceof Model)
-        {
+        if (in_array($name, $this->models) && $value instanceof Model) {
             $this->{$name} = $value;
         }
     }
@@ -64,11 +63,12 @@ abstract class AbstractErrorTracker implements ErrorTrackerInterface
     protected function belongsToUser()
     {
 
-        if((int)$this->model->user_id !== (int)$this->user->id)
-        {
-            $this->responseTracker->setResult(403,
-                "Error: You are not authorized to perform this action", true);
+        if ((int)$this->model->user_id !== (int)$this->user->id) {
+            $this->responseTracker->setResult(
+                403,
+                "Error: You are not authorized to perform this action",
+                true
+            );
         }
     }
-
 }

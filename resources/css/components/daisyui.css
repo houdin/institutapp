@@ -1,0 +1,15 @@
+/* BTN */
+.btn-primary {
+    @apply bg-primary;
+}
+.btn-secondary {
+    @apply bg-secondary;
+}
+
+/* BADGE */
+.badge-primary {
+    @apply bg-primary;
+}
+.badge-secondary {
+    @apply bg-secondary;
+}

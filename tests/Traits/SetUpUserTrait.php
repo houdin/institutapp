@@ -1,5 +1,6 @@
 <?php
-use App\Models\User;
+
+use App\Models\Auth\User;
 
 /**
  * Created by PhpStorm.
@@ -29,7 +30,7 @@ trait SetUpUserTrait
         $this->destroyUsers();
         $this->user = User::create([
             'username' => 'candy',
-            'first_name'=> 'Tom',
+            'first_name' => 'Tom',
             'last_name' => 'Smith',
             'email' => 'email@company.com',
             'password' => bcrypt('secret'),
@@ -46,7 +47,7 @@ trait SetUpUserTrait
     {
         $this->secondUser = User::create([
             'username' => 'coffee',
-            'first_name'=>  'Jack',
+            'first_name' =>  'Jack',
             'last_name' => 'Adams',
             'email' => 'jack@company.com',
             'password' => 'secret',

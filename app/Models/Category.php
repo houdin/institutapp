@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Formation;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -18,11 +19,11 @@ class Category extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at', 'status', 'formations', 'tutorials', 'bundles', 'blogs', 'portfolios', 'tipstricks', 'products'
+        'created_at', 'updated_at', 'pivot', 'status', 'deleted_at',
     ];
 
     protected $appends = [
-        'parent', 'total'
+        'total'
     ];
 
     protected $guarded = [];
@@ -30,75 +31,76 @@ class Category extends Model
     public function getTotalAttribute()
     {
 
-        $count = $this->formations->count();
-        $count += $this->tutorials->count();
-        $count += $this->bundles->count();
+        $count = 0;
+        // $count = $this->formations->count();
+        // $count += $this->tutorials->count();
+        // $count += $this->bundles->count();
         $count += $this->blogs->count();
-        $count += $this->faqs->count();
-        $count += $this->portfolios->count();
-        $count += $this->tipstricks->count();
-        $count += $this->children->count();
+        // $count += $this->faqs->count();
+        // $count += $this->portfolios->count();
+        // $count += $this->tipstricks->count();
+        // $count += $this->children->count();
 
-        $count += $this->products->count();
+        // $count += $this->products->count();
 
         return $count;
     }
 
     public function formations()
     {
-        return $this->hasMany(Formation::class);
+        return $this->belongsToMany(Formation::class);
     }
 
     public function tutorials()
     {
-        return $this->hasMany(Tutorial::class);
-    }
-
-    public function bundles()
-    {
-        return $this->hasMany(Bundle::class);
+        return $this->belongsToMany(Tutorial::class);
     }
 
     public function blogs()
     {
-        return $this->hasMany(Blog::class);
+        return $this->belongsToMany(Blog::class, 'category_blog');
     }
 
     public function faqs()
     {
-        return $this->hasMany(Faq::class);
+        return $this->belongsToMany(Faq::class);
     }
 
     public function portfolios()
     {
-        return $this->hasMany(Portfolio::class);
+        return $this->belongsToMany(Portfolio::class);
     }
 
     public function tipstricks()
     {
-        return $this->hasMany(Tipstrick::class);
+        return $this->belongsToMany(Tipstrick::class);
     }
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
 
-    public function setNameAttribute($value)
+    public function name(): Attribute
     {
-        $this->attributes['name'] = ucwords($value);
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => ucwords($value),
+        );
     }
 
-    public function getParentAttribute()
+    public function parentId(): Attribute
     {
-        return $this->attributes['parent_id'];
+        return Attribute::make(
+            get: fn ($value) => $value
+        );
     }
 
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
+    // public function getParentAttribute()
+    // {
+    //     return $this->belongsTo(Category::class, 'parent_id');
+    // }
 
     public function children()
     {

@@ -5,9 +5,9 @@
  */
 
 import _ from "lodash";
-// import $ from 'jquery';
+// import $ from "jquery";
 
-window.$ = window.jQuery = require("jquery");
+// window.$ = window.jQuery = $;
 
 import axios from "axios";
 

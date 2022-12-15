@@ -24,18 +24,18 @@ class PermissionRoleTableSeeder extends Seeder
         $this->disableForeignKeys();
 
         // Create Roles
-        $admin = Role::create(['name' => config('access.users.admin_role'), 'ref' => md5(config('access.users.admin_role'))]);
-        $teacher = Role::create(['name' => 'teacher', 'ref' => md5('teacher')]);
-        $instructor = Role::create(['name' => 'instructor', 'ref' => md5('instructor')]);
-        $supplier = Role::create(['name' => 'supplier', 'ref' => md5('supplier')]);
-        $seller = Role::create(['name' => 'seller', 'ref' => md5('seller')]);
-        $staff = Role::create(['name' => 'staff', 'ref' => md5('staff')]);
+        $admin = Role::create(['name' => config('access.users.admin_role')]);
+        $teacher = Role::create(['name' => 'teacher']);
+        $instructor = Role::create(['name' => 'instructor']);
+        $supplier = Role::create(['name' => 'supplier']);
+        $seller = Role::create(['name' => 'seller']);
+        $staff = Role::create(['name' => 'staff']);
         // $designer = Role::create(['name' => 'designer']);
-        $moderator = Role::create(['name' => 'moderator', 'ref' => md5('moderator')]);
-        $customer = Role::create(['name' => 'customer', 'ref' => md5('customer')]);
-        $student = Role::create(['name' => 'student', 'ref' => md5('student')]);
-        $user = Role::create(['name' => 'user', 'ref' => md5('user')]);
-        $editor = Role::create(['name' => 'editor', 'ref' => md5('editor')]);
+        $moderator = Role::create(['name' => 'moderator']);
+        $customer = Role::create(['name' => 'customer']);
+        $student = Role::create(['name' => 'student']);
+        $user = Role::create(['name' => 'user']);
+        $editor = Role::create(['name' => 'editor']);
 
 
         $permissions = [
@@ -187,7 +187,7 @@ class PermissionRoleTableSeeder extends Seeder
 
 
         foreach ($permissions as $item) {
-            Permission::create(array_merge($item, array('ref' => md5($item['name']))));
+            Permission::create(array_merge($item));
         }
 
         //        $admin_permissions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];

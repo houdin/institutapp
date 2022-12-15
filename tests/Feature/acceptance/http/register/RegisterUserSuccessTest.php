@@ -14,9 +14,10 @@
 |   When: I submit my results
 |   Then: My account should be created
 */
+
 namespace Tests\Feature\acceptance\http\register;
 
-use App\Models\User;
+use App\Models\Auth\User;
 use Tests\Feature\acceptance\http\AbstractHttpTestClass;
 
 class RegisterUserSuccessTest extends AbstractHttpTestClass

@@ -2,7 +2,8 @@
   <!-- <slot :message="message" :errorMessage="errorMessage" :showComponents="showComponents" /> -->
   <metainfo>
     <template v-slot:title="{ content }">{{ content ? `${content} | ${$SITE_NAME}` : `${$SITE_NAME}xx` }}</template>
-    <template v-slot:description="{ content }">{{ content ? `${content} | ${$SITE_NAME}` : `${$SITE_NAME}xx` }}</template>
+    <template v-slot:description="{ content }">{{ content ? `${content} | ${$SITE_NAME}` : `${$SITE_NAME}xx`
+    }}</template>
   </metainfo>
   <div id="modal-root">
 
@@ -18,15 +19,20 @@
   <error-message v-if="showError" :error-message="errorMessage">
   </error-message>
 
-  <main :id="`${($filters.Utility.segment(1).length ? $filters.Utility.segment(1) : 'home' )}-${($filters.Utility.segments().length > 1 ? 'item' : 'page')}`" :class="'container-fluid d-flex flex-column align-items-center ' + ( $route.name!=='home' ? `${$filters.Utility.segment(1)}-${($filters.Utility.segments().length > 1 ? 'item-section' : 'page-section')}` : '') + ' _section_page_ _page_'" ref="main">
-    <breadcrumbs v-if="$route.name!=='home' " class="d-slide-small my-2" @prev-bread="routeSlide"></breadcrumbs>
-    <svg id="bg-logo-icon" class="d-slide-small" style="position: absolute; width:50rem; height:40rem; top: -2rem; color: #2a2c34;">
+  <main
+    :id="`${($filters.Utility.segment(1).length ? $filters.Utility.segment(1) : 'home')}-${($filters.Utility.segments().length > 1 ? 'item' : 'page')}`"
+    :class="'container-fluid d-flex flex-column align-items-center ' + ($route.name !== 'home' ? `${$filters.Utility.segment(1)}-${($filters.Utility.segments().length > 1 ? 'item-section' : 'page-section')}` : '') + ' _section_page_ _page_'"
+    ref="main">
+    <breadcrumbs v-if="$route.name !== 'home'" class="d-slide-small my-2" @prev-bread="routeSlide"></breadcrumbs>
+    <svg id="bg-logo-icon" class="d-slide-small"
+      style="position: absolute; width:50rem; height:40rem; top: -2rem; color: #2a2c34;">
       <use xlink:href="/sprite.svg?logo#logo-icon"></use>
     </svg>
 
     <div id="container-master" class="container d-flex flex-column" ref="container">
 
-      <app-title v-if="!showLoading && $route.meta.pageTitle" :text="$route.meta.pageTitle.title" :inverse="$route.meta.pageTitle.inverse_color" class="widget-title">
+      <app-title v-if="!showLoading && $route.meta.pageTitle" :text="$route.meta.pageTitle.title"
+        :inverse="$route.meta.pageTitle.inverse_color" class="widget-title">
         <template v-if="$route.meta.pageTitle.content" v-slot:content>
           <div class="mb-5">
             {{ $route.meta.pageTitle.content }}
@@ -56,7 +62,7 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 import { useMeta } from "vue-meta";
 
 useMeta({
@@ -144,7 +150,7 @@ onMounted(() => {
   });
 
   nextTick(() => {
-    // await $filters.Utility.promiseTimeOut();
+    // await $filters.Utility.timeOut();
     // console.log(container.value.clientHeight);
     // console.log(container);
 

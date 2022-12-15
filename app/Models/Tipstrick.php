@@ -5,14 +5,27 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Tipstrick extends Model
+class Tipstrick extends Model implements Searchable
 {
     use HasFactory;
 
     const EXCERPT_LENGTH = 100;
 
-        /**
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('blog.show', $this->slug);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
+    }
+
+    /**
      * performs a search if algolia is not used
      * comment out if algolia is used
      *
@@ -29,9 +42,9 @@ class Tipstrick extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function snipets()
@@ -41,7 +54,6 @@ class Tipstrick extends Model
 
     public function excerpt()
     {
-        return Str::limit($this->description, self::EXCERPT_LENGTH) ;
+        return Str::limit($this->description, self::EXCERPT_LENGTH);
     }
-
 }

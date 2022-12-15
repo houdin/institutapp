@@ -13,7 +13,7 @@ class CreateCertificatesTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('certificates')) {
+        if (!Schema::hasTable('certificates')) {
 
             Schema::create('certificates', function (Blueprint $table) {
                 $table->id();

@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.35.1.
+ * Generated for Laravel 9.40.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1685,6 +1685,17 @@
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
                         /** @var \App\Console\Kernel $instance */
                         $instance->bootstrap();
+        }
+                    /**
+         * Bootstrap the application without booting service providers.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function bootstrapWithoutBootingProviders()
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
+                        /** @var \App\Console\Kernel $instance */
+                        $instance->bootstrapWithoutBootingProviders();
         }
                     /**
          * Set the Artisan application instance.
@@ -4700,6 +4711,141 @@
             /**
      * 
      *
+     * @see https://carbon.nesbot.com/docs/
+     * @see https://github.com/briannesbitt/Carbon/blob/master/src/Carbon/Factory.php
+     * @method static \Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromDate($year = null, $month = null, $day = null, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second = 0, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
+     * @method static \Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
+     * @method static \Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
+     * @method static void disableHumanDiffOption($humanDiffOption)
+     * @method static void enableHumanDiffOption($humanDiffOption)
+     * @method static \Illuminate\Support\Carbon fromSerialized($value)
+     * @method static array getLastErrors()
+     * @method static \Illuminate\Support\Carbon|null getTestNow()
+     * @method static \Illuminate\Support\Carbon instance($date)
+     * @method static bool isMutable()
+     * @method static \Illuminate\Support\Carbon maxValue()
+     * @method static \Illuminate\Support\Carbon minValue()
+     * @method static \Illuminate\Support\Carbon now($tz = null)
+     * @method static \Illuminate\Support\Carbon parse($time = null, $tz = null)
+     * @method static void setHumanDiffOptions($humanDiffOptions)
+     * @method static void setTestNow($testNow = null)
+     * @method static void setUtf8($utf8)
+     * @method static \Illuminate\Support\Carbon today($tz = null)
+     * @method static \Illuminate\Support\Carbon tomorrow($tz = null)
+     * @method static void useStrictMode($strictModeEnabled = true)
+     * @method static \Illuminate\Support\Carbon yesterday($tz = null)
+     * @method static \Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
+     * @method static \Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
+     * @method static \Illuminate\Support\Carbon|null make($var)
+     * @method static \Symfony\Component\Translation\TranslatorInterface getTranslator()
+     * @method static array getAvailableLocales()
+     * @method static array getDays()
+     * @method static array getIsoUnits()
+     * @method static array getWeekendDays()
+     * @method static bool hasFormat($date, $format)
+     * @method static bool hasMacro($name)
+     * @method static bool hasRelativeKeywords($time)
+     * @method static bool hasTestNow()
+     * @method static bool isImmutable()
+     * @method static bool isModifiableUnit($unit)
+     * @method static bool isStrictModeEnabled()
+     * @method static bool localeHasDiffOneDayWords($locale)
+     * @method static bool localeHasDiffSyntax($locale)
+     * @method static bool localeHasDiffTwoDayWords($locale)
+     * @method static bool localeHasPeriodSyntax($locale)
+     * @method static bool localeHasShortUnits($locale)
+     * @method static bool setLocale($locale)
+     * @method static bool shouldOverflowMonths()
+     * @method static bool shouldOverflowYears()
+     * @method static int getHumanDiffOptions()
+     * @method static int getMidDayAt()
+     * @method static int getWeekEndsAt()
+     * @method static int getWeekStartsAt()
+     * @method static mixed executeWithLocale($locale, $func)
+     * @method static string getLocale()
+     * @method static string pluralUnit(string $unit)
+     * @method static string singularUnit(string $unit)
+     * @method static void macro($name, $macro)
+     * @method static void mixin($mixin)
+     * @method static void resetMonthsOverflow()
+     * @method static void resetToStringFormat()
+     * @method static void resetYearsOverflow()
+     * @method static void serializeUsing($callback)
+     * @method static void setMidDayAt($hour)
+     * @method static void setToStringFormat($format)
+     * @method static void setTranslator(\Symfony\Component\Translation\TranslatorInterface $translator)
+     * @method static void setWeekEndsAt($day)
+     * @method static void setWeekStartsAt($day)
+     * @method static void setWeekendDays($days)
+     * @method static void useMonthsOverflow($monthsOverflow = true)
+     * @method static void useYearsOverflow($yearsOverflow = true)
+     */ 
+        class Date {
+                    /**
+         * Use the given handler when generating dates (class name, callable, or factory).
+         *
+         * @param mixed $handler
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function use($handler)
+        {
+                        return \Illuminate\Support\DateFactory::use($handler);
+        }
+                    /**
+         * Use the default date class when generating dates.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function useDefault()
+        {
+                        \Illuminate\Support\DateFactory::useDefault();
+        }
+                    /**
+         * Execute the given callable on each date creation.
+         *
+         * @param callable $callable
+         * @return void 
+         * @static 
+         */ 
+        public static function useCallable($callable)
+        {
+                        \Illuminate\Support\DateFactory::useCallable($callable);
+        }
+                    /**
+         * Use the given date type (class) when generating dates.
+         *
+         * @param string $dateClass
+         * @return void 
+         * @static 
+         */ 
+        public static function useClass($dateClass)
+        {
+                        \Illuminate\Support\DateFactory::useClass($dateClass);
+        }
+                    /**
+         * Use the given Carbon factory when generating dates.
+         *
+         * @param object $factory
+         * @return void 
+         * @static 
+         */ 
+        public static function useFactory($factory)
+        {
+                        \Illuminate\Support\DateFactory::useFactory($factory);
+        }
+         
+    }
+            /**
+     * 
+     *
      * @see \Illuminate\Database\DatabaseManager
      * @see \Illuminate\Database\Connection
      */ 
@@ -4854,7 +5000,7 @@
                     /**
          * Return all of the created connections.
          *
-         * @return \Illuminate\Database\array<string, \Illuminate\Database\Connection>
+         * @return array<string, \Illuminate\Database\Connection> 
          * @static 
          */ 
         public static function getConnections()
@@ -9644,6 +9790,166 @@
             /**
      * 
      *
+     * @see \Illuminate\Cache\RateLimiter
+     */ 
+        class RateLimiter {
+                    /**
+         * Register a named limiter configuration.
+         *
+         * @param string $name
+         * @param \Closure $callback
+         * @return \Illuminate\Cache\RateLimiter 
+         * @static 
+         */ 
+        public static function for($name, $callback)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->for($name, $callback);
+        }
+                    /**
+         * Get the given named rate limiter.
+         *
+         * @param string $name
+         * @return \Closure 
+         * @static 
+         */ 
+        public static function limiter($name)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->limiter($name);
+        }
+                    /**
+         * Attempts to execute a callback if it's not limited.
+         *
+         * @param string $key
+         * @param int $maxAttempts
+         * @param \Closure $callback
+         * @param int $decaySeconds
+         * @return mixed 
+         * @static 
+         */ 
+        public static function attempt($key, $maxAttempts, $callback, $decaySeconds = 60)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->attempt($key, $maxAttempts, $callback, $decaySeconds);
+        }
+                    /**
+         * Determine if the given key has been "accessed" too many times.
+         *
+         * @param string $key
+         * @param int $maxAttempts
+         * @return bool 
+         * @static 
+         */ 
+        public static function tooManyAttempts($key, $maxAttempts)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->tooManyAttempts($key, $maxAttempts);
+        }
+                    /**
+         * Increment the counter for a given key for a given decay time.
+         *
+         * @param string $key
+         * @param int $decaySeconds
+         * @return int 
+         * @static 
+         */ 
+        public static function hit($key, $decaySeconds = 60)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->hit($key, $decaySeconds);
+        }
+                    /**
+         * Get the number of attempts for the given key.
+         *
+         * @param string $key
+         * @return mixed 
+         * @static 
+         */ 
+        public static function attempts($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->attempts($key);
+        }
+                    /**
+         * Reset the number of attempts for the given key.
+         *
+         * @param string $key
+         * @return mixed 
+         * @static 
+         */ 
+        public static function resetAttempts($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->resetAttempts($key);
+        }
+                    /**
+         * Get the number of retries left for the given key.
+         *
+         * @param string $key
+         * @param int $maxAttempts
+         * @return int 
+         * @static 
+         */ 
+        public static function remaining($key, $maxAttempts)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->remaining($key, $maxAttempts);
+        }
+                    /**
+         * Get the number of retries left for the given key.
+         *
+         * @param string $key
+         * @param int $maxAttempts
+         * @return int 
+         * @static 
+         */ 
+        public static function retriesLeft($key, $maxAttempts)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->retriesLeft($key, $maxAttempts);
+        }
+                    /**
+         * Clear the hits and lockout timer for the given key.
+         *
+         * @param string $key
+         * @return void 
+         * @static 
+         */ 
+        public static function clear($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        $instance->clear($key);
+        }
+                    /**
+         * Get the number of seconds until the "key" is accessible again.
+         *
+         * @param string $key
+         * @return int 
+         * @static 
+         */ 
+        public static function availableIn($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->availableIn($key);
+        }
+                    /**
+         * Clean the rate limiter key from unicode characters.
+         *
+         * @param string $key
+         * @return string 
+         * @static 
+         */ 
+        public static function cleanRateLimiterKey($key)
+        {
+                        /** @var \Illuminate\Cache\RateLimiter $instance */
+                        return $instance->cleanRateLimiterKey($key);
+        }
+         
+    }
+            /**
+     * 
+     *
      * @see \Illuminate\Routing\Redirector
      */ 
         class Redirect {
@@ -12405,6 +12711,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
      * @method static \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
+     * @method static \Illuminate\Routing\RouteRegistrar withoutScopedBindings()
      * @see \Illuminate\Routing\Router
      */ 
         class Route {
@@ -12627,13 +12934,13 @@
          *
          * @param array $attributes
          * @param \Closure|array|string $routes
-         * @return void 
+         * @return \Illuminate\Routing\Router 
          * @static 
          */ 
         public static function group($attributes, $routes)
         {
                         /** @var \Illuminate\Routing\Router $instance */
-                        $instance->group($attributes, $routes);
+                        return $instance->group($attributes, $routes);
         }
                     /**
          * Merge the given array with the last group stack.
@@ -12902,6 +13209,19 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->pushMiddlewareToGroup($group, $middleware);
+        }
+                    /**
+         * Remove the given middleware from the specified group.
+         *
+         * @param string $group
+         * @param string $middleware
+         * @return \Illuminate\Routing\Router 
+         * @static 
+         */ 
+        public static function removeMiddlewareFromGroup($group, $middleware)
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->removeMiddlewareFromGroup($group, $middleware);
         }
                     /**
          * Flush the router's middleware groups.
@@ -14297,6 +14617,18 @@
                         return $instance->getHandler();
         }
                     /**
+         * Set the underlying session handler implementation.
+         *
+         * @param \SessionHandlerInterface $handler
+         * @return void 
+         * @static 
+         */ 
+        public static function setHandler($handler)
+        {
+                        /** @var \Illuminate\Session\Store $instance */
+                        $instance->setHandler($handler);
+        }
+                    /**
          * Determine if the session handler needs a request.
          *
          * @return bool 
@@ -14826,6 +15158,18 @@
         {
                         /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->size($path);
+        }
+                    /**
+         * Get the checksum for a file.
+         *
+         * @return string|false 
+         * @throws UnableToProvideChecksum
+         * @static 
+         */ 
+        public static function checksum($path, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->checksum($path, $options);
         }
                     /**
          * Get the mime-type of a given file.
@@ -16434,6 +16778,65 @@
                         $instance->callCreator($view);
         }
                     /**
+         * Start injecting content into a fragment.
+         *
+         * @param string $fragment
+         * @return void 
+         * @static 
+         */ 
+        public static function startFragment($fragment)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        $instance->startFragment($fragment);
+        }
+                    /**
+         * Stop injecting content into a fragment.
+         *
+         * @return string 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function stopFragment()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->stopFragment();
+        }
+                    /**
+         * Get the contents of a fragment.
+         *
+         * @param string $name
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getFragment($name, $default = null)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getFragment($name, $default);
+        }
+                    /**
+         * Get the entire array of rendered fragments.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getFragments()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->getFragments();
+        }
+                    /**
+         * Flush all of the fragments.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushFragments()
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        $instance->flushFragments();
+        }
+                    /**
          * Start injecting content into a section.
          *
          * @param string $section
@@ -16733,6 +17136,246 @@
         }
          
     }
+            /**
+     * 
+     *
+     * @see \Illuminate\Foundation\Vite
+     */ 
+        class Vite {
+                    /**
+         * Get the preloaded assets.
+         *
+         * @var array
+         * @static 
+         */ 
+        public static function preloadedAssets()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->preloadedAssets();
+        }
+                    /**
+         * Get the Content Security Policy nonce applied to all generated tags.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function cspNonce()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->cspNonce();
+        }
+                    /**
+         * Generate or set a Content Security Policy nonce to apply to all generated tags.
+         *
+         * @param \Illuminate\Foundation\?string $nonce
+         * @return string 
+         * @static 
+         */ 
+        public static function useCspNonce($nonce = null)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useCspNonce($nonce);
+        }
+                    /**
+         * Use the given key to detect integrity hashes in the manifest.
+         *
+         * @param string|false $key
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useIntegrityKey($key)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useIntegrityKey($key);
+        }
+                    /**
+         * Set the Vite entry points.
+         *
+         * @param array $entryPoints
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function withEntryPoints($entryPoints)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->withEntryPoints($entryPoints);
+        }
+                    /**
+         * Get the Vite "hot" file path.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function hotFile()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->hotFile();
+        }
+                    /**
+         * Set the Vite "hot" file path.
+         *
+         * @param string $path
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useHotFile($path)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useHotFile($path);
+        }
+                    /**
+         * Set the Vite build directory.
+         *
+         * @param string $path
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useBuildDirectory($path)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useBuildDirectory($path);
+        }
+                    /**
+         * Use the given callback to resolve attributes for script tags.
+         *
+         * @param \Illuminate\Foundation\(callable(string,  string, ?array, ?array): array)|array  $attributes
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useScriptTagAttributes($attributes)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useScriptTagAttributes($attributes);
+        }
+                    /**
+         * Use the given callback to resolve attributes for style tags.
+         *
+         * @param \Illuminate\Foundation\(callable(string,  string, ?array, ?array): array)|array  $attributes
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function useStyleTagAttributes($attributes)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->useStyleTagAttributes($attributes);
+        }
+                    /**
+         * Use the given callback to resolve attributes for preload tags.
+         *
+         * @param \Illuminate\Foundation\(callable(string,  string, ?array, ?array): array)|array  $attributes
+         * @return \Illuminate\Foundation\Vite 
+         * @static 
+         */ 
+        public static function usePreloadTagAttributes($attributes)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->usePreloadTagAttributes($attributes);
+        }
+                    /**
+         * Generate React refresh runtime script.
+         *
+         * @return \Illuminate\Support\HtmlString|void 
+         * @static 
+         */ 
+        public static function reactRefresh()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->reactRefresh();
+        }
+                    /**
+         * Get the URL for an asset.
+         *
+         * @param string $asset
+         * @param string|null $buildDirectory
+         * @return string 
+         * @static 
+         */ 
+        public static function asset($asset, $buildDirectory = null)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->asset($asset, $buildDirectory);
+        }
+                    /**
+         * Get a unique hash representing the current manifest, or null if there is no manifest.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function manifestHash($buildDirectory = null)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->manifestHash($buildDirectory);
+        }
+                    /**
+         * Determine if the HMR server is running.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isRunningHot()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->isRunningHot();
+        }
+                    /**
+         * Get the Vite tag content as a string of HTML.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function toHtml()
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->toHtml();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Foundation\Vite::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Foundation\Vite::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Foundation\Vite::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Foundation\Vite::flushMacros();
+        }
+         
+    }
      
 }
 
@@ -16742,6 +17385,13 @@
      *
      */ 
         class Arr {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Js {
          
     }
             /**
@@ -17469,6 +18119,34 @@
                         return $instance->getHtmlBuilder();
         }
                     /**
+         * 
+         *
+         * @param string $engine
+         * @param string $parent
+         * @return void 
+         * @throws \Yajra\DataTables\Exceptions\Exception
+         * @static 
+         */ 
+        public static function validateDataTable($engine, $parent)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        $instance->validateDataTable($engine, $parent);
+        }
+                    /**
+         * 
+         *
+         * @param string $engine
+         * @param string $parent
+         * @return void 
+         * @throws \Yajra\DataTables\Exceptions\Exception
+         * @static 
+         */ 
+        public static function throwInvalidEngineException($engine, $parent)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        $instance->throwInvalidEngineException($engine, $parent);
+        }
+                    /**
          * Register a custom macro.
          *
          * @param string $name
@@ -17513,324 +18191,6 @@
         public static function flushMacros()
         {
                         \Yajra\DataTables\DataTables::flushMacros();
-        }
-         
-    }
-     
-}
-
-    namespace Chumper\Zipper\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class Zipper {
-                    /**
-         * Create a new zip Archive if the file does not exists
-         * opens a zip archive if the file exists
-         *
-         * @param $pathToFile string The file to open
-         * @param \Chumper\Zipper\Repositories\RepositoryInterface|string $type The type of the archive, defaults to zip, possible are zip, phar
-         * @throws \RuntimeException
-         * @throws \Exception
-         * @throws \InvalidArgumentException
-         * @return \Chumper\Zipper\Zipper Zipper instance
-         * @static 
-         */ 
-        public static function make($pathToFile, $type = 'zip')
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->make($pathToFile, $type);
-        }
-                    /**
-         * Create a new zip archive or open an existing one
-         *
-         * @param $pathToFile
-         * @throws \Exception
-         * @return \Chumper\Zipper\Zipper 
-         * @static 
-         */ 
-        public static function zip($pathToFile)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->zip($pathToFile);
-        }
-                    /**
-         * Create a new phar file or open one
-         *
-         * @param $pathToFile
-         * @throws \Exception
-         * @return \Chumper\Zipper\Zipper 
-         * @static 
-         */ 
-        public static function phar($pathToFile)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->phar($pathToFile);
-        }
-                    /**
-         * Create a new rar file or open one
-         *
-         * @param $pathToFile
-         * @throws \Exception
-         * @return \Chumper\Zipper\Zipper 
-         * @static 
-         */ 
-        public static function rar($pathToFile)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->rar($pathToFile);
-        }
-                    /**
-         * Extracts the opened zip archive to the specified location <br/>
-         * you can provide an array of files and folders and define if they should be a white list
-         * or a black list to extract. By default this method compares file names using "string starts with" logic
-         *
-         * @param $path string The path to extract to
-         * @param array $files An array of files
-         * @param int $methodFlags The Method the files should be treated
-         * @throws \Exception
-         * @static 
-         */ 
-        public static function extractTo($path, $files = [], $methodFlags = 2)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->extractTo($path, $files, $methodFlags);
-        }
-                    /**
-         * Extracts matching files/folders from the opened zip archive to the specified location.
-         *
-         * @param string $extractToPath The path to extract to
-         * @param string $regex regular expression used to match files. See @link http://php.net/manual/en/reference.pcre.pattern.syntax.php
-         * @throws \InvalidArgumentException
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function extractMatchingRegex($extractToPath, $regex)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->extractMatchingRegex($extractToPath, $regex);
-        }
-                    /**
-         * Gets the content of a single file if available
-         *
-         * @param $filePath string The full path (including all folders) of the file in the zip
-         * @throws \Exception
-         * @return mixed returns the content or throws an exception
-         * @static 
-         */ 
-        public static function getFileContent($filePath)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getFileContent($filePath);
-        }
-                    /**
-         * Add one or multiple files to the zip.
-         *
-         * @param $pathToAdd array|string An array or string of files and folders to add
-         * @param null|mixed $fileName
-         * @return \Chumper\Zipper\Zipper Zipper instance
-         * @static 
-         */ 
-        public static function add($pathToAdd, $fileName = null)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->add($pathToAdd, $fileName);
-        }
-                    /**
-         * Add an empty directory
-         *
-         * @param $dirName
-         * @return \Zipper 
-         * @static 
-         */ 
-        public static function addEmptyDir($dirName)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->addEmptyDir($dirName);
-        }
-                    /**
-         * Add a file to the zip using its contents
-         *
-         * @param $filename string The name of the file to create
-         * @param $content string The file contents
-         * @return \Chumper\Zipper\Zipper Zipper instance
-         * @static 
-         */ 
-        public static function addString($filename, $content)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->addString($filename, $content);
-        }
-                    /**
-         * Gets the status of the zip.
-         *
-         * @return int The status of the internal zip file
-         * @static 
-         */ 
-        public static function getStatus()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getStatus();
-        }
-                    /**
-         * Remove a file or array of files and folders from the zip archive
-         *
-         * @param $fileToRemove array|string The path/array to the files in the zip
-         * @return \Chumper\Zipper\Zipper Zipper instance
-         * @static 
-         */ 
-        public static function remove($fileToRemove)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->remove($fileToRemove);
-        }
-                    /**
-         * Returns the path of the current zip file if there is one.
-         *
-         * @return string The path to the file
-         * @static 
-         */ 
-        public static function getFilePath()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getFilePath();
-        }
-                    /**
-         * Sets the password to be used for decompressing
-         *
-         * @param $password
-         * @return bool 
-         * @static 
-         */ 
-        public static function usePassword($password)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->usePassword($password);
-        }
-                    /**
-         * Closes the zip file and frees all handles
-         *
-         * @static 
-         */ 
-        public static function close()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->close();
-        }
-                    /**
-         * Sets the internal folder to the given path.<br/>
-         * Useful for extracting only a segment of a zip file.
-         *
-         * @param $path
-         * @return \Chumper\Zipper\Zipper 
-         * @static 
-         */ 
-        public static function folder($path)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->folder($path);
-        }
-                    /**
-         * Resets the internal folder to the root of the zip file.
-         *
-         * @return \Chumper\Zipper\Zipper 
-         * @static 
-         */ 
-        public static function home()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->home();
-        }
-                    /**
-         * Deletes the archive file
-         *
-         * @static 
-         */ 
-        public static function delete()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->delete();
-        }
-                    /**
-         * Get the type of the Archive
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getArchiveType()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getArchiveType();
-        }
-                    /**
-         * Get the current internal folder pointer
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getCurrentFolderPath()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getCurrentFolderPath();
-        }
-                    /**
-         * Checks if a file is present in the archive
-         *
-         * @param $fileInArchive
-         * @return bool 
-         * @static 
-         */ 
-        public static function contains($fileInArchive)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->contains($fileInArchive);
-        }
-                    /**
-         * 
-         *
-         * @return \Chumper\Zipper\Repositories\RepositoryInterface 
-         * @static 
-         */ 
-        public static function getRepository()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getRepository();
-        }
-                    /**
-         * 
-         *
-         * @return \Illuminate\Filesystem\Filesystem 
-         * @static 
-         */ 
-        public static function getFileHandler()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getFileHandler();
-        }
-                    /**
-         * Gets the path to the internal folder
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getInternalPath()
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->getInternalPath();
-        }
-                    /**
-         * List all files that are within the archive
-         *
-         * @param string|null $regexFilter regular expression to filter returned files/folders. See @link http://php.net/manual/en/reference.pcre.pattern.syntax.php
-         * @throws \RuntimeException
-         * @return array 
-         * @static 
-         */ 
-        public static function listFiles($regexFilter = null)
-        {
-                        /** @var \Chumper\Zipper\Zipper $instance */
-                        return $instance->listFiles($regexFilter);
         }
          
     }
@@ -19870,64 +20230,6 @@
      
 }
 
-    namespace Gerardojbaez\Messenger\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class Messenger {
-                    /**
-         * Set Message.
-         *
-         * @param string
-         * @return \Gerardojbaez\Messenger\Messenger 
-         * @static 
-         */ 
-        public static function message($message)
-        {
-                        /** @var \Gerardojbaez\Messenger\Messenger $instance */
-                        return $instance->message($message);
-        }
-                    /**
-         * Message sender.
-         *
-         * @param \App\Models\User
-         * @return \Gerardojbaez\Messenger\Messenger 
-         * @static 
-         */ 
-        public static function from($from)
-        {
-                        /** @var \Gerardojbaez\Messenger\Messenger $instance */
-                        return $instance->from($from);
-        }
-                    /**
-         * Message recipients.
-         *
-         * @param mixed
-         * @return \Gerardojbaez\Messenger\Messenger 
-         * @static 
-         */ 
-        public static function to($to)
-        {
-                        /** @var \Gerardojbaez\Messenger\Messenger $instance */
-                        return $instance->to($to);
-        }
-                    /**
-         * Send message.
-         *
-         * @return \Gerardojbaez\Messenger\Contracts\MessageInterface 
-         * @static 
-         */ 
-        public static function send()
-        {
-                        /** @var \Gerardojbaez\Messenger\Messenger $instance */
-                        return $instance->send();
-        }
-         
-    }
-     
-}
-
     namespace Jenssegers\Agent\Facades { 
             /**
      * 
@@ -20176,7 +20478,7 @@
          *
          * @param string $header The name of the header to retrieve. Can be HTTP compliant such as
          *                       "User-Agent" or "X-Device-User-Agent" or can be php-esque with the
-         *                       all-caps, HTTP_ prefixed, underscore seperated awesomeness.
+         *                       all-caps, HTTP_ prefixed, underscore separated awesomeness.
          * @return string|null The value of the header.
          * @static 
          */ 
@@ -20845,7 +21147,7 @@
                     /**
          * Set the paper size (default A4)
          *
-         * @param string|\Barryvdh\DomPDF\array<string> $paper
+         * @param string|array<string> $paper
          * @static 
          */ 
         public static function setPaper($paper, $orientation = 'portrait')
@@ -20980,7 +21282,7 @@
                     /**
          * 
          *
-         * @param \Barryvdh\DomPDF\array<string> $pc
+         * @param array<string> $pc
          * @static 
          */ 
         public static function setEncryption($password, $ownerpassword = '', $pc = [])
@@ -20988,6 +21290,20 @@
                         /** @var \Barryvdh\DomPDF\PDF $instance */
                         return $instance->setEncryption($password, $ownerpassword, $pc);
         }
+         
+    }
+     
+}
+
+    namespace PHPColorExtractor { 
+            /**
+     * A simple class to extract the main colour palette of an image
+     * 
+     * Class PHPColorExtractor
+     *
+     * @package PHPColorExtractor
+     */ 
+        class PHPColorExtractor {
          
     }
      
@@ -21190,7 +21506,7 @@
                     /**
          * 
          *
-         * @return \Spatie\FlareClient\array<int, FlareMiddleware|class-string<FlareMiddleware>>
+         * @return array<int, FlareMiddleware|class-string<FlareMiddleware>> 
          * @static 
          */ 
         public static function getMiddleware()
@@ -21251,7 +21567,7 @@
                     /**
          * 
          *
-         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|\Spatie\FlareClient\array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware> $middleware
+         * @param \Spatie\FlareClient\FlareMiddleware\FlareMiddleware|array<FlareMiddleware>|\Spatie\FlareClient\class-string<FlareMiddleware> $middleware
          * @return \Spatie\FlareClient\Flare 
          * @static 
          */ 
@@ -21263,7 +21579,7 @@
                     /**
          * 
          *
-         * @return \Spatie\FlareClient\array<int,FlareMiddleware|\Spatie\FlareClient\class-string<FlareMiddleware>> 
+         * @return array<int,FlareMiddleware|class-string<FlareMiddleware>> 
          * @static 
          */ 
         public static function getMiddlewares()
@@ -21423,7 +21739,7 @@
          *
          * @param string $groupName
          * @param mixed $default
-         * @return \Spatie\FlareClient\array<int, mixed>
+         * @return array<int, mixed> 
          * @static 
          */ 
         public static function getGroup($groupName = 'context', $default = [])
@@ -21556,6 +21872,35 @@
         }
          
     }
+            /**
+     * 
+     *
+     */ 
+        class RedirectResponse {
+                    /**
+         * 
+         *
+         * @see \Laravel\Jetstream\JetstreamServiceProvider::boot()
+         * @param mixed $message
+         * @static 
+         */ 
+        public static function banner($message)
+        {
+                        return \Illuminate\Http\RedirectResponse::banner($message);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Jetstream\JetstreamServiceProvider::boot()
+         * @param mixed $message
+         * @static 
+         */ 
+        public static function dangerBanner($message)
+        {
+                        return \Illuminate\Http\RedirectResponse::dangerBanner($message);
+        }
+         
+    }
      
 }
 
@@ -21659,6 +22004,7 @@ namespace  {
             class Config extends \Illuminate\Support\Facades\Config {}
             class Cookie extends \Illuminate\Support\Facades\Cookie {}
             class Crypt extends \Illuminate\Support\Facades\Crypt {}
+            class Date extends \Illuminate\Support\Facades\Date {}
             class DB extends \Illuminate\Support\Facades\DB {}
             class Eloquent extends \Illuminate\Database\Eloquent\Model {             
                 /**
@@ -23326,7 +23672,7 @@ namespace  {
                 /**
              * Set the table which the query is targeting.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $table
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $table
              * @param string|null $as
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -24840,6 +25186,20 @@ namespace  {
             }
              
                 /**
+             * Get a single expression value from the first result of a query.
+             *
+             * @param string $expression
+             * @param array $bindings
+             * @return mixed 
+             * @static 
+             */ 
+            public static function rawValue($expression, $bindings = [])
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->rawValue($expression, $bindings);
+            }
+             
+                /**
              * Get the count of the total records for the paginator.
              *
              * @param array $columns
@@ -25377,12 +25737,14 @@ namespace  {
             class Gate extends \Illuminate\Support\Facades\Gate {}
             class Hash extends \Illuminate\Support\Facades\Hash {}
             class Http extends \Illuminate\Support\Facades\Http {}
+            class Js extends \Illuminate\Support\Js {}
             class Lang extends \Illuminate\Support\Facades\Lang {}
             class Log extends \Illuminate\Support\Facades\Log {}
             class Mail extends \Illuminate\Support\Facades\Mail {}
             class Notification extends \Illuminate\Support\Facades\Notification {}
             class Password extends \Illuminate\Support\Facades\Password {}
             class Queue extends \Illuminate\Support\Facades\Queue {}
+            class RateLimiter extends \Illuminate\Support\Facades\RateLimiter {}
             class Redirect extends \Illuminate\Support\Facades\Redirect {}
             class Request extends \Illuminate\Support\Facades\Request {}
             class Response extends \Illuminate\Support\Facades\Response {}
@@ -25394,9 +25756,9 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class Vite extends \Illuminate\Support\Facades\Vite {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class DataTables extends \Yajra\DataTables\Facades\DataTables {}
-            class Zipper extends \Chumper\Zipper\Facades\Zipper {}
             class GeoIP extends \Torann\GeoIP\Facades\GeoIP {}
             class Active extends \HieuLe\Active\Facades\Active {}
             class Gravatar extends \Creativeorange\Gravatar\Facades\Gravatar {}
@@ -25405,10 +25767,10 @@ namespace  {
             class Html extends \Spatie\Html\Facades\Html {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Excel extends \Maatwebsite\Excel\Facades\Excel {}
-            class Messenger extends \Gerardojbaez\Messenger\Facades\Messenger {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
             class Cart extends \Darryldecode\Cart\Facades\CartFacade {}
             class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}
+            class ColorExtractor extends \PHPColorExtractor\PHPColorExtractor {}
             class ExportLocalization extends \KgBot\LaravelLocalization\Facades\ExportLocalizations {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Uuid extends \Webpatser\Uuid\Uuid {}

@@ -17,7 +17,8 @@
     <div class="card-body">
       <h5 class="card-title">{{ trans.get('comments::comments.authentication_required')}}</h5>
       <p class="card-text">{{ trans.get('comments::comments.you_must_login_to_post_a_comment') }}</p>
-      <router-link :to="{ name:'login'}" class="btn btn-primary">{{ trans.get('comments::comments.log_in')}}</router-link>
+      <router-link :to="{ name:'logi n'}" class="btn btn-primary">{{ trans.get('comments::comments.log_in')}}
+      </router-link>
     </div>
   </div>
 
@@ -27,7 +28,8 @@
     <template v-for="comments in grouped_comments">
       <!-- <template v-if="comment_id"> -->
 
-      <one-comment v-for="comment in comments" :key="comment.id" :comment="comment" :grp-comments="grouped_comments" :max-indentation-level="3"></one-comment>
+      <one-comment v-for="comment in comments" :key="comment.id" :comment="comment" :grp-comments="grouped_comments"
+        :max-indentation-level="3"></one-comment>
       <!-- </template> -->
     </template>
 
@@ -35,7 +37,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { inject, ref, reactive } = require("@vue/runtime-core");
 
 const $filters = inject("$filters");

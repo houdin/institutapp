@@ -26,8 +26,7 @@ class SnipetFactory extends Factory
         return [
             'title' => $this->faker->sentence(7),
             'language' => $lang[rand(0, 3)],
-            'content' => $this->faker->text(300),
-            'category_id' => rand(1, 10)
+            'content' => $this->faker->text(300)
         ];
     }
 }

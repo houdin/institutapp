@@ -10,6 +10,7 @@ use App\Models\Formation;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use App\Http\Traits\FileUploadTrait;
+use App\Models\Tag;
 
 class FormationSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class FormationSeeder extends Seeder
      *
      * @return void
      */
-
+    public $count = 30;
 
     public function run()
     {
@@ -30,12 +31,17 @@ class FormationSeeder extends Seeder
 
         // });
 
+
         //Creating Formation
-        Formation::factory(30)->create()->each(function ($formation) {
+        Formation::factory($this->count)->create()->each(function ($formation) {
 
-            $category = Category::inRandomOrder()->first();
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
 
-            $formation->category()->associate($category);
+            $tags = Tag::inRandomOrder()->take(rand(1, 7))->pluck('id')->toArray();
+
+            $formation->categories()->attach($categories);
+
+            $formation->tags()->attach($tags);
 
             $formation->teachers()->sync([2]);
             // dd($formation->id);
@@ -125,43 +131,6 @@ class FormationSeeder extends Seeder
 
             foreach ($order->items as $orderItem) {
                 $orderItem->item->students()->attach(3);
-            }
-        }
-
-
-        //Creating Bundles
-        \App\Models\Bundle::factory(10)->create()->each(function ($bundle) {
-            $bundle->user_id = 2;
-            $bundle->save();
-            $bundle->formations()->sync([rand(1, 30), rand(1, 30), rand(1, 30)]);
-        });
-
-
-        $bundles = \App\Models\Bundle::get()->take(2);
-
-        foreach ($bundles as $bundle) {
-            $order = new \App\Models\Order();
-            $order->user_id = 3;
-            $order->reference_no = Str::random(8);
-            $order->amount = $bundle->price;
-            $order->status = 1;
-            $order->save();
-
-            $order->items()->create([
-                'item_id' => $bundle->id,
-                'item_type' => get_class($bundle),
-                'price' => $bundle->price
-            ]);
-            generateInvoice($order);
-
-            foreach ($order->items as $orderItem) {
-                //Bundle Entries
-                if ($orderItem->item_type == \App\Models\Bundle::class) {
-                    foreach ($orderItem->item->formations as $formation) {
-                        $formation->students()->attach($order->user_id);
-                    }
-                }
-                $orderItem->item->students()->attach($order->user_id);
             }
         }
     }

@@ -74,11 +74,11 @@ class ResetPasswordTest extends TestCase
 
         $response = $this->followingRedirects()
             ->post('password/reset', [
-            'token' => $token,
-            'email' => 'john@example.com',
-            'password' => 'secret',
-            'password_confirmation' => 'secret',
-        ]);
+                'token' => $token,
+                'email' => 'john@example.com',
+                'password' => 'secret',
+                'password_confirmation' => 'secret',
+            ]);
 
         $this->assertContains(__('auth.password_rules'), $response->content());
     }

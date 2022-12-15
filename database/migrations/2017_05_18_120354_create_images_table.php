@@ -17,9 +17,9 @@ class CreateImagesTable extends Migration
             'images',
             function (Blueprint $table) {
                 // $table->id();
-                // $table->string('path');
                 // $table->string('thumbnail')->nullable();
                 $table->id();
+                $table->string('path')->nullable();
                 $table->nullableMorphs('model');
                 $table->string('name')->nullable();
                 $table->text('url')->nullable();
@@ -28,6 +28,7 @@ class CreateImagesTable extends Migration
                 $table->string('extension')->nullable();
                 $table->json('colors')->nullable();
                 $table->unsignedInteger('size')->nullable();
+                $table->softDeletes();
                 $table->timestamps();
             }
         );

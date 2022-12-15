@@ -14,9 +14,10 @@
 |   When: when the browser posts to user-email-taken
 |   Then: it will return either true or false
 */
+
 namespace Tests\Feature\acceptance\http\register;
 
-use App\Models\User;
+use App\Models\Auth\User;
 use Tests\Feature\acceptance\http\AbstractHttpAjaxTestClass;
 
 class CheckEmailTest extends AbstractHttpAjaxTestClass

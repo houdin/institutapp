@@ -9,12 +9,15 @@
         <div class="nav-menu ul-li">
           <ul v-if="$laravel.app.custom_menus">
 
-            <li v-for="(value, index) in $laravel.app.custom_menus" :key="index" class="menu-item-has-children ul-li-block">
+            <li v-for="(value, index) in   $laravel.app.custom_menus" :key="index"
+              class="menu-item-has-children ul-li-block">
 
               <template v-if="typeof value == 'object'">
-                <a href="#!" :class="{'nav-link' : true, 'router-link-active router-link-exact-active' : isActive(index, $route.path)  }">{{index}}</a>
+                <a href="#!"
+                  :class="{'nav-link' : true, 'router-link-active router-link-exact-active' : isActive(index, $route.path)  }">{{index}}</a>
                 <ul class="sub-menu">
-                  <nav-dropdown v-for="(item, index2) in value" :key="index2" :item="item" :label="index2" :home="$laravel.urls.index">
+                  <nav-dropdown v-for="(item, index2) in   value" :key="index2" :item="item" :label="index2"
+                    :home="$laravel.urls.index">
                   </nav-dropdown>
                 </ul>
               </template>
@@ -29,18 +32,22 @@
 
       </div>
       <right-menu-header class="d-flex"></right-menu-header>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobile-menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobile-menu"
+        aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div v-click-outside="hide" id="mobile-menu" class="collapse navbar-collapse">
         <div class="nav-menu mobile ul-li-flex">
           <ul v-if="$laravel.app.custom_menus">
-            <li v-for="(value, index) in $laravel.app.custom_menus" :key="index" class="menu-item-has-children ul-li-flex">
+            <li v-for="(value, index) in   $laravel.app.custom_menus" :key="index"
+              class="menu-item-has-children ul-li-flex">
               <template v-if="typeof value == 'object'">
-                <a href="#!" :class="{'nav-link' : true, 'router-link-active router-link-exact-active' : isActive(index, $route.path)  }">{{index}}</a>
+                <a href="#!"
+                  :class="{'nav-link' : true, 'router-link-active router-link-exact-active' : isActive(index, $route.path)  }">{{index}}</a>
                 <ul class="sub-menu">
-                  <nav-dropdown v-for="(item, index2) in value" :key="index2" :item="item" :label="index2" :home="$laravel.urls.index">
+                  <nav-dropdown v-for="(item, index2) in value" :key="index2" :item="item" :label="index2"
+                    :home="$laravel.urls.index">
                   </nav-dropdown>
                 </ul>
               </template>
@@ -61,7 +68,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 const {
   watch,
   ref,

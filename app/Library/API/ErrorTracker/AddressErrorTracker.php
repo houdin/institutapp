@@ -68,11 +68,12 @@ class AddressErrorTracker extends AbstractErrorTracker
      */
     protected function addressExists()
     {
-        if(!$this->model->hasResult())
-        {
-            $this->responseTracker->setResult(422,
+        if (!$this->model->hasResult()) {
+            $this->responseTracker->setResult(
+                422,
                 "Error: there is no address in your account that matches the one you provided!",
-                true);
+                true
+            );
         }
     }
 }

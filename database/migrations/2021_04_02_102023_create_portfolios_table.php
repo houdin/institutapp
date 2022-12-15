@@ -24,6 +24,7 @@ class CreatePortfoliosTable extends Migration
             $table->text('meta_keywords')->nullable();
             $table->integer('published')->default(0);
             $table->date('date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

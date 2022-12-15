@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Http\Traits\FileUploadTrait;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use App\Http\Traits\FileUploadTrait;
+use App\Models\Tag;
 
 class ProductTableSeeder extends Seeder
 {
@@ -24,8 +27,10 @@ class ProductTableSeeder extends Seeder
 
         foreach ($products as $product) {
 
-            $category = \App\Models\Category::inRandomOrder()->first();
-            $supplier = \App\Models\Supplier::inRandomOrder()->first();
+            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray();
+            $tags = Tag::inRandomOrder()->take(rand(1, 7))->pluck('id')->toArray();
+
+            $supplier = Supplier::inRandomOrder()->first();
             $tax = \App\Models\Tax::inRandomOrder()->first();
 
             $name = 'product_' . rand(1, 10) . '.jpg';
@@ -50,7 +55,6 @@ class ProductTableSeeder extends Seeder
                 'title' => $product['name'],
                 'slug' => Str::slug($product['name']),
                 // 'image_id' => $image->id,
-                'category_id' => $category->id,
                 // 'tax_id' => $tax->id,
                 'price' => $product['price'],
                 'weight' => $product['weight'],
@@ -58,6 +62,9 @@ class ProductTableSeeder extends Seeder
                 'vendor_id' => $supplier->id,
                 'published' => rand(0, 1)
             ]);
+
+            $product->categories()->attach($categories);
+            $product->tags()->attach($tags);
 
             $product->image()->save($image);
         }

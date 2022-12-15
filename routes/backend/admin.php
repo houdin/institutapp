@@ -25,7 +25,6 @@ use App\Http\Controllers\Backend\Admin\ConfigController;
 
 use App\Http\Controllers\Backend\Admin\SliderController;
 use App\Http\Controllers\Backend\Admin\StatesController;
-use App\Http\Controllers\Backend\Admin\BundlesController;
 use App\Http\Controllers\Backend\Admin\InvoiceController;
 use App\Http\Controllers\Backend\Admin\ModulesController;
 use App\Http\Controllers\Backend\Admin\PremiumController;
@@ -53,8 +52,13 @@ use App\Http\Controllers\ImageController;
  * All route names are prefixed with 'admin.'.
  */
 
+// Route::backlist(function () {
+
+
 //===== General Routes =====//
-Route::redirect('/', '/user/dashboard', 301);
+
+// Route::redirect('/', '/user/dashboard', 301);
+
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
@@ -275,14 +279,7 @@ Route::post('tutorial-save-sequence', [TutorialsController::class, 'saveSequence
 Route::get('tutorial-publish/{id}', [TutorialsController::class, 'publish'])->name('tutorials.publish');
 
 
-//===== Bundles Routes =====//
-Route::resource('bundles', BundlesController::class);
-Route::get('get-bundles-data', [BundlesController::class, 'getData'])->name('bundles.get_data');
-Route::post('bundles_mass_destroy', [BundlesController::class, 'massDestroy'])->name('bundles.mass_destroy');
-Route::post('bundles_restore/{id}', [BundlesController::class, 'restore'])->name('bundles.restore');
-Route::delete('bundles_perma_del/{id}', [BundlesController::class, 'perma_del'])->name('bundles.perma_del');
-Route::post('bundle-save-sequence', [BundlesController::class, 'saveSequence'])->name('bundles.saveSequence');
-Route::get('bundle-publish/{id}', [BundlesController::class, 'publish'])->name('bundles.publish');
+
 
 
 //===== Modules Routes =====//
@@ -379,3 +376,4 @@ Route::group(['prefix' => 'blog'], function () {
 Route::resource('blogs', BlogController::class);
 Route::get('get-blogs-data', [BlogController::class, 'getData'])->name('blogs.get_data');
 Route::post('blogs_mass_destroy', [BlogController::class, 'massDestroy'])->name('blogs.mass_destroy');
+// });

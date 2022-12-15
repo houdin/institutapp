@@ -1,5 +1,5 @@
 <template>
-  <!-- @if($errors->any())
+    <!-- @if($errors->any())
     <div class="alert alert-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -73,7 +73,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const props = defineProps(["message"]);

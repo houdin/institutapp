@@ -127,7 +127,7 @@ class MessageThread extends Model implements MessageThreadInterface
 
         // If message date is greater than the
         // last_read, the message is unread.
-        return $this->messages->filter(function ($msg, $key) use ($last_read,$user_id) {
+        return $this->messages->filter(function ($msg, $key) use ($last_read, $user_id) {
             // Exclude messages that were sent
             // by this user.
             if ($user_id == $msg->sender_id) {
@@ -154,7 +154,7 @@ class MessageThread extends Model implements MessageThreadInterface
      * relatios must be loaded when working
      * with multiple results!
      *
-     * @return \App\Models\User|null
+     * @return \App\Models\Auth\User|null
      */
     public function getCreatorAttribute()
     {
@@ -180,7 +180,7 @@ class MessageThread extends Model implements MessageThreadInterface
             $query->select('thread_id')
                 ->whereIn('user_id', $participants)
                 ->groupBy('thread_id')
-                ->havingRaw('COUNT(thread_id) = '.count($participants));
+                ->havingRaw('COUNT(thread_id) = ' . count($participants));
         });
     }
 }

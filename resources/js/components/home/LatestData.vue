@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-lg-4 col-md-4 col-sm-6">
-        <latest-tutorials v-if="homeData.tutorials" :tutorials="homeData.tutorials"></latest-tutorials>
+        <latest-tutorials v-if="homeData.tutorials" :tutorials="homeData.tut orials"></latest-tutorials>
       </div>
 
       <div class="col-lg-4 col-sm-6 col-md-4 pt-md-4 pt-lg-0 col-sm-12">
@@ -24,7 +24,7 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 const { onMounted, ref, inject } = require("@vue/runtime-core");
 
 const homeData = inject("homeData");

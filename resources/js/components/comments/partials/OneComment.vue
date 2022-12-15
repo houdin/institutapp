@@ -8,24 +8,31 @@
   <div :id="'comment-' + comment.id" class="media">
     <img class="mr-3" src="/assets/images/user-default.jpg?s=64" :alt="comment.commenter.full_name + ' Avatar'">
     <div class="media-body">
-      <h5 class="mt-0 mb-1">{{ comment.commenter.full_name }} <small class="text-muted">- {{ $date.formatDistance(new Date(comment.created_at), new Date()) }}</small></h5>
+      <h5 class="mt-0 mb-1">{{ comment.commenter.full_name }} <small class="text-muted">- {{ $date.formatDistance(new
+      Date(comment.created_at), new Date()) }}</small></h5>
       <div style="white-space: pre-wrap;">{{ comment.comment }}</div>
 
       <div>
         <!-- @can('reply-to-comment', $comment) -->
-        <button v-if="permissions.reply_to_comment === true" data-toggle="modal" data-target="#reply-modal-{{ $comment.id }}" class="btn btn-sm btn-link text-uppercase">@lang('comments::comments.reply')</button>
+        <button v-if="permissions.reply_to_comment === true" data-toggle="modal"
+          data-target="#reply-modal-{{ $comment.id }}"
+          class="btn btn-sm btn-link text-uppercase">@lang('comments::comments.reply')</button>
         <!-- @can('edit-comment', $comment) -->
-        <button v-if="permissions.edit_comment === true" data-toggle="modal" data-target="#comment-modal-{{ $commen.id }}" class="btn btn-sm btn-link text-uppercase">@lang('comments::comments.edit')</button>
+        <button v-if="permissions.edit_comment === true" data-toggle="modal"
+          data-target="#comment-modal-{{ $commen.id }}"
+          class="btn btn-sm btn-link text-uppercase">@lang('comments::comments.edit')</button>
         <!-- @can('delete-comment', $comment) -->
         <template v-if="permissions.delete_comment === true">
-          <a href="#" @click.prevent="deleteComment(comment.id)" class="btn btn-sm btn-link text-danger text-uppercase">@lang('comments::comments.delete')</a>
+          <a href="#" @click.prevent="deleteComment(comment.id)"
+            class="btn btn-sm btn-link text-danger text-uppercase">@lang('comments::comments.delete')</a>
 
         </template>
 
       </div>
 
       <!-- @can('edit-comment', $comment) -->
-      <div v-if="permissions.edit_comment === true" class="modal fade" id="comment-modal-{{ comment.id }}" tabindex="-1" role="dialog">
+      <div v-if="permissions.edit_comment === true" class="modal fade" id="comment-modal-{{ comment.id }}" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <!-- <form method="POST" action="{{ route('comments.update', comment.getKey()) }}"> -->
@@ -42,12 +49,15 @@
                 <div class="form-group">
                   <label for="message">@lang('comments::comments.update_your_message_here')</label>
                   <textarea required class="form-control" name="message" rows="3" v-model="comment.comment"></textarea>
-                  <small class="form-text text-muted">@lang('comments::comments.markdown_cheatsheet', ['url' => 'https://help.github.com/articles/basic-writing-and-formatting-syntax'])</small>
+                  <small class="form-text text-muted">@lang('comments::comments.markdown_cheatsheet', ['url' =>
+                    'https://help.github.com/articles/basic-writing-and-formatting-syntax'])</small>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-dismiss="modal">@lang('comments::comments.cancel')</button>
-                <button type="submit" class="btn btn-sm btn-outline-success text-uppercase">@lang('comments::comments.update')</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase"
+                  data-dismiss="modal">@lang('comments::comments.cancel')</button>
+                <button type="submit"
+                  class="btn btn-sm btn-outline-success text-uppercase">@lang('comments::comments.update')</button>
               </div>
             </form>
           </div>
@@ -55,7 +65,8 @@
       </div>
 
       <!-- @can('reply-to-comment', $comment) -->
-      <div v-if="permissions.reply_to_comment === true" class="modal fade" id="reply-modal-{{ comment.id }}" tabindex="-1" role="dialog">
+      <div v-if="permissions.reply_to_comment === true" class="modal fade" id="reply-modal-{{ comment.id }}"
+        tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <!-- <form method="POST" action="{{ route('comments.reply', $comment->getKey()) }}"> -->
@@ -71,12 +82,15 @@
                 <div class="form-group">
                   <label for="message">@lang('comments::comments.enter_your_message_here')</label>
                   <textarea required class="form-control" name="message" rows="3"></textarea>
-                  <small class="form-text text-muted">@lang('comments::comments.markdown_cheatsheet', ['url' => 'https://help.github.com/articles/basic-writing-and-formatting-syntax'])</small>
+                  <small class="form-text text-muted">@lang('comments::comments.markdown_cheatsheet', ['url' =>
+                    'https://help.github.com/articles/basic-writing-and-formatting-syntax'])</small>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase" data-dismiss="modal">@lang('comments::comments.cancel')</button>
-                <button type="submit" class="btn btn-sm btn-outline-success text-uppercase">@lang('comments::comments.reply')</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary text-uppercase"
+                  data-dismiss="modal">@lang('comments::comments.cancel')</button>
+                <button type="submit"
+                  class="btn btn-sm btn-outline-success text-uppercase">@lang('comments::comments.reply')</button>
               </div>
             </form>
           </div>
@@ -110,7 +124,8 @@
         <template v-if="!!grpComments[comment.id] && indentationLevel <= maxIndentationLevel">
           <!-- <template v-for="comments in grpComments[comment.id]"> -->
 
-          <one-comment v-for="child in grpComments[comment.id]" :key="child.id" :comment="child" :grp-comments="grouped_comments" :max-indentation-level="3"></one-comment>
+          <one-comment v-for="child in   grpComments[comment.id]" :key="child.id" :comment="child"
+            :grp-comments="grouped_comments" :max-indentation-level="3"></one-comment>
           <!-- </template> -->
         </template>
 
@@ -121,7 +136,8 @@
   <template v-if="!!grpComments[comment.id] && indentationLevel <= maxIndentationLevel">
     <!-- <template v-for="comments in grpComments[comment.id]"> -->
 
-    <one-comment v-for="child in grpComments[comment.id]" :key="child.id" :comment="child" :grp-comments="grouped_comments" :max-indentation-level="3"></one-comment>
+    <one-comment v-for="child in grpComments[comment.id]" :key="child.id" :comment="child"
+      :grp-comments="grouped_comments" :max-indentation-level="3"></one-comment>
     <!-- </template> -->
   </template>
   <!-- {{-- Recursion for children --}}
@@ -136,7 +152,7 @@
 @endif  -->
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref, reactive } = require("@vue/reactivity");
 
 const can_reply_comment = ref(false);

@@ -18,7 +18,7 @@ class CreateSnipetsTable extends Migration
             $table->string('title');
             $table->string('language');
             $table->text('content');
-            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

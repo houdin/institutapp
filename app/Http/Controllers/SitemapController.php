@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Bundle;
 use App\Models\Formation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -14,20 +13,19 @@ use Illuminate\Support\Facades\Storage;
 class SitemapController extends Controller
 {
 
-    public function index($file=null)
+    public function index($file = null)
     {
-        try{
-            return Storage::disk('local')->get('sitemap-'.Str::slug(config('app.name')).'/'.$file);
-        }
-        catch (\Exception $e){
+        try {
+            return Storage::disk('local')->get('sitemap-' . Str::slug(config('app.name')) . '/' . $file);
+        } catch (\Exception $e) {
             abort(404);
         }
     }
 
 
-    public function getIndex(){
+    public function getIndex()
+    {
         $formation = Formation::select('id')->count();
-        $bundle = Bundle::select('id')->count();
         $blog = Blog::select('id')->count();
 
         return view('admin.generate-sitemap');
@@ -37,13 +35,10 @@ class SitemapController extends Controller
     {
         ini_set('memory_limit', -1);
         $sitemap = App::make("sitemap");
-        if($request->quotes_file_count == 0 || $request->quotes_file_count == "" || $request->topics_file_count == 0 || $request->topics_file_count == ""){
+        if ($request->quotes_file_count == 0 || $request->quotes_file_count == "" || $request->topics_file_count == 0 || $request->topics_file_count == "") {
 
-            Session::flash('flash_message','Please add valid file count.');
-
-        }
-        else
-        {
+            Session::flash('flash_message', 'Please add valid file count.');
+        } else {
             ///==========================Creating index for Quotes===================================//
             $quote_count = Quotes::select('id')->count();
             $quote_sitemap_ctr = ceil($quote_count / 500);
@@ -65,13 +60,9 @@ class SitemapController extends Controller
             $content = $sitemap->render('sitemapindex');
             Storage::disk('local')->put('sitemap-' . env('APP_SHORT_NAME') . '/sitemap-index.xml', $content->original);
 
-            Session::flash('flash_message','Sitemap Index FIle Created Successfully.');
-
+            Session::flash('flash_message', 'Sitemap Index FIle Created Successfully.');
         }
 
         return back();
     }
-
-
-
 }

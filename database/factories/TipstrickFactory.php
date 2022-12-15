@@ -32,7 +32,6 @@ class TipstrickFactory extends Factory
             'slug' => Str::slug($title),
             'language' => $lang[rand(0, 3)],
             'content' => $this->faker->text(1000),
-            'category_id' => rand(1, 10),
             'published' => rand(0, 1),
         ];
     }

@@ -15,20 +15,22 @@
 
         <div class="form-group">
           <label for="message">{{ trans.get('comments::comments.enter_your_message_here')}}</label>
-          <textarea :class="{'form-control': true, 'is-invalid': errors.message }" name="message" rows="3"></textarea>
+          <textarea :class="{'form-contr ol': true, ' is-invalid': errors.message }" name="message" rows="3"></textarea>
           <div class="invalid-feedback">
             {{ trans.get('comments::comments.your_message_is_required') }}
           </div>
-          <small class="form-text text-muted">{{ trans.get('comments::comments.markdown_cheatsheet', {'url' : 'https://help.github.com/articles/basic-writing-and-formatting-syntax'}) }}</small>
+          <small class="form-text text-muted">{{ trans.get('comments::comments.markdown_cheatsheet', {'url' :
+          'https://help.github.com/articles/basic-writing-and-formatting-syntax'}) }}</small>
         </div>
-        <button type="submit" class="btn btn-sm btn-outline-success text-uppercase">{{ trans.get('comments::comments.submit') }}</button>
+        <button type="submit" class="btn btn-sm btn-outline-success text-uppercase">{{
+        trans.get('comments::comments.submit') }}</button>
       </form>
     </div>
   </div>
   <br />
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { ref } = require("@vue/reactivity");
 
 const erros = ref({});

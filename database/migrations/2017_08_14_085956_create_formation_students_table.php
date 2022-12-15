@@ -13,7 +13,7 @@ class CreateFormationStudentsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('formation_student')) {
+        if (!Schema::hasTable('formation_student')) {
             Schema::create('formation_student', function (Blueprint $table) {
                 // $table->integer('formation_id')->unsigned()->nullable();
                 $table->foreignId('formation_id')->constrained('formations')->onDelete('cascade');
